@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 import {
   directive,
@@ -41,10 +41,10 @@ import {
   ContextmenuDivider,
   ContextmenuSubmenu,
   ContextmenuGroup
-} from "v-contextmenu";
+} from 'v-contextmenu'
 
 export default defineComponent({
-  name: "ExampleSimple",
+  name: 'ExampleSimple',
 
   components: {
     [Contextmenu.name]: Contextmenu,
@@ -57,7 +57,7 @@ export default defineComponent({
   directives: {
     contextmenu: directive
   }
-});
+})
 </script>
 
 <style scoped>

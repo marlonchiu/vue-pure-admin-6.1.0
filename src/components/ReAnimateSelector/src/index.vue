@@ -1,68 +1,66 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { animates } from "./animate";
-import { cloneDeep } from "@pureadmin/utils";
+import { ref, computed } from 'vue'
+import { animates } from './animate'
+import { cloneDeep } from '@pureadmin/utils'
 
 defineOptions({
-  name: "ReAnimateSelector"
-});
+  name: 'ReAnimateSelector'
+})
 
 defineProps({
   placeholder: {
     type: String,
-    default: "请选择动画"
+    default: '请选择动画'
   }
-});
+})
 
-const inputValue = defineModel({ type: String });
+const inputValue = defineModel({ type: String })
 
-const searchVal = ref();
-const animatesList = ref(animates);
-const copyAnimatesList = cloneDeep(animatesList);
+const searchVal = ref()
+const animatesList = ref(animates)
+const copyAnimatesList = cloneDeep(animatesList)
 
 const animateClass = computed(() => {
   return [
-    "mt-1",
-    "flex",
-    "border",
-    "w-[130px]",
-    "h-[100px]",
-    "items-center",
-    "cursor-pointer",
-    "transition-all",
-    "justify-center",
-    "border-[#e5e7eb]",
-    "hover:text-primary",
-    "hover:duration-[700ms]"
-  ];
-});
+    'mt-1',
+    'flex',
+    'border',
+    'w-[130px]',
+    'h-[100px]',
+    'items-center',
+    'cursor-pointer',
+    'transition-all',
+    'justify-center',
+    'border-[#e5e7eb]',
+    'hover:text-primary',
+    'hover:duration-[700ms]'
+  ]
+})
 
 const animateStyle = computed(
   () => (i: string) =>
     inputValue.value === i
       ? {
-          borderColor: "var(--el-color-primary)",
-          color: "var(--el-color-primary)"
+          borderColor: 'var(--el-color-primary)',
+          color: 'var(--el-color-primary)'
         }
-      : ""
-);
+      : ''
+)
 
 function onChangeIcon(animate: string) {
-  inputValue.value = animate;
+  inputValue.value = animate
 }
 
 function onClear() {
-  inputValue.value = "";
+  inputValue.value = ''
 }
 
 function filterMethod(value: any) {
-  searchVal.value = value;
-  animatesList.value = copyAnimatesList.value.filter((i: string | any[]) =>
-    i.includes(value)
-  );
+  searchVal.value = value
+  animatesList.value = copyAnimatesList.value.filter((i: string | any[]) => i.includes(value))
 }
 
-const animateMap = ref({});
+const animateMap = ref({})
 function onMouseEnter(index: string | number) {
   animateMap.value[index] = animateMap.value[index]?.loading
     ? Object.assign({}, animateMap.value[index], {
@@ -70,10 +68,10 @@ function onMouseEnter(index: string | number) {
       })
     : Object.assign({}, animateMap.value[index], {
         loading: true
-      });
+      })
 }
 function onMouseleave() {
-  animateMap.value = {};
+  animateMap.value = {}
 }
 </script>
 
@@ -108,9 +106,7 @@ function onMouseleave() {
               <h4
                 :class="[
                   `animate__animated animate__${
-                    animateMap[index]?.loading
-                      ? animate + ' animate__infinite'
-                      : ''
+                    animateMap[index]?.loading ? animate + ' animate__infinite' : ''
                   } `
                 ]"
               >

@@ -1,58 +1,58 @@
 <script setup lang="ts">
-import "codemirror/theme/material-darker.css";
-import "codemirror/addon/hint/show-hint.css";
-import "codemirror/addon/hint/show-hint";
-import "codemirror/addon/hint/javascript-hint.js";
-import "codemirror/mode/javascript/javascript.js";
+import 'codemirror/theme/material-darker.css'
+import 'codemirror/addon/hint/show-hint.css'
+import 'codemirror/addon/hint/show-hint'
+import 'codemirror/addon/hint/javascript-hint.js'
+import 'codemirror/mode/javascript/javascript.js'
 
-import { useDark } from "@pureadmin/utils";
-import Codemirror from "codemirror-editor-vue3";
-import { ref, reactive, watch, nextTick } from "vue";
-import type { Editor, EditorConfiguration } from "codemirror";
+import { useDark } from '@pureadmin/utils'
+import Codemirror from 'codemirror-editor-vue3'
+import { ref, reactive, watch, nextTick } from 'vue'
+import type { Editor, EditorConfiguration } from 'codemirror'
 
-const { isDark } = useDark();
-const cminstance = ref<Editor | null>(null);
+const { isDark } = useDark()
+const cminstance = ref<Editor | null>(null)
 const cmOptions: EditorConfiguration = reactive({
-  mode: "javascript",
-  theme: isDark.value ? "material-darker" : "default",
+  mode: 'javascript',
+  theme: isDark.value ? 'material-darker' : 'default',
   tabSize: 4,
   readOnly: false,
   autofocus: true,
   autoRefresh: true,
   lineNumbers: true,
   lineWiseCopyCut: true,
-  gutters: ["CodeMirror-lint-markers"],
+  gutters: ['CodeMirror-lint-markers'],
   lint: true,
   extraKeys: {
-    Ctrl: "autocomplete",
-    Tab: "autocomplete"
+    Ctrl: 'autocomplete',
+    Tab: 'autocomplete'
   },
   hintOptions: {
     completeSingle: false
   }
-});
+})
 
 const code = ref(`function sayHello() {
     console.log("Hello, World!");
 }
 
-sayHello();`);
+sayHello();`)
 
 const onReady = (cm: Editor) => {
-  cminstance.value = cm;
-  cm.on("keypress", () => cm.showHint());
+  cminstance.value = cm
+  cm.on('keypress', () => cm.showHint())
   // console.log(cm.getValue());
-};
+}
 
 watch(
   () => isDark.value,
   async newVal => {
-    await nextTick();
+    await nextTick()
     newVal
-      ? cminstance.value.setOption("theme", "material-darker")
-      : cminstance.value.setOption("theme", "default");
+      ? cminstance.value.setOption('theme', 'material-darker')
+      : cminstance.value.setOption('theme', 'default')
   }
-);
+)
 </script>
 
 <template>

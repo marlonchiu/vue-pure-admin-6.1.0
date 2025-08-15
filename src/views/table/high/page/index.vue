@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useColumns } from "./columns";
+import { useColumns } from './columns'
 
 const {
   loading,
@@ -14,7 +14,7 @@ const {
   onChange,
   onSizeChange,
   onCurrentChange
-} = useColumns();
+} = useColumns()
 </script>
 
 <template>

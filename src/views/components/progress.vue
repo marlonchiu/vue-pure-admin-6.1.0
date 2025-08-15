@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
 defineOptions({
-  name: "PureProgress"
-});
+  name: 'PureProgress'
+})
 
-const format = percentage => (percentage === 100 ? "Full" : `${percentage}%`);
+const format = percentage => (percentage === 100 ? 'Full' : `${percentage}%`)
 </script>
 
 <template>
@@ -35,40 +35,15 @@ const format = percentage => (percentage === 100 ? "Full" : `${percentage}%`);
     <div class="mb-4">直线进度条动画</div>
     <div class="w-1/4">
       <el-progress indeterminate :percentage="50" class="mb-4" />
-      <el-progress
-        indeterminate
-        :percentage="100"
-        :format="format"
-        class="mb-4"
-      />
-      <el-progress
-        indeterminate
-        :percentage="100"
-        status="success"
-        class="mb-4"
-      />
-      <el-progress
-        indeterminate
-        :percentage="100"
-        status="warning"
-        class="mb-4"
-      />
-      <el-progress
-        indeterminate
-        :percentage="50"
-        status="exception"
-        class="mb-4"
-      />
+      <el-progress indeterminate :percentage="100" :format="format" class="mb-4" />
+      <el-progress indeterminate :percentage="100" status="success" class="mb-4" />
+      <el-progress indeterminate :percentage="100" status="warning" class="mb-4" />
+      <el-progress indeterminate :percentage="50" status="exception" class="mb-4" />
     </div>
 
     <div class="mb-4">进度条内显示百分比标识</div>
     <div class="w-1/4">
-      <el-progress
-        :text-inside="true"
-        :stroke-width="26"
-        :percentage="70"
-        class="mb-4"
-      />
+      <el-progress :text-inside="true" :stroke-width="26" :percentage="70" class="mb-4" />
       <el-progress
         :text-inside="true"
         :stroke-width="24"
@@ -102,12 +77,7 @@ const format = percentage => (percentage === 100 ? "Full" : `${percentage}%`);
       <el-progress :percentage="50">
         <el-button text>自定义内容</el-button>
       </el-progress>
-      <el-progress
-        :text-inside="true"
-        :stroke-width="20"
-        :percentage="50"
-        status="exception"
-      >
+      <el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception">
         <span>自定义内容</span>
       </el-progress>
       <el-progress type="circle" :percentage="100" status="success">

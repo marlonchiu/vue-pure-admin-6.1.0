@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import "deep-chat";
-import { ref, onMounted } from "vue";
-import hljs from "highlight.js";
+import 'deep-chat'
+import { ref, onMounted } from 'vue'
+import hljs from 'highlight.js'
 // @ts-expect-error
-window.hljs = hljs;
+window.hljs = hljs
 
-const chatRef = ref();
+const chatRef = ref()
 
 onMounted(() => {
   chatRef.value.demo = {
     response: message => {
-      console.log(message);
+      console.log(message)
       return {
-        text: "仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect"
-      };
+        text: '仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect'
+      }
     }
-  };
-});
+  }
+})
 </script>
 
 <template>

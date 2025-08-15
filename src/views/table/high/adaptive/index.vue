@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useColumns } from "./columns";
+import { ref } from 'vue'
+import { useColumns } from './columns'
 
-const tableRef = ref();
+const tableRef = ref()
 
 const {
   loading,
@@ -13,7 +13,7 @@ const {
   adaptiveConfig,
   onSizeChange,
   onCurrentChange
-} = useColumns();
+} = useColumns()
 </script>
 
 <template>

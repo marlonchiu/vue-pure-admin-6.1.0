@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useMenu } from "./utils/hook";
-import { transformI18n } from "@/plugins/i18n";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref } from 'vue'
+import { useMenu } from './utils/hook'
+import { transformI18n } from '@/plugins/i18n'
+import { PureTableBar } from '@/components/RePureTableBar'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
-import Delete from "~icons/ep/delete";
-import EditPen from "~icons/ep/edit-pen";
-import Refresh from "~icons/ep/refresh";
-import AddFill from "~icons/ri/add-circle-line";
+import Delete from '~icons/ep/delete'
+import EditPen from '~icons/ep/edit-pen'
+import Refresh from '~icons/ep/refresh'
+import AddFill from '~icons/ri/add-circle-line'
 
 defineOptions({
-  name: "SystemMenu"
-});
+  name: 'SystemMenu'
+})
 
-const formRef = ref();
-const tableRef = ref();
+const formRef = ref()
+const tableRef = ref()
 const {
   form,
   loading,
@@ -26,11 +26,11 @@ const {
   openDialog,
   handleDelete,
   handleSelectionChange
-} = useMenu();
+} = useMenu()
 
 function onFullscreen() {
   // 重置表格高度
-  tableRef.value.setAdaptive();
+  tableRef.value.setAdaptive()
 }
 </script>
 
@@ -43,12 +43,7 @@ function onFullscreen() {
       class="search-form bg-bg_color w-full pl-8 pt-[12px] overflow-auto"
     >
       <el-form-item label="菜单名称：" prop="title">
-        <el-input
-          v-model="form.title"
-          placeholder="请输入菜单名称"
-          clearable
-          class="w-[180px]!"
-        />
+        <el-input v-model="form.title" placeholder="请输入菜单名称" clearable class="w-[180px]!" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -59,9 +54,7 @@ function onFullscreen() {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
@@ -74,11 +67,7 @@ function onFullscreen() {
       @fullscreen="onFullscreen"
     >
       <template #buttons>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
+        <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
           新增菜单
         </el-button>
       </template>

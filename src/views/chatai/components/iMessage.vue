@@ -1,31 +1,30 @@
 <script setup lang="ts">
-import "deep-chat";
-import { ref, onMounted } from "vue";
+import 'deep-chat'
+import { ref, onMounted } from 'vue'
 
-const chatRef = ref();
+const chatRef = ref()
 
 onMounted(() => {
   chatRef.value.demo = {
     response: message => {
-      console.log(message);
+      console.log(message)
       return {
-        text: "仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect"
-      };
+        text: '仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect'
+      }
     }
-  };
-});
+  }
+})
 </script>
 
 <template>
   <deep-chat
     ref="chatRef"
     style="
-      border-radius: 10px;
-      font-size: 16px;
       font-family:
-        system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif,
-        &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
-        &quot;Segoe UI Symbol&quot;;
+        system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
+      font-size: 16px;
+      border-radius: 10px;
     "
     :messageStyles="{
       default: {

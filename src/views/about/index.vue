@@ -1,71 +1,68 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useColumns } from "./columns";
+import { computed } from 'vue'
+import { useColumns } from './columns'
 
 export interface schemaItem {
-  field: string;
-  label: string;
+  field: string
+  label: string
 }
 
 defineOptions({
-  name: "About"
-});
+  name: 'About'
+})
 
-const { pkg } = __APP_INFO__;
-const { dependencies, devDependencies } = pkg;
+const { pkg } = __APP_INFO__
+const { dependencies, devDependencies } = pkg
 
-const schema: schemaItem[] = [];
-const devSchema: schemaItem[] = [];
+const schema: schemaItem[] = []
+const devSchema: schemaItem[] = []
 
-const { columns } = useColumns();
+const { columns } = useColumns()
 
 const words = [
-  "@pureadmin/descriptions",
-  "@pureadmin/table",
-  "@pureadmin/utils",
-  "@vueuse/core",
-  "axios",
-  "dayjs",
-  "echarts",
-  "vue",
-  "element-plus",
-  "pinia",
-  "vue-i18n",
-  "vue-router",
-  "@iconify/vue",
-  "@vitejs/plugin-vue",
-  "@vitejs/plugin-vue-jsx",
-  "eslint",
-  "prettier",
-  "sass",
-  "stylelint",
-  "tailwindcss",
-  "typescript",
-  "vite",
-  "vue-tsc"
-];
+  '@pureadmin/descriptions',
+  '@pureadmin/table',
+  '@pureadmin/utils',
+  '@vueuse/core',
+  'axios',
+  'dayjs',
+  'echarts',
+  'vue',
+  'element-plus',
+  'pinia',
+  'vue-i18n',
+  'vue-router',
+  '@iconify/vue',
+  '@vitejs/plugin-vue',
+  '@vitejs/plugin-vue-jsx',
+  'eslint',
+  'prettier',
+  'sass',
+  'stylelint',
+  'tailwindcss',
+  'typescript',
+  'vite',
+  'vue-tsc'
+]
 
-const getMainLabel = computed(
-  () => (label: string) => words.find(w => w === label) && "main-label"
-);
+const getMainLabel = computed(() => (label: string) => words.find(w => w === label) && 'main-label')
 
 Object.keys(dependencies).forEach(key => {
-  schema.push({ field: dependencies[key], label: key });
-});
+  schema.push({ field: dependencies[key], label: key })
+})
 
 Object.keys(devDependencies).forEach(key => {
-  devSchema.push({ field: devDependencies[key], label: key });
-});
+  devSchema.push({ field: devDependencies[key], label: key })
+})
 </script>
 
 <template>
   <div>
     <el-card class="mb-4 box-card" shadow="never">
       <span>
-        vue-pure-admin 是一款开源免费且开箱即用的中后台管理系统模版。完全采用
-        ECMAScript 模块（ESM）规范来编写和组织代码，使用了最新的
-        Vue3、Vite、Element-Plus、TypeScript、Pinia、Tailwindcss
-        等主流技术开发。
+        vue-pure-admin 是一款开源免费且开箱即用的中后台管理系统模版。完全采用 ECMAScript
+        模块（ESM）规范来编写和组织代码，使用了最新的
+        Vue3、Vite、Element-Plus、TypeScript、Pinia、Tailwindcss 等主流技术开发。
       </span>
     </el-card>
 
@@ -99,14 +96,8 @@ Object.keys(devDependencies).forEach(key => {
             class-name="pure-version"
             label-align="right"
           >
-            <a
-              :href="'https://www.npmjs.com/package/' + item.label"
-              target="_blank"
-            >
-              <span
-                :class="getMainLabel(item.label)"
-                style="color: var(--el-color-primary)"
-              >
+            <a :href="'https://www.npmjs.com/package/' + item.label" target="_blank">
+              <span :class="getMainLabel(item.label)" style="color: var(--el-color-primary)">
                 {{ item.field }}
               </span>
             </a>
@@ -134,14 +125,8 @@ Object.keys(devDependencies).forEach(key => {
             class-name="pure-version"
             label-align="right"
           >
-            <a
-              :href="'https://www.npmjs.com/package/' + item.label"
-              target="_blank"
-            >
-              <span
-                :class="getMainLabel(item.label)"
-                style="color: var(--el-color-primary)"
-              >
+            <a :href="'https://www.npmjs.com/package/' + item.label" target="_blank">
+              <span :class="getMainLabel(item.label)" style="color: var(--el-color-primary)">
                 {{ item.field }}
               </span>
             </a>

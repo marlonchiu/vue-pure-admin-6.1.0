@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Vditor from "./components/Vditor.vue";
+import { ref } from 'vue'
+import Vditor from './components/Vditor.vue'
 
 defineOptions({
-  name: "Markdown"
-});
+  name: 'Markdown'
+})
 
 const text = ref(`
 \`\`\`ts
@@ -19,7 +19,7 @@ sayHello();
 #### 四级标题
 ##### 五级标题
 ###### 六级标题
-`);
+`)
 </script>
 
 <template>

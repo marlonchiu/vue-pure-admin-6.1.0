@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { message } from "@/utils/message";
-import { FormInstance } from "element-plus";
+import { ref, watch } from 'vue'
+import { message } from '@/utils/message'
+import { FormInstance } from 'element-plus'
 
 const SELECT_OPTIONS = [
-  { label: "网关", value: 1 },
-  { label: "人工智能", value: 2 },
-  { label: "CVM", value: 3 },
-  { label: "防火墙", value: 4 },
-  { label: "未知", value: 5 }
-];
+  { label: '网关', value: 1 },
+  { label: '人工智能', value: 2 },
+  { label: 'CVM', value: 3 },
+  { label: '防火墙', value: 4 },
+  { label: '未知', value: 5 }
+]
 
 const props = defineProps({
   visible: {
@@ -19,63 +19,63 @@ const props = defineProps({
   data: {
     type: Object,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 
-const ruleFormRef = ref<FormInstance>();
+const ruleFormRef = ref<FormInstance>()
 
-const formVisible = ref(false);
-const formData = ref(props.data);
-const textareaValue = ref("");
+const formVisible = ref(false)
+const formData = ref(props.data)
+const textareaValue = ref('')
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   await formEl.validate(valid => {
     if (valid) {
-      message("提交成功", { type: "success" });
-      formVisible.value = false;
-      resetForm(formEl);
+      message('提交成功', { type: 'success' })
+      formVisible.value = false
+      resetForm(formEl)
     }
-  });
-};
+  })
+}
 
 const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
+  if (!formEl) return
+  formEl.resetFields()
+}
 
 const closeDialog = () => {
-  formVisible.value = false;
-  resetForm(ruleFormRef.value);
-};
+  formVisible.value = false
+  resetForm(ruleFormRef.value)
+}
 
-const emit = defineEmits(["update:visible"]);
+const emit = defineEmits(['update:visible'])
 watch(
   () => formVisible.value,
   val => {
-    emit("update:visible", val);
+    emit('update:visible', val)
   }
-);
+)
 
 watch(
   () => props.visible,
   val => {
-    formVisible.value = val;
+    formVisible.value = val
   }
-);
+)
 
 watch(
   () => props.data,
   val => {
-    formData.value = val;
+    formData.value = val
   }
-);
+)
 
 const rules = {
-  name: [{ required: true, message: "请输入产品名称", trigger: "blur" }]
-};
+  name: [{ required: true, message: '请输入产品名称', trigger: 'blur' }]
+}
 </script>
 
 <template>
@@ -87,12 +87,7 @@ const rules = {
     :before-close="closeDialog"
   >
     <!-- 表单内容 -->
-    <el-form
-      ref="ruleFormRef"
-      :model="formData"
-      :rules="rules"
-      label-width="100px"
-    >
+    <el-form ref="ruleFormRef" :model="formData" :rules="rules" label-width="100px">
       <el-form-item label="产品名称" prop="name">
         <el-input
           v-model="formData.name"
@@ -114,11 +109,7 @@ const rules = {
         />
       </el-form-item>
       <el-form-item label="产品类型" prop="type">
-        <el-select
-          v-model="formData.type"
-          clearable
-          :style="{ width: '480px' }"
-        >
+        <el-select v-model="formData.type" clearable :style="{ width: '480px' }">
           <el-option
             v-for="(item, index) in SELECT_OPTIONS"
             :key="index"
@@ -140,9 +131,7 @@ const rules = {
     </el-form>
     <template #footer>
       <el-button @click="closeDialog">取消</el-button>
-      <el-button type="primary" @click="submitForm(ruleFormRef)">
-        确定
-      </el-button>
+      <el-button type="primary" @click="submitForm(ruleFormRef)"> 确定 </el-button>
     </template>
   </el-dialog>
 </template>

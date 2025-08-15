@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import VuePdfEmbed from "vue-pdf-embed";
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VuePdfEmbed from 'vue-pdf-embed'
 
 defineOptions({
-  name: "Pdf"
-});
+  name: 'Pdf'
+})
 
-const { t } = useI18n();
-const pdfRef = ref<any>();
-const pageCount = ref(1);
-const loading = ref(true);
-const currentPage = ref(1);
-const currentRotation = ref(0);
-const showAllPages = ref(false);
-const rotations = [0, 90, 180, 270];
+const { t } = useI18n()
+const pdfRef = ref<any>()
+const pageCount = ref(1)
+const loading = ref(true)
+const currentPage = ref(1)
+const currentRotation = ref(0)
+const showAllPages = ref(false)
+const rotations = [0, 90, 180, 270]
 
 const source =
-  "https://xiaoxian521.github.io/hyperlink/pdf/Cookie%E5%92%8CSession%E5%8C%BA%E5%88%AB%E7%94%A8%E6%B3%95.pdf";
+  'https://xiaoxian521.github.io/hyperlink/pdf/Cookie%E5%92%8CSession%E5%8C%BA%E5%88%AB%E7%94%A8%E6%B3%95.pdf'
 
 const handleDocumentRender = () => {
-  loading.value = false;
-  pageCount.value = pdfRef.value.doc.numPages;
-};
+  loading.value = false
+  pageCount.value = pdfRef.value.doc.numPages
+}
 
 const showAllPagesChange = () => {
-  currentPage.value = showAllPages.value ? null : 1;
-};
+  currentPage.value = showAllPages.value ? null : 1
+}
 
 const onPrint = () => {
   // 如果在打印时，打印页面是本身的两倍，在打印配置 页面 设置 仅限页码为奇数的页面 即可
-  pdfRef.value.print();
-};
+  pdfRef.value.print()
+}
 </script>
 
 <template>
@@ -60,9 +60,7 @@ const onPrint = () => {
       :element-loading-text="t('status.pureLoad')"
     >
       <div class="flex justify-between items-center h-9">
-        <div v-if="showAllPages" class="font-medium ml-1.25 text-xl">
-          共{{ pageCount }}页
-        </div>
+        <div v-if="showAllPages" class="font-medium ml-1.25 text-xl">共{{ pageCount }}页</div>
         <div v-else>
           <el-pagination
             v-model:current-page="currentPage"
@@ -85,11 +83,7 @@ const onPrint = () => {
             }"
             icon="ic:baseline-rotate-90-degrees-ccw"
             class="cursor-pointer outline-transparent"
-            @click="
-              currentRotation === 3
-                ? (currentRotation = 0)
-                : (currentRotation += 1)
-            "
+            @click="currentRotation === 3 ? (currentRotation = 0) : (currentRotation += 1)"
           />
           <IconifyIconOnline
             v-tippy="{

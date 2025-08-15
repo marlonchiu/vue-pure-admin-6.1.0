@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { tableData } from "./data";
+import { ref } from 'vue'
+import { tableData } from './data'
 
-const tableRef = ref();
+const tableRef = ref()
 
-const multipleSelection = ref([]);
+const multipleSelection = ref([])
 const toggleSelection = (rows?: any) => {
-  const { toggleRowSelection, clearSelection } = tableRef.value.getTableRef();
+  const { toggleRowSelection, clearSelection } = tableRef.value.getTableRef()
   if (rows) {
     rows.forEach(row => {
-      toggleRowSelection(row, undefined);
-    });
+      toggleRowSelection(row, undefined)
+    })
   } else {
-    clearSelection();
+    clearSelection()
   }
-};
+}
 const handleSelectionChange = val => {
-  multipleSelection.value = val;
-};
+  multipleSelection.value = val
+}
 
 const columns: TableColumnList = [
   {
-    type: "selection",
-    align: "left"
+    type: 'selection',
+    align: 'left'
   },
   {
-    label: "日期",
-    prop: "date"
+    label: '日期',
+    prop: 'date'
   },
   {
-    label: "姓名",
-    prop: "name"
+    label: '姓名',
+    prop: 'name'
   },
   {
-    label: "地址",
-    prop: "address"
+    label: '地址',
+    prop: 'address'
   }
-];
+]
 </script>
 
 <template>

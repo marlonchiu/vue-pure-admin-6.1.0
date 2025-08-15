@@ -1,21 +1,21 @@
-import { vueflow } from "@/router/enums";
+import { vueflow } from '@/router/enums'
 
 export default {
-  path: "/vue-flow",
-  redirect: "/vue-flow/index",
+  path: '/vue-flow',
+  redirect: '/vue-flow/index',
   meta: {
-    icon: "ep/set-up",
-    title: "vue-flow",
+    icon: 'ep/set-up',
+    title: 'vue-flow',
     rank: vueflow
   },
   children: [
     {
-      path: "/vue-flow/index",
-      name: "VueFlow",
-      component: () => import("@/views/vue-flow/layouting/index.vue"),
+      path: '/vue-flow/index',
+      name: 'VueFlow',
+      component: () => import('@/views/vue-flow/layouting/index.vue'),
       meta: {
-        title: "vue-flow"
+        title: 'vue-flow'
       }
     }
   ]
-} satisfies RouteConfigsTable;
+} satisfies RouteConfigsTable

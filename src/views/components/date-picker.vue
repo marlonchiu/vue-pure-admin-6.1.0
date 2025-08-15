@@ -1,131 +1,129 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref, watch } from 'vue'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
 defineOptions({
-  name: "DatePicker"
-});
+  name: 'DatePicker'
+})
 
-const size = ref("default");
-const dynamicSize = ref();
+const size = ref('default')
+const dynamicSize = ref()
 
-const value = ref("");
+const value = ref('')
 const shortcuts = [
   {
-    text: "今天",
+    text: '今天',
     value: new Date()
   },
   {
-    text: "昨天",
+    text: '昨天',
     value: () => {
-      const date = new Date();
-      date.setTime(date.getTime() - 3600 * 1000 * 24);
-      return date;
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24)
+      return date
     }
   },
   {
-    text: "一周前",
+    text: '一周前',
     value: () => {
-      const date = new Date();
-      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-      return date;
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+      return date
     }
   }
-];
+]
 
 const disabledDate = (time: Date) => {
-  return time.getTime() > Date.now();
-};
+  return time.getTime() > Date.now()
+}
 
-const value1 = ref("");
-const value2 = ref("");
-const value3 = ref("");
-const value4 = ref("");
+const value1 = ref('')
+const value2 = ref('')
+const value3 = ref('')
+const value4 = ref('')
 
-const value5 = ref("");
+const value5 = ref('')
 const shortcuts1 = [
   {
-    text: "上周",
+    text: '上周',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+      return [start, end]
     }
   },
   {
-    text: "上个月",
+    text: '上个月',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+      return [start, end]
     }
   },
   {
-    text: "三个月前",
+    text: '三个月前',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+      return [start, end]
     }
   }
-];
+]
 
-const value6 = ref("");
+const value6 = ref('')
 const shortcuts2 = [
   {
-    text: "本月",
+    text: '本月',
     value: [new Date(), new Date()]
   },
   {
-    text: "今年",
+    text: '今年',
     value: () => {
-      const end = new Date();
-      const start = new Date(new Date().getFullYear(), 0);
-      return [start, end];
+      const end = new Date()
+      const start = new Date(new Date().getFullYear(), 0)
+      return [start, end]
     }
   },
   {
-    text: "六个月前",
+    text: '六个月前',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setMonth(start.getMonth() - 6);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setMonth(start.getMonth() - 6)
+      return [start, end]
     }
   }
-];
+]
 
-const value7 = ref("");
-const dateFormat = ref("");
+const value7 = ref('')
+const dateFormat = ref('')
 
-const value8 = ref("");
+const value8 = ref('')
 
-const value9 = ref("2023-10-30");
+const value9 = ref('2023-10-30')
 const holidays = [
-  "2023-10-22",
-  "2023-10-23",
-  "2023-10-24",
-  "2023-10-25",
-  "2023-10-26",
-  "2023-10-27",
-  "2023-10-28",
-  "2023-10-29",
-  "2023-10-30",
-  "2023-10-31"
-];
+  '2023-10-22',
+  '2023-10-23',
+  '2023-10-24',
+  '2023-10-25',
+  '2023-10-26',
+  '2023-10-27',
+  '2023-10-28',
+  '2023-10-29',
+  '2023-10-30',
+  '2023-10-31'
+]
 
 const isHoliday = ({ dayjs }) => {
-  return holidays.includes(dayjs.format("YYYY-MM-DD"));
-};
+  return holidays.includes(dayjs.format('YYYY-MM-DD'))
+}
 
 watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
-);
+  val === 'disabled' ? (dynamicSize.value = 'default') : (dynamicSize.value = size.value)
+)
 </script>
 
 <template>

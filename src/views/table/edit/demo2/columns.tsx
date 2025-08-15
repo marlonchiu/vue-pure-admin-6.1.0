@@ -1,28 +1,22 @@
-import { ref } from "vue";
-import { tableData, options } from "../data";
-import { clone, delObjectProperty } from "@pureadmin/utils";
+import { ref } from 'vue'
+import { tableData, options } from '../data'
+import { clone, delObjectProperty } from '@pureadmin/utils'
 
 export function useColumns() {
-  const editMap = ref({});
-  const dataList = ref(clone(tableData, true));
+  const editMap = ref({})
+  const dataList = ref(clone(tableData, true))
 
   const columns: TableColumnList = [
     {
-      label: "姓名",
-      prop: "name",
+      label: '姓名',
+      prop: 'name',
       cellRenderer: ({ row, index }) => (
-        <>
-          {editMap.value[index]?.editable ? (
-            <el-input v-model={row.name} />
-          ) : (
-            <p>{row.name}</p>
-          )}
-        </>
+        <>{editMap.value[index]?.editable ? <el-input v-model={row.name} /> : <p>{row.name}</p>}</>
       )
     },
     {
-      label: "性别",
-      prop: "sex",
+      label: '性别',
+      prop: 'sex',
       cellRenderer: ({ row, index }) => (
         <>
           {editMap.value[index]?.editable ? (
@@ -35,26 +29,20 @@ export function useColumns() {
               inactive-text="女"
             />
           ) : (
-            <p>{row.sex === 0 ? "男" : "女"}</p>
+            <p>{row.sex === 0 ? '男' : '女'}</p>
           )}
         </>
       )
     },
     {
-      label: "爱好",
-      prop: "hobby",
+      label: '爱好',
+      prop: 'hobby',
       cellRenderer: ({ row, index }) => (
         <>
           {editMap.value[index]?.editable ? (
             <el-select v-model={row.hobby} clearable placeholder="请选择爱好">
               {options.map(item => {
-                return (
-                  <el-option
-                    key={item.value}
-                    label={item.label}
-                    value={item.value}
-                  />
-                );
+                return <el-option key={item.value} label={item.label} value={item.value} />
               })}
             </el-select>
           ) : (
@@ -66,8 +54,8 @@ export function useColumns() {
       )
     },
     {
-      label: "日期",
-      prop: "date",
+      label: '日期',
+      prop: 'date',
       cellRenderer: ({ row, index }) => (
         <>
           {editMap.value[index]?.editable ? (
@@ -86,23 +74,23 @@ export function useColumns() {
       minWidth: 110
     },
     {
-      label: "操作",
-      fixed: "right",
-      slot: "operation"
+      label: '操作',
+      fixed: 'right',
+      slot: 'operation'
     }
-  ];
+  ]
 
   function onEdit(row, index) {
-    editMap.value[index] = Object.assign({ ...row, editable: true });
+    editMap.value[index] = Object.assign({ ...row, editable: true })
   }
 
   function onSave(index) {
-    editMap.value[index].editable = false;
+    editMap.value[index].editable = false
   }
 
   function onCancel(index) {
-    editMap.value[index].editable = false;
-    dataList.value[index] = delObjectProperty(editMap.value[index], "editable");
+    editMap.value[index].editable = false
+    dataList.value[index] = delObjectProperty(editMap.value[index], 'editable')
   }
 
   return {
@@ -112,5 +100,5 @@ export function useColumns() {
     onEdit,
     onSave,
     onCancel
-  };
+  }
 }

@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import "@wangeditor/editor/dist/css/style.css";
-import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
-import { onBeforeUnmount, ref, shallowRef, onMounted } from "vue";
+import '@wangeditor/editor/dist/css/style.css'
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import { onBeforeUnmount, ref, shallowRef, onMounted } from 'vue'
 
 defineOptions({
-  name: "BaseEditor"
-});
+  name: 'BaseEditor'
+})
 
-const mode = "default";
+const mode = 'default'
 // 编辑器实例，必须用 shallowRef
-const editorRef = shallowRef();
+const editorRef = shallowRef()
 
 // 内容 HTML
-const valueHtml = ref("<p>你好</p>");
+const valueHtml = ref('<p>你好</p>')
 
 // 模拟 ajax 异步获取内容
 onMounted(() => {
   setTimeout(() => {
-    valueHtml.value = "<p>我是模拟的异步数据</p>";
-  }, 1500);
-});
+    valueHtml.value = '<p>我是模拟的异步数据</p>'
+  }, 1500)
+})
 
-const toolbarConfig: any = { excludeKeys: "fullScreen" };
-const editorConfig = { placeholder: "请输入内容..." };
+const toolbarConfig: any = { excludeKeys: 'fullScreen' }
+const editorConfig = { placeholder: '请输入内容...' }
 
 const handleCreated = editor => {
   // 记录 editor 实例，重要！
-  editorRef.value = editor;
-};
+  editorRef.value = editor
+}
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
-  const editor = editorRef.value;
-  if (editor == null) return;
-  editor.destroy();
-});
+  const editor = editorRef.value
+  if (editor == null) return
+  editor.destroy()
+})
 </script>
 
 <template>

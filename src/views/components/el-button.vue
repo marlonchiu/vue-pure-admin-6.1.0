@@ -1,55 +1,53 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { useDark } from "@pureadmin/utils";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref, watch } from 'vue'
+import { useDark } from '@pureadmin/utils'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
 defineOptions({
-  name: "PureButton"
-});
+  name: 'PureButton'
+})
 
-const { isDark } = useDark();
-const size = ref("default");
-const dynamicSize = ref();
+const { isDark } = useDark()
+const size = ref('default')
+const dynamicSize = ref()
 
-const baseRadio = ref("default");
+const baseRadio = ref('default')
 const buttonList = [
   {
-    type: "",
-    text: "Default",
-    icon: "ep:search"
+    type: '',
+    text: 'Default',
+    icon: 'ep:search'
   },
   {
-    type: "primary",
-    text: "Primary",
-    icon: "ep:edit"
+    type: 'primary',
+    text: 'Primary',
+    icon: 'ep:edit'
   },
   {
-    type: "success",
-    text: "Success",
-    icon: "ep:check"
+    type: 'success',
+    text: 'Success',
+    icon: 'ep:check'
   },
   {
-    type: "info",
-    text: "Info",
-    icon: "ep:message"
+    type: 'info',
+    text: 'Info',
+    icon: 'ep:message'
   },
   {
-    type: "warning",
-    text: "Warning",
-    icon: "ep:star"
+    type: 'warning',
+    text: 'Warning',
+    icon: 'ep:star'
   },
   {
-    type: "danger",
-    text: "Danger",
-    icon: "ep:delete"
+    type: 'danger',
+    text: 'Danger',
+    icon: 'ep:delete'
   }
-];
+]
 
 watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
-);
+  val === 'disabled' ? (dynamicSize.value = 'default') : (dynamicSize.value = size.value)
+)
 </script>
 
 <template>
@@ -126,7 +124,7 @@ watch(size, val =>
       :disabled="size === 'disabled'"
       :loading="size !== 'disabled'"
     >
-      {{ size === "disabled" ? "停止加载" : "加载中" }}
+      {{ size === 'disabled' ? '停止加载' : '加载中' }}
     </el-button>
     <el-button
       type="primary"
@@ -136,7 +134,7 @@ watch(size, val =>
       :loading-icon="useRenderIcon('ep:eleme')"
       :loading="size !== 'disabled'"
     >
-      {{ size === "disabled" ? "停止加载" : "加载中" }}
+      {{ size === 'disabled' ? '停止加载' : '加载中' }}
     </el-button>
     <el-button
       type="primary"
@@ -162,14 +160,12 @@ watch(size, val =>
           </svg>
         </div>
       </template>
-      {{ size === "disabled" ? "停止加载" : "加载中" }}
+      {{ size === 'disabled' ? '停止加载' : '加载中' }}
     </el-button>
     <el-divider />
 
     <div class="mb-4">自定义元素标签。例如：按钮、div、链接</div>
-    <el-button :size="dynamicSize" :disabled="size === 'disabled'">
-      button 标签
-    </el-button>
+    <el-button :size="dynamicSize" :disabled="size === 'disabled'"> button 标签 </el-button>
     <el-button
       tag="div"
       role="button"
@@ -198,12 +194,7 @@ watch(size, val =>
 
     <div class="mb-4">自定义颜色</div>
     <el-space wrap>
-      <el-button
-        color="#626aef"
-        :size="dynamicSize"
-        :disabled="size === 'disabled'"
-        :dark="isDark"
-      >
+      <el-button color="#626aef" :size="dynamicSize" :disabled="size === 'disabled'" :dark="isDark">
         Default
       </el-button>
       <el-button

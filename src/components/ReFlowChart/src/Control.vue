@@ -1,96 +1,94 @@
 <script setup lang="ts">
-import { ref, unref, onMounted } from "vue";
-import { LogicFlow } from "@logicflow/core";
+import { ref, unref, onMounted } from 'vue'
+import { LogicFlow } from '@logicflow/core'
 
 interface Props {
-  lf?: LogicFlow;
-  catTurboData?: boolean;
+  lf?: LogicFlow
+  catTurboData?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   lf: null
-});
+})
 
 const emit = defineEmits<{
-  (e: "catData"): void;
-}>();
+  (e: 'catData'): void
+}>()
 
-const controlButton3 = ref();
-const controlButton4 = ref();
+const controlButton3 = ref()
+const controlButton4 = ref()
 
-const focusIndex = ref<Number>(-1);
+const focusIndex = ref<Number>(-1)
 const titleLists = ref([
   {
-    icon: "icon-zoom-out-hs",
-    text: "缩小",
-    size: "18",
+    icon: 'icon-zoom-out-hs',
+    text: '缩小',
+    size: '18',
     disabled: false
   },
   {
-    icon: "icon-enlarge-hs",
-    text: "放大",
-    size: "18",
+    icon: 'icon-enlarge-hs',
+    text: '放大',
+    size: '18',
     disabled: false
   },
   {
-    icon: "icon-full-screen-hs",
-    text: "适应",
-    size: "15",
+    icon: 'icon-full-screen-hs',
+    text: '适应',
+    size: '15',
     disabled: false
   },
   {
-    icon: "icon-previous-hs",
-    text: "上一步",
-    size: "15",
+    icon: 'icon-previous-hs',
+    text: '上一步',
+    size: '15',
     disabled: true
   },
   {
-    icon: "icon-next-step-hs",
-    text: "下一步",
-    size: "17",
+    icon: 'icon-next-step-hs',
+    text: '下一步',
+    size: '17',
     disabled: true
   },
   {
-    icon: "icon-download-hs",
-    text: "下载图片",
-    size: "17",
+    icon: 'icon-download-hs',
+    text: '下载图片',
+    size: '17',
     disabled: false
   },
   {
-    icon: "icon-watch-hs",
-    text: "查看数据",
-    size: "17",
+    icon: 'icon-watch-hs',
+    text: '查看数据',
+    size: '17',
     disabled: false
   }
-]);
+])
 
 const onControl = (item, key) => {
-  ["zoom", "zoom", "resetZoom", "undo", "redo", "getSnapshot"].forEach(
-    (v, i) => {
-      const domControl = props.lf;
-      if (key === 1) {
-        domControl.zoom(true);
-      }
-      if (key === 6) {
-        emit("catData");
-      }
-      if (key === i) {
-        domControl[v]();
-      }
+  ;['zoom', 'zoom', 'resetZoom', 'undo', 'redo', 'getSnapshot'].forEach((v, i) => {
+    const domControl = props.lf
+    if (key === 1) {
+      domControl.zoom(true)
     }
-  );
-};
+    if (key === 6) {
+      emit('catData')
+    }
+    if (key === i) {
+      domControl[v]()
+    }
+  })
+}
 
 const onEnter = key => {
-  focusIndex.value = key;
-};
+  focusIndex.value = key
+}
 
 onMounted(() => {
-  props.lf.on("history:change", ({ data: { undoAble, redoAble } }) => {
-    unref(titleLists)[3].disabled = unref(controlButton3).disabled = !undoAble;
-    unref(titleLists)[4].disabled = unref(controlButton4).disabled = !redoAble;
-  });
-});
+  props.lf.on('history:change', ({ data: { undoAble, redoAble } }) => {
+    unref(titleLists)[3].disabled = unref(controlButton3).disabled = !undoAble
+    unref(titleLists)[4].disabled = unref(controlButton4).disabled = !redoAble
+  })
+})
 </script>
 
 <template>
@@ -119,10 +117,7 @@ onMounted(() => {
           }"
           @click="onControl(item, key)"
         >
-          <span
-            :class="'iconfont ' + item.icon"
-            :style="{ fontSize: `${item.size}px` }"
-          />
+          <span :class="'iconfont ' + item.icon" :style="{ fontSize: `${item.size}px` }" />
         </button>
       </li>
     </ul>
@@ -130,7 +125,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@import url("./assets/iconfont/iconfont.css");
+@import url('./assets/iconfont/iconfont.css');
 
 .control-container {
   background: hsl(0deg 0% 100% / 80%);

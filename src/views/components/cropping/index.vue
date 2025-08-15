@@ -1,28 +1,28 @@
 <script setup lang="tsx">
-import avatar from "./avatar.png";
-import { ref, onBeforeUnmount } from "vue";
-import ReCropper from "@/components/ReCropper";
-import { formatBytes } from "@pureadmin/utils";
+import avatar from './avatar.png'
+import { ref, onBeforeUnmount } from 'vue'
+import ReCropper from '@/components/ReCropper'
+import { formatBytes } from '@pureadmin/utils'
 
 defineOptions({
-  name: "Cropping"
-});
+  name: 'Cropping'
+})
 
-const infos = ref();
-const popoverRef = ref();
-const refCropper = ref();
-const showPopover = ref(false);
-const cropperImg = ref<string>("");
+const infos = ref()
+const popoverRef = ref()
+const refCropper = ref()
+const showPopover = ref(false)
+const cropperImg = ref<string>('')
 
 function onCropper({ base64, blob, info }) {
-  console.log(blob);
-  infos.value = info;
-  cropperImg.value = base64;
+  console.log(blob)
+  infos.value = info
+  cropperImg.value = base64
 }
 
 onBeforeUnmount(() => {
-  popoverRef.value.hide();
-});
+  popoverRef.value.hide()
+})
 </script>
 
 <template>
@@ -50,12 +50,7 @@ onBeforeUnmount(() => {
       </el-link>
     </template>
     <div v-loading="!showPopover" element-loading-background="transparent">
-      <el-popover
-        ref="popoverRef"
-        :visible="showPopover"
-        placement="right"
-        width="300px"
-      >
+      <el-popover ref="popoverRef" :visible="showPopover" placement="right" width="300px">
         <template #reference>
           <ReCropper
             ref="refCropper"
@@ -74,13 +69,8 @@ onBeforeUnmount(() => {
             fit="cover"
           />
           <div v-if="infos" class="mt-1">
-            <p>
-              图像大小：{{ parseInt(infos.width) }} ×
-              {{ parseInt(infos.height) }}像素
-            </p>
-            <p>
-              文件大小：{{ formatBytes(infos.size) }}（{{ infos.size }} 字节）
-            </p>
+            <p>图像大小：{{ parseInt(infos.width) }} × {{ parseInt(infos.height) }}像素</p>
+            <p>文件大小：{{ formatBytes(infos.size) }}（{{ infos.size }} 字节）</p>
           </div>
         </div>
       </el-popover>

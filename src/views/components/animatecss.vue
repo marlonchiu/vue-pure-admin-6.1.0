@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import ReAnimateSelector from "@/components/ReAnimateSelector";
+import { ref, watch } from 'vue'
+import ReAnimateSelector from '@/components/ReAnimateSelector'
 
 defineOptions({
-  name: "AnimateCss"
-});
+  name: 'AnimateCss'
+})
 
-const animate = ref("");
+const animate = ref('')
 
 watch(animate, () => {
-  console.log("animate", animate.value);
-});
+  console.log('animate', animate.value)
+})
 </script>
 
 <template>

@@ -1,8 +1,8 @@
-import "./resizer.css";
-import { computed, unref, defineComponent } from "vue";
+import './resizer.css'
+import { computed, unref, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "Resizer",
+  name: 'Resizer',
   props: {
     split: {
       type: String,
@@ -10,14 +10,14 @@ export default defineComponent({
     },
     className: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   setup(props) {
     const classes = computed(() => {
-      return ["splitter-pane-resizer", props.split, props.className].join(" ");
-    });
+      return ['splitter-pane-resizer', props.split, props.className].join(' ')
+    })
 
-    return () => <div class={unref(classes)}></div>;
+    return () => <div class={unref(classes)}></div>
   }
-});
+})

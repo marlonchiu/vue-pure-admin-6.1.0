@@ -1,18 +1,9 @@
 <script setup lang="ts">
-import {
-  Base,
-  Step,
-  Input,
-  Size,
-  Placement,
-  Range,
-  Vertical,
-  Marks
-} from "./components";
+import { Base, Step, Input, Size, Placement, Range, Vertical, Marks } from './components'
 
 defineOptions({
-  name: "PureSlider"
-});
+  name: 'PureSlider'
+})
 </script>
 
 <template>

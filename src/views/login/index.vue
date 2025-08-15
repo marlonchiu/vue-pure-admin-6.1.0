@@ -1,73 +1,73 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Motion from "./utils/motion";
-import { useRouter } from "vue-router";
-import { message } from "@/utils/message";
-import { loginRules } from "./utils/rule";
-import TypeIt from "@/components/ReTypeit";
-import { debounce } from "@pureadmin/utils";
-import { useNav } from "@/layout/hooks/useNav";
-import { useEventListener } from "@vueuse/core";
-import type { FormInstance } from "element-plus";
-import { $t, transformI18n } from "@/plugins/i18n";
-import { operates, thirdParty } from "./utils/enums";
-import { useLayout } from "@/layout/hooks/useLayout";
-import LoginPhone from "./components/LoginPhone.vue";
-import LoginRegist from "./components/LoginRegist.vue";
-import LoginUpdate from "./components/LoginUpdate.vue";
-import LoginQrCode from "./components/LoginQrCode.vue";
-import { useUserStoreHook } from "@/store/modules/user";
-import { initRouter, getTopMenu } from "@/router/utils";
-import { bg, avatar, illustration } from "./utils/static";
-import { ReImageVerify } from "@/components/ReImageVerify";
-import { ref, toRaw, reactive, watch, computed } from "vue";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
-import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
+import { useI18n } from 'vue-i18n'
+import Motion from './utils/motion'
+import { useRouter } from 'vue-router'
+import { message } from '@/utils/message'
+import { loginRules } from './utils/rule'
+import TypeIt from '@/components/ReTypeit'
+import { debounce } from '@pureadmin/utils'
+import { useNav } from '@/layout/hooks/useNav'
+import { useEventListener } from '@vueuse/core'
+import type { FormInstance } from 'element-plus'
+import { $t, transformI18n } from '@/plugins/i18n'
+import { operates, thirdParty } from './utils/enums'
+import { useLayout } from '@/layout/hooks/useLayout'
+import LoginPhone from './components/LoginPhone.vue'
+import LoginRegist from './components/LoginRegist.vue'
+import LoginUpdate from './components/LoginUpdate.vue'
+import LoginQrCode from './components/LoginQrCode.vue'
+import { useUserStoreHook } from '@/store/modules/user'
+import { initRouter, getTopMenu } from '@/router/utils'
+import { bg, avatar, illustration } from './utils/static'
+import { ReImageVerify } from '@/components/ReImageVerify'
+import { ref, toRaw, reactive, watch, computed } from 'vue'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
+import { useTranslationLang } from '@/layout/hooks/useTranslationLang'
+import { useDataThemeChange } from '@/layout/hooks/useDataThemeChange'
 
-import dayIcon from "@/assets/svg/day.svg?component";
-import darkIcon from "@/assets/svg/dark.svg?component";
-import globalization from "@/assets/svg/globalization.svg?component";
-import Lock from "~icons/ri/lock-fill";
-import Check from "~icons/ep/check";
-import User from "~icons/ri/user-3-fill";
-import Info from "~icons/ri/information-line";
-import Keyhole from "~icons/ri/shield-keyhole-line";
+import dayIcon from '@/assets/svg/day.svg?component'
+import darkIcon from '@/assets/svg/dark.svg?component'
+import globalization from '@/assets/svg/globalization.svg?component'
+import Lock from '~icons/ri/lock-fill'
+import Check from '~icons/ep/check'
+import User from '~icons/ri/user-3-fill'
+import Info from '~icons/ri/information-line'
+import Keyhole from '~icons/ri/shield-keyhole-line'
 
 defineOptions({
-  name: "Login"
-});
+  name: 'Login'
+})
 
-const imgCode = ref("");
-const loginDay = ref(7);
-const router = useRouter();
-const loading = ref(false);
-const checked = ref(false);
-const disabled = ref(false);
-const ruleFormRef = ref<FormInstance>();
+const imgCode = ref('')
+const loginDay = ref(7)
+const router = useRouter()
+const loading = ref(false)
+const checked = ref(false)
+const disabled = ref(false)
+const ruleFormRef = ref<FormInstance>()
 const currentPage = computed(() => {
-  return useUserStoreHook().currentPage;
-});
+  return useUserStoreHook().currentPage
+})
 
-const { t } = useI18n();
-const { initStorage } = useLayout();
-initStorage();
-const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange();
-dataThemeChange(overallStyle.value);
-const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
-const { locale, translationCh, translationEn } = useTranslationLang();
+const { t } = useI18n()
+const { initStorage } = useLayout()
+initStorage()
+const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange()
+dataThemeChange(overallStyle.value)
+const { title, getDropdownItemStyle, getDropdownItemClass } = useNav()
+const { locale, translationCh, translationEn } = useTranslationLang()
 
 const ruleForm = reactive({
-  username: "admin",
-  password: "admin123",
-  verifyCode: ""
-});
+  username: 'admin',
+  password: 'admin123',
+  verifyCode: ''
+})
 
 const onLogin = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   await formEl.validate(valid => {
     if (valid) {
-      loading.value = true;
+      loading.value = true
       useUserStoreHook()
         .loginByUsername({
           username: ruleForm.username,
@@ -77,47 +77,39 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           if (res.success) {
             // 获取后端路由
             return initRouter().then(() => {
-              disabled.value = true;
+              disabled.value = true
               router
                 .push(getTopMenu(true).path)
                 .then(() => {
-                  message(t("login.pureLoginSuccess"), { type: "success" });
+                  message(t('login.pureLoginSuccess'), { type: 'success' })
                 })
-                .finally(() => (disabled.value = false));
-            });
+                .finally(() => (disabled.value = false))
+            })
           } else {
-            message(t("login.pureLoginFail"), { type: "error" });
+            message(t('login.pureLoginFail'), { type: 'error' })
           }
         })
-        .finally(() => (loading.value = false));
+        .finally(() => (loading.value = false))
     }
-  });
-};
+  })
+}
 
-const immediateDebounce: any = debounce(
-  formRef => onLogin(formRef),
-  1000,
-  true
-);
+const immediateDebounce: any = debounce(formRef => onLogin(formRef), 1000, true)
 
-useEventListener(document, "keydown", ({ code }) => {
-  if (
-    ["Enter", "NumpadEnter"].includes(code) &&
-    !disabled.value &&
-    !loading.value
-  )
-    immediateDebounce(ruleFormRef.value);
-});
+useEventListener(document, 'keydown', ({ code }) => {
+  if (['Enter', 'NumpadEnter'].includes(code) && !disabled.value && !loading.value)
+    immediateDebounce(ruleFormRef.value)
+})
 
 watch(imgCode, value => {
-  useUserStoreHook().SET_VERIFYCODE(value);
-});
+  useUserStoreHook().SET_VERIFYCODE(value)
+})
 watch(checked, bool => {
-  useUserStoreHook().SET_ISREMEMBERED(bool);
-});
+  useUserStoreHook().SET_ISREMEMBERED(bool)
+})
 watch(loginDay, value => {
-  useUserStoreHook().SET_LOGINDAY(value);
-});
+  useUserStoreHook().SET_LOGINDAY(value)
+})
 </script>
 
 <template>
@@ -144,11 +136,7 @@ watch(loginDay, value => {
               :class="['dark:text-white!', getDropdownItemClass(locale, 'zh')]"
               @click="translationCh"
             >
-              <IconifyIconOffline
-                v-show="locale === 'zh'"
-                class="check-zh"
-                :icon="Check"
-              />
+              <IconifyIconOffline v-show="locale === 'zh'" class="check-zh" :icon="Check" />
               简体中文
             </el-dropdown-item>
             <el-dropdown-item
@@ -174,9 +162,7 @@ watch(loginDay, value => {
           <avatar class="avatar" />
           <Motion>
             <h2 class="outline-hidden">
-              <TypeIt
-                :options="{ strings: [title], cursor: false, speed: 100 }"
-              />
+              <TypeIt :options="{ strings: [title], cursor: false, speed: 100 }" />
             </h2>
           </Motion>
 
@@ -253,7 +239,7 @@ watch(loginDay, value => {
                         <option value="7">7</option>
                         <option value="30">30</option>
                       </select>
-                      {{ t("login.pureRemember") }}
+                      {{ t('login.pureRemember') }}
                       <IconifyIconOffline
                         v-tippy="{
                           content: t('login.pureRememberInfo'),
@@ -264,12 +250,8 @@ watch(loginDay, value => {
                       />
                     </span>
                   </el-checkbox>
-                  <el-button
-                    link
-                    type="primary"
-                    @click="useUserStoreHook().SET_CURRENTPAGE(4)"
-                  >
-                    {{ t("login.pureForget") }}
+                  <el-button link type="primary" @click="useUserStoreHook().SET_CURRENTPAGE(4)">
+                    {{ t('login.pureForget') }}
                   </el-button>
                 </div>
                 <el-button
@@ -280,7 +262,7 @@ watch(loginDay, value => {
                   :disabled="disabled"
                   @click="onLogin(ruleFormRef)"
                 >
-                  {{ t("login.pureLogin") }}
+                  {{ t('login.pureLogin') }}
                 </el-button>
               </el-form-item>
             </Motion>
@@ -306,15 +288,11 @@ watch(loginDay, value => {
             <el-form-item>
               <el-divider>
                 <p class="text-gray-500 text-xs">
-                  {{ t("login.pureThirdLogin") }}
+                  {{ t('login.pureThirdLogin') }}
                 </p>
               </el-divider>
               <div class="w-full flex justify-evenly">
-                <span
-                  v-for="(item, index) in thirdParty"
-                  :key="index"
-                  :title="t(item.title)"
-                >
+                <span v-for="(item, index) in thirdParty" :key="index" :title="t(item.title)">
                   <IconifyIconOnline
                     :icon="`ri:${item.icon}-fill`"
                     width="20"
@@ -339,11 +317,7 @@ watch(loginDay, value => {
       class="w-full flex-c absolute bottom-3 text-sm text-[rgba(0,0,0,0.6)] dark:text-[rgba(220,220,242,0.8)]"
     >
       Copyright © 2020-present
-      <a
-        class="hover:text-primary!"
-        href="https://github.com/pure-admin"
-        target="_blank"
-      >
+      <a class="hover:text-primary!" href="https://github.com/pure-admin" target="_blank">
         &nbsp;{{ title }}
       </a>
     </div>
@@ -351,7 +325,7 @@ watch(loginDay, value => {
 </template>
 
 <style scoped>
-@import url("@/style/login.css");
+@import url('@/style/login.css');
 </style>
 
 <style lang="scss" scoped>

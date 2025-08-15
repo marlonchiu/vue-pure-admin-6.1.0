@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { list } from "./high/list";
+import { ref } from 'vue'
+import { list } from './high/list'
 
 defineOptions({
-  name: "PureTableHigh"
-});
+  name: 'PureTableHigh'
+})
 
-const selected = ref(0);
+const selected = ref(0)
 
 function tabClick({ index }) {
-  selected.value = index;
+  selected.value = index
 }
 </script>
 

@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { tableData } from "./data";
+import { ref } from 'vue'
+import { tableData } from './data'
 
-const tableRef = ref();
-const currentRow = ref();
+const tableRef = ref()
+const currentRow = ref()
 
 const setCurrent = (row?: any) => {
   // 获取表格的方法 tableRef.value.getTableRef()
-  const { setCurrentRow } = tableRef.value.getTableRef();
-  setCurrentRow(row);
-};
+  const { setCurrentRow } = tableRef.value.getTableRef()
+  setCurrentRow(row)
+}
 const handleCurrentChange = val => {
-  currentRow.value = val;
-};
+  currentRow.value = val
+}
 
 const columns: TableColumnList = [
   {
-    label: "日期",
-    prop: "date"
+    label: '日期',
+    prop: 'date'
   },
   {
-    label: "姓名",
-    prop: "name"
+    label: '姓名',
+    prop: 'name'
   },
   {
-    label: "地址",
-    prop: "address"
+    label: '地址',
+    prop: 'address'
   }
-];
+]
 </script>
 
 <template>

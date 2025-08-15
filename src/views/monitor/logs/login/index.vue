@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRole } from "./hook";
-import { getPickerShortcuts } from "../../utils";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref } from 'vue'
+import { useRole } from './hook'
+import { getPickerShortcuts } from '../../utils'
+import { PureTableBar } from '@/components/RePureTableBar'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
-import Delete from "~icons/ep/delete";
-import Refresh from "~icons/ep/refresh";
+import Delete from '~icons/ep/delete'
+import Refresh from '~icons/ep/refresh'
 
 defineOptions({
-  name: "LoginLog"
-});
+  name: 'LoginLog'
+})
 
-const formRef = ref();
-const tableRef = ref();
+const formRef = ref()
+const tableRef = ref()
 
 const {
   form,
@@ -30,7 +30,7 @@ const {
   onSelectionCancel,
   handleCurrentChange,
   handleSelectionChange
-} = useRole(tableRef);
+} = useRole(tableRef)
 </script>
 
 <template>
@@ -42,20 +42,10 @@ const {
       class="search-form bg-bg_color w-full pl-8 pt-[12px] overflow-auto"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input
-          v-model="form.username"
-          placeholder="请输入用户名"
-          clearable
-          class="w-[150px]!"
-        />
+        <el-input v-model="form.username" placeholder="请输入用户名" clearable class="w-[150px]!" />
       </el-form-item>
       <el-form-item label="登录状态" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择"
-          clearable
-          class="w-[150px]!"
-        >
+        <el-select v-model="form.status" placeholder="请选择" clearable class="w-[150px]!">
           <el-option label="成功" value="1" />
           <el-option label="失败" value="0" />
         </el-select>
@@ -79,23 +69,15 @@ const {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
-    <PureTableBar
-      title="登录日志（仅演示，操作后不生效）"
-      :columns="columns"
-      @refresh="onSearch"
-    >
+    <PureTableBar title="登录日志（仅演示，操作后不生效）" :columns="columns" @refresh="onSearch">
       <template #buttons>
         <el-popconfirm title="确定要删除所有日志数据吗？" @confirm="clearAll">
           <template #reference>
-            <el-button type="danger" :icon="useRenderIcon(Delete)">
-              清空日志
-            </el-button>
+            <el-button type="danger" :icon="useRenderIcon(Delete)"> 清空日志 </el-button>
           </template>
         </el-popconfirm>
       </template>
@@ -112,9 +94,7 @@ const {
             >
               已选 {{ selectedNum }} 项
             </span>
-            <el-button type="primary" text @click="onSelectionCancel">
-              取消选择
-            </el-button>
+            <el-button type="primary" text @click="onSelectionCancel"> 取消选择 </el-button>
           </div>
           <el-popconfirm title="是否确认删除?" @confirm="onbatchDel">
             <template #reference>

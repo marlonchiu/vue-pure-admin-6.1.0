@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { danmus as danmusData, getDanmuData } from "./danmu.js";
-import { onMounted, onUnmounted, reactive, ref } from "vue";
-import VueDanmaku from "vue3-danmaku";
+import { danmus as danmusData, getDanmuData } from './danmu.js'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import VueDanmaku from 'vue3-danmaku'
 
 defineOptions({
-  name: "Danmaku"
-});
+  name: 'Danmaku'
+})
 
-const danmaku = ref();
-const danmus = ref<any[]>(getDanmuData());
-const danmuMsg = ref<string>("");
-let timer = 0;
+const danmaku = ref()
+const danmus = ref<any[]>(getDanmuData())
+const danmuMsg = ref<string>('')
+let timer = 0
 const config = reactive({
   channels: 5, // 轨道数量，为0则弹幕轨道数会撑满容器
   useSlot: true, // 是否开启slot
@@ -21,84 +21,84 @@ const config = reactive({
   right: 0, // 同一轨道弹幕的水平间距
   debounce: 100, // 弹幕刷新频率（多少毫秒插入一条弹幕，建议不小于50）
   randomChannel: true // 随机弹幕轨道
-});
+})
 
 onMounted(() => {
-  window.onresize = () => resizeHandler();
-});
+  window.onresize = () => resizeHandler()
+})
 
 onUnmounted(() => {
-  window.onresize = null;
-});
+  window.onresize = null
+})
 
 function play(type: string) {
   switch (type) {
-    case "play":
-      danmaku.value.play();
-      break;
-    case "pause":
-      danmaku.value.pause();
-      break;
-    case "stop":
-      danmaku.value.stop();
-      break;
-    case "show":
-      danmaku.value.show();
-      break;
-    case "hide":
-      danmaku.value.hide();
-      break;
-    case "reset":
-      danmaku.value.reset();
-      break;
+    case 'play':
+      danmaku.value.play()
+      break
+    case 'pause':
+      danmaku.value.pause()
+      break
+    case 'stop':
+      danmaku.value.stop()
+      break
+    case 'show':
+      danmaku.value.show()
+      break
+    case 'hide':
+      danmaku.value.hide()
+      break
+    case 'reset':
+      danmaku.value.reset()
+      break
     default:
-      break;
+      break
   }
 }
 
 function switchSlot(slot: boolean) {
-  config.useSlot = slot;
-  danmus.value = slot ? getDanmuData() : danmusData;
+  config.useSlot = slot
+  danmus.value = slot ? getDanmuData() : danmusData
 
   setTimeout(() => {
-    danmaku.value.stop();
-    danmaku.value.play();
-  });
+    danmaku.value.stop()
+    danmaku.value.play()
+  })
 }
 function speedsChange(val: number) {
   if (config.speeds <= 10 && val === -10) {
-    return;
+    return
   }
-  config.speeds += val;
-  danmaku.value.reset();
+  config.speeds += val
+  danmaku.value.reset()
 }
 function fontChange(val: number) {
-  config.fontSize += val;
-  danmaku.value.reset();
+  config.fontSize += val
+  danmaku.value.reset()
 }
 function channelChange(val: number) {
   if (!config.channels && val === -1) {
-    return;
+    return
   }
-  config.channels += val;
+  config.channels += val
 }
 function resizeHandler() {
-  if (timer) clearTimeout(timer);
+  if (timer) clearTimeout(timer)
   timer = window.setTimeout(() => {
-    danmaku.value.resize();
-  }, 500);
+    danmaku.value.resize()
+  }, 500)
 }
 function addDanmu() {
-  if (!danmuMsg.value) return;
+  if (!danmuMsg.value) return
   const _danmuMsg = config.useSlot
     ? {
-        avatar: "https://i.loli.net/2021/01/17/xpwbm3jKytfaNOD.jpg",
-        name: "你",
+        avatar: 'https://i.loli.net/2021/01/17/xpwbm3jKytfaNOD.jpg',
+        name: '你',
         text: danmuMsg.value
       }
-    : danmuMsg.value;
-  danmaku.value.add(_danmuMsg);
-  danmuMsg.value = "";
+    : danmuMsg.value
+  danmaku.value.add(_danmuMsg)
+  danmuMsg.value = ''
 }
 </script>
 <template>
@@ -125,13 +125,7 @@ function addDanmu() {
       </el-link>
     </template>
     <div class="flex gap-5">
-      <vue-danmaku
-        ref="danmaku"
-        v-model:danmus="danmus"
-        class="demo"
-        isSuspend
-        v-bind="config"
-      >
+      <vue-danmaku ref="danmaku" v-model:danmus="danmus" class="demo" isSuspend v-bind="config">
         <!-- 弹幕slot -->
         <template v-slot:dm="{ danmu, index }">
           <div class="danmu-item">
@@ -166,12 +160,8 @@ function addDanmu() {
         </p>
         <p>
           字号：
-          <el-button :disabled="config.useSlot" @click="fontChange(-1)">
-            缩小
-          </el-button>
-          <el-button :disabled="config.useSlot" @click="fontChange(1)">
-            放大
-          </el-button>
+          <el-button :disabled="config.useSlot" @click="fontChange(-1)"> 缩小 </el-button>
+          <el-button :disabled="config.useSlot" @click="fontChange(1)"> 放大 </el-button>
           <span class="ml-5">当前字号：{{ config.fontSize }}px</span>
         </p>
         <p>

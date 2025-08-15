@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useColumns } from "./columns";
+import { ref } from 'vue'
+import { useColumns } from './columns'
 
-const formRef = ref();
-const tableRef = ref();
-const selectRef = ref();
+const formRef = ref()
+const tableRef = ref()
+const selectRef = ref()
 const {
   searchForm,
   sexOptions,
@@ -18,7 +18,7 @@ const {
   onSearch,
   removeTag,
   handleSelectionChange
-} = useColumns(selectRef, formRef, tableRef);
+} = useColumns(selectRef, formRef, tableRef)
 </script>
 
 <template>
@@ -65,9 +65,7 @@ const {
             />
           </el-form-item>
           <el-form-item class="float-right mr-0!">
-            <el-button type="primary" text bg @click="onSearch">
-              查询
-            </el-button>
+            <el-button type="primary" text bg @click="onSearch"> 查询 </el-button>
             <el-button text bg @click="onReset"> 重置 </el-button>
           </el-form-item>
         </el-form>

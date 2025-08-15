@@ -1,43 +1,41 @@
 <script setup lang="ts">
-import "deep-chat";
-import { ref, onMounted } from "vue";
+import 'deep-chat'
+import { ref, onMounted } from 'vue'
 
-const chatRef = ref();
+const chatRef = ref()
 
 onMounted(() => {
   chatRef.value.demo = {
     response: message => {
-      console.log(message);
+      console.log(message)
       return {
-        text: "仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect"
-      };
+        text: '仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect'
+      }
     }
-  };
-});
+  }
+})
 </script>
 
 <template>
   <deep-chat
     ref="chatRef"
     style="
-      border-radius: 10px;
-      border: unset;
-      background-image: url(&quot;https://xiaoxian521.github.io/hyperlink/img/vue-pure-admin/chatai/lofi.png&quot;);
+      background-image: url('https://xiaoxian521.github.io/hyperlink/img/vue-pure-admin/chatai/lofi.png');
       background-size: cover;
+      border: unset;
+      border-radius: 10px;
     "
     :messageStyles="{
       default: {
         user: {
           bubble: {
-            background:
-              'linear-gradient(90deg, rgb(225 37 255) 0%, rgb(161, 99, 233) 100%)',
+            background: 'linear-gradient(90deg, rgb(225 37 255) 0%, rgb(161, 99, 233) 100%)',
             color: 'white'
           }
         },
         ai: {
           bubble: {
-            background:
-              'linear-gradient(90deg, rgb(0, 162, 255) 30%, rgb(197 119 255) 100%)',
+            background: 'linear-gradient(90deg, rgb(0, 162, 255) 30%, rgb(197 119 255) 100%)',
             color: 'white'
           }
         }
@@ -46,8 +44,7 @@ onMounted(() => {
         message: {
           styles: {
             bubble: {
-              background:
-                'linear-gradient(90deg, rgb(0, 162, 255) 30%, rgb(197 119 255) 100%)',
+              background: 'linear-gradient(90deg, rgb(0, 162, 255) 30%, rgb(197 119 255) 100%)',
               color: 'white'
             }
           }

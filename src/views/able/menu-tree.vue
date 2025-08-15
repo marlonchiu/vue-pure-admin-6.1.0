@@ -1,45 +1,45 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { clone } from "@pureadmin/utils";
-import type { ElTreeV2 } from "element-plus";
-import { transformI18n } from "@/plugins/i18n";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { extractPathList, deleteChildren } from "@/utils/tree";
-import { usePermissionStoreHook } from "@/store/modules/permission";
-import type { TreeNode } from "element-plus/es/components/tree-v2/src/types";
-import NodeTree from "~icons/ri/node-tree";
+import { ref, computed } from 'vue'
+import { clone } from '@pureadmin/utils'
+import type { ElTreeV2 } from 'element-plus'
+import { transformI18n } from '@/plugins/i18n'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
+import { extractPathList, deleteChildren } from '@/utils/tree'
+import { usePermissionStoreHook } from '@/store/modules/permission'
+import type { TreeNode } from 'element-plus/es/components/tree-v2/src/types'
+import NodeTree from '~icons/ri/node-tree'
 
 defineOptions({
-  name: "MenuTree"
-});
+  name: 'MenuTree'
+})
 
 interface treeNode extends TreeNode {
   meta: {
-    title: string;
-  };
+    title: string
+  }
 }
 
-const query = ref("");
+const query = ref('')
 const dataProps = ref({
-  value: "uniqueId",
-  children: "children"
-});
-const treeRef = ref<InstanceType<typeof ElTreeV2>>();
-const menusTree = clone(usePermissionStoreHook().wholeMenus, true);
+  value: 'uniqueId',
+  children: 'children'
+})
+const treeRef = ref<InstanceType<typeof ElTreeV2>>()
+const menusTree = clone(usePermissionStoreHook().wholeMenus, true)
 
 const menusData = computed(() => {
-  return deleteChildren(menusTree);
-});
+  return deleteChildren(menusTree)
+})
 
-const expandedKeys = extractPathList(menusData.value);
+const expandedKeys = extractPathList(menusData.value)
 
 const onQueryChanged = (query: string) => {
-  (treeRef as any).value!.filter(query);
-};
+  ;(treeRef as any).value!.filter(query)
+}
 
 const filterMethod = (query: string, node: treeNode) => {
-  return transformI18n(node.meta.title)!.indexOf(query) !== -1;
-};
+  return transformI18n(node.meta.title)!.indexOf(query) !== -1
+}
 </script>
 
 <template>

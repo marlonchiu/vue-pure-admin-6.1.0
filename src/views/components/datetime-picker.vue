@@ -1,157 +1,155 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch } from 'vue'
 
 defineOptions({
-  name: "DateTimePicker"
-});
+  name: 'DateTimePicker'
+})
 
-const size = ref("default");
-const dynamicSize = ref();
+const size = ref('default')
+const dynamicSize = ref()
 
-const value = ref("");
+const value = ref('')
 const shortcuts = [
   {
-    text: "今天",
+    text: '今天',
     value: new Date()
   },
   {
-    text: "昨天",
+    text: '昨天',
     value: () => {
-      const date = new Date();
-      date.setTime(date.getTime() - 3600 * 1000 * 24);
-      return date;
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24)
+      return date
     }
   },
   {
-    text: "一周前",
+    text: '一周前',
     value: () => {
-      const date = new Date();
-      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-      return date;
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+      return date
     }
   }
-];
+]
 
-const value1 = ref("");
-const datetimeFormat = ref("");
+const value1 = ref('')
+const datetimeFormat = ref('')
 
-const value2 = ref("");
+const value2 = ref('')
 const shortcuts1 = [
   {
-    text: "上周",
+    text: '上周',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+      return [start, end]
     }
   },
   {
-    text: "上个月",
+    text: '上个月',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+      return [start, end]
     }
   },
   {
-    text: "三个月前",
+    text: '三个月前',
     value: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-      return [start, end];
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+      return [start, end]
     }
   }
-];
+]
 
-const value3 = ref("");
-const datePickerRef = ref();
-const placement = ref("auto");
+const value3 = ref('')
+const datePickerRef = ref()
+const placement = ref('auto')
 const checkTag = ref([
   {
-    title: "auto", // https://popper.js.org/docs/v2/constructors/#options
+    title: 'auto', // https://popper.js.org/docs/v2/constructors/#options
     checked: false
   },
   {
-    title: "auto-start",
+    title: 'auto-start',
     checked: false
   },
   {
-    title: "auto-end",
+    title: 'auto-end',
     checked: false
   },
   {
-    title: "top",
+    title: 'top',
     checked: false
   },
   {
-    title: "top-start",
+    title: 'top-start',
     checked: false
   },
   {
-    title: "top-end",
+    title: 'top-end',
     checked: false
   },
   {
-    title: "bottom",
+    title: 'bottom',
     checked: false
   },
   {
-    title: "bottom-start",
+    title: 'bottom-start',
     checked: false
   },
   {
-    title: "bottom-end",
+    title: 'bottom-end',
     checked: false
   },
   {
-    title: "right",
+    title: 'right',
     checked: false
   },
   {
-    title: "right-start",
+    title: 'right-start',
     checked: false
   },
   {
-    title: "right-end",
+    title: 'right-end',
     checked: false
   },
   {
-    title: "left",
+    title: 'left',
     checked: false
   },
   {
-    title: "left-start",
+    title: 'left-start',
     checked: false
   },
   {
-    title: "left-end",
+    title: 'left-end',
     checked: false
   }
-]);
-const curTagMap = ref({});
+])
+const curTagMap = ref({})
 function onChecked(tag, index) {
-  if (size.value === "disabled") return;
-  placement.value = tag.title;
+  if (size.value === 'disabled') return
+  placement.value = tag.title
   curTagMap.value[index] = Object.assign({
     ...tag,
     checked: !tag.checked
-  });
-  checkTag.value.map(item => (item.checked = false));
-  checkTag.value[index].checked = curTagMap.value[index].checked;
+  })
+  checkTag.value.map(item => (item.checked = false))
+  checkTag.value[index].checked = curTagMap.value[index].checked
   // 外部触发日期时间选择面板的打开与关闭
   curTagMap.value[index].checked
     ? datePickerRef.value.handleOpen()
-    : datePickerRef.value.handleClose();
+    : datePickerRef.value.handleClose()
 }
 
 watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
-);
+  val === 'disabled' ? (dynamicSize.value = 'default') : (dynamicSize.value = size.value)
+)
 </script>
 
 <template>
@@ -238,18 +236,12 @@ watch(size, val =>
       :disabled="size === 'disabled'"
     />
 
-    <div class="mb-2 mt-4">
-      弹出面板位置可控（如果弹出位置不足以完整展示面板会自动调整位置）
-    </div>
+    <div class="mb-2 mt-4">弹出面板位置可控（如果弹出位置不足以完整展示面板会自动调整位置）</div>
     <el-space wrap class="w-[400px]">
       <el-check-tag
         v-for="(tag, index) in checkTag"
         :key="index"
-        :class="[
-          'select-none',
-          size === 'disabled' && 'tag-disabled',
-          tag.checked && 'is-active'
-        ]"
+        :class="['select-none', size === 'disabled' && 'tag-disabled', tag.checked && 'is-active']"
         :checked="tag.checked"
         @change="onChecked(tag, index)"
       >

@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import "deep-chat";
-import { ref, onMounted } from "vue";
+import 'deep-chat'
+import { ref, onMounted } from 'vue'
 
-const chatRef = ref();
+const chatRef = ref()
 
 onMounted(() => {
   chatRef.value.demo = {
     response: message => {
-      console.log(message);
+      console.log(message)
       return {
-        text: "仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect"
-      };
+        text: '仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect'
+      }
     }
-  };
-});
+  }
+})
 </script>
 
 <template>
   <deep-chat
     ref="chatRef"
     style="
-      border-radius: 10px;
-      border: unset;
-      background-image: url(&quot;https://xiaoxian521.github.io/hyperlink/img/vue-pure-admin/chatai/blue.jpg&quot;);
+      background-image: url('https://xiaoxian521.github.io/hyperlink/img/vue-pure-admin/chatai/blue.jpg');
       background-size: cover;
+      border: unset;
+      border-radius: 10px;
     "
     :messageStyles="{
       default: {

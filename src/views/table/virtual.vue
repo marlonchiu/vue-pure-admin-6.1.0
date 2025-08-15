@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { list } from "./virtual/list";
+import { ref } from 'vue'
+import { list } from './virtual/list'
 
 defineOptions({
-  name: "VxeTable"
-});
+  name: 'VxeTable'
+})
 
-const selected = ref(0);
+const selected = ref(0)
 
 function tabClick({ index }) {
-  selected.value = index;
+  selected.value = index
 }
 </script>
 

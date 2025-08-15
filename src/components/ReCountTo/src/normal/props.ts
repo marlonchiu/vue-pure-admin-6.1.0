@@ -1,5 +1,5 @@
-import type { PropType } from "vue";
-import propTypes from "@/utils/propTypes";
+import type { PropType } from 'vue'
+import propTypes from '@/utils/propTypes'
 
 export const countToProps = {
   startVal: propTypes.number.def(0),
@@ -11,22 +11,20 @@ export const countToProps = {
     required: false,
     default: 0,
     validator(value: number) {
-      return value >= 0;
+      return value >= 0
     }
   },
   color: propTypes.string.def(),
   fontSize: propTypes.string.def(),
-  decimal: propTypes.string.def("."),
-  separator: propTypes.string.def(","),
-  prefix: propTypes.string.def(""),
-  suffix: propTypes.string.def(""),
+  decimal: propTypes.string.def('.'),
+  separator: propTypes.string.def(','),
+  prefix: propTypes.string.def(''),
+  suffix: propTypes.string.def(''),
   useEasing: propTypes.bool.def(true),
   easingFn: {
-    type: Function as PropType<
-      (t: number, b: number, c: number, d: number) => number
-    >,
+    type: Function as PropType<(t: number, b: number, c: number, d: number) => number>,
     default(t: number, b: number, c: number, d: number) {
-      return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
+      return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
     }
   }
-};
+}

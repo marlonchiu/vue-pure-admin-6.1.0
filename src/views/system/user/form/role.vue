@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import ReCol from "@/components/ReCol";
-import { RoleFormProps } from "../utils/types";
+import { ref } from 'vue'
+import ReCol from '@/components/ReCol'
+import { RoleFormProps } from '../utils/types'
 
 const props = withDefaults(defineProps<RoleFormProps>(), {
   formInline: () => ({
-    username: "",
-    nickname: "",
+    username: '',
+    nickname: '',
     roleOptions: [],
     ids: []
   })
-});
+})
 
-const newFormInline = ref(props.formInline);
+const newFormInline = ref(props.formInline)
 </script>
 
 <template>

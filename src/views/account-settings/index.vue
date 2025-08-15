@@ -1,69 +1,69 @@
 <script setup lang="ts">
-import { getMine } from "@/api/user";
-import { useRouter } from "vue-router";
-import { ref, onBeforeMount } from "vue";
-import { ReText } from "@/components/ReText";
-import Profile from "./components/Profile.vue";
-import Preferences from "./components/Preferences.vue";
-import SecurityLog from "./components/SecurityLog.vue";
-import { useGlobal, deviceDetection } from "@pureadmin/utils";
-import AccountManagement from "./components/AccountManagement.vue";
-import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
-import LaySidebarTopCollapse from "@/layout/components/lay-sidebar/components/SidebarTopCollapse.vue";
+import { getMine } from '@/api/user'
+import { useRouter } from 'vue-router'
+import { ref, onBeforeMount } from 'vue'
+import { ReText } from '@/components/ReText'
+import Profile from './components/Profile.vue'
+import Preferences from './components/Preferences.vue'
+import SecurityLog from './components/SecurityLog.vue'
+import { useGlobal, deviceDetection } from '@pureadmin/utils'
+import AccountManagement from './components/AccountManagement.vue'
+import { useDataThemeChange } from '@/layout/hooks/useDataThemeChange'
+import LaySidebarTopCollapse from '@/layout/components/lay-sidebar/components/SidebarTopCollapse.vue'
 
-import leftLine from "~icons/ri/arrow-left-s-line";
-import ProfileIcon from "~icons/ri/user-3-line";
-import PreferencesIcon from "~icons/ri/settings-3-line";
-import SecurityLogIcon from "~icons/ri/window-line";
-import AccountManagementIcon from "~icons/ri/profile-line";
+import leftLine from '~icons/ri/arrow-left-s-line'
+import ProfileIcon from '~icons/ri/user-3-line'
+import PreferencesIcon from '~icons/ri/settings-3-line'
+import SecurityLogIcon from '~icons/ri/window-line'
+import AccountManagementIcon from '~icons/ri/profile-line'
 
 defineOptions({
-  name: "AccountSettings"
-});
+  name: 'AccountSettings'
+})
 
-const router = useRouter();
-const isOpen = ref(deviceDetection() ? false : true);
-const { $storage } = useGlobal<GlobalPropertiesApi>();
+const router = useRouter()
+const isOpen = ref(deviceDetection() ? false : true)
+const { $storage } = useGlobal<GlobalPropertiesApi>()
 onBeforeMount(() => {
-  useDataThemeChange().dataThemeChange($storage.layout?.overallStyle);
-});
+  useDataThemeChange().dataThemeChange($storage.layout?.overallStyle)
+})
 
 const userInfo = ref({
-  avatar: "",
-  username: "",
-  nickname: ""
-});
+  avatar: '',
+  username: '',
+  nickname: ''
+})
 const panes = [
   {
-    key: "profile",
-    label: "个人信息",
+    key: 'profile',
+    label: '个人信息',
     icon: ProfileIcon,
     component: Profile
   },
   {
-    key: "preferences",
-    label: "偏好设置",
+    key: 'preferences',
+    label: '偏好设置',
     icon: PreferencesIcon,
     component: Preferences
   },
   {
-    key: "securityLog",
-    label: "安全日志",
+    key: 'securityLog',
+    label: '安全日志',
     icon: SecurityLogIcon,
     component: SecurityLog
   },
   {
-    key: "accountManagement",
-    label: "账户管理",
+    key: 'accountManagement',
+    label: '账户管理',
     icon: AccountManagementIcon,
     component: AccountManagement
   }
-];
-const witchPane = ref("profile");
+]
+const witchPane = ref('profile')
 
 getMine().then(res => {
-  userInfo.value = res.data;
-});
+  userInfo.value = res.data
+})
 </script>
 
 <template>
@@ -78,9 +78,7 @@ getMine().then(res => {
           class="h-[50px]! text-[var(--pure-theme-menu-text)] cursor-pointer text-sm transition-all duration-300 ease-in-out hover:scale-105 will-change-transform transform-gpu origin-center hover:text-base! hover:text-[var(--pure-theme-menu-title-hover)]!"
           @click="router.go(-1)"
         >
-          <div
-            class="h-full flex items-center px-[var(--el-menu-base-level-padding)]"
-          >
+          <div class="h-full flex items-center px-[var(--el-menu-base-level-padding)]">
             <IconifyIconOffline :icon="leftLine" />
             <span class="ml-2">返回</span>
           </div>
@@ -102,9 +100,9 @@ getMine().then(res => {
           :index="item.key"
           @click="
             () => {
-              witchPane = item.key;
+              witchPane = item.key
               if (deviceDetection()) {
-                isOpen = !isOpen;
+                isOpen = !isOpen
               }
             }
           "
@@ -162,7 +160,7 @@ getMine().then(res => {
         inset: 0 8px;
         clear: both;
         margin: 4px 0;
-        content: "";
+        content: '';
         background: var(--el-color-primary);
         border-radius: 3px;
       }

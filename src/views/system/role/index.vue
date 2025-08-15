@@ -1,51 +1,46 @@
 <script setup lang="ts">
-import { useRole } from "./utils/hook";
-import { ref, computed, nextTick, onMounted } from "vue";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import {
-  delay,
-  subBefore,
-  deviceDetection,
-  useResizeObserver
-} from "@pureadmin/utils";
+import { useRole } from './utils/hook'
+import { ref, computed, nextTick, onMounted } from 'vue'
+import { PureTableBar } from '@/components/RePureTableBar'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
+import { delay, subBefore, deviceDetection, useResizeObserver } from '@pureadmin/utils'
 
 // import Database from "~icons/ri/database-2-line";
 // import More from "~icons/ep/more-filled";
-import Delete from "~icons/ep/delete";
-import EditPen from "~icons/ep/edit-pen";
-import Refresh from "~icons/ep/refresh";
-import Menu from "~icons/ep/menu";
-import AddFill from "~icons/ri/add-circle-line";
-import Close from "~icons/ep/close";
-import Check from "~icons/ep/check";
+import Delete from '~icons/ep/delete'
+import EditPen from '~icons/ep/edit-pen'
+import Refresh from '~icons/ep/refresh'
+import Menu from '~icons/ep/menu'
+import AddFill from '~icons/ri/add-circle-line'
+import Close from '~icons/ep/close'
+import Check from '~icons/ep/check'
 
 defineOptions({
-  name: "SystemRole"
-});
+  name: 'SystemRole'
+})
 
 const iconClass = computed(() => {
   return [
-    "w-[22px]",
-    "h-[22px]",
-    "flex",
-    "justify-center",
-    "items-center",
-    "outline-hidden",
-    "rounded-[4px]",
-    "cursor-pointer",
-    "transition-colors",
-    "hover:bg-[#0000000f]",
-    "dark:hover:bg-[#ffffff1f]",
-    "dark:hover:text-[#ffffffd9]"
-  ];
-});
+    'w-[22px]',
+    'h-[22px]',
+    'flex',
+    'justify-center',
+    'items-center',
+    'outline-hidden',
+    'rounded-[4px]',
+    'cursor-pointer',
+    'transition-colors',
+    'hover:bg-[#0000000f]',
+    'dark:hover:bg-[#ffffff1f]',
+    'dark:hover:text-[#ffffffd9]'
+  ]
+})
 
-const treeRef = ref();
-const formRef = ref();
-const tableRef = ref();
-const contentRef = ref();
-const treeHeight = ref();
+const treeRef = ref()
+const formRef = ref()
+const tableRef = ref()
+const contentRef = ref()
+const treeHeight = ref()
 
 const {
   form,
@@ -76,18 +71,18 @@ const {
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
-} = useRole(treeRef);
+} = useRole(treeRef)
 
 onMounted(() => {
   useResizeObserver(contentRef, async () => {
-    await nextTick();
+    await nextTick()
     delay(60).then(() => {
       treeHeight.value = parseFloat(
-        subBefore(tableRef.value.getTableDoms().tableWrapper.style.height, "px")
-      );
-    });
-  });
-});
+        subBefore(tableRef.value.getTableDoms().tableWrapper.style.height, 'px')
+      )
+    })
+  })
+})
 </script>
 
 <template>
@@ -99,28 +94,13 @@ onMounted(() => {
       class="search-form bg-bg_color w-full pl-8 pt-[12px] overflow-auto"
     >
       <el-form-item label="角色名称：" prop="name">
-        <el-input
-          v-model="form.name"
-          placeholder="请输入角色名称"
-          clearable
-          class="w-[180px]!"
-        />
+        <el-input v-model="form.name" placeholder="请输入角色名称" clearable class="w-[180px]!" />
       </el-form-item>
       <el-form-item label="角色标识：" prop="code">
-        <el-input
-          v-model="form.code"
-          placeholder="请输入角色标识"
-          clearable
-          class="w-[180px]!"
-        />
+        <el-input v-model="form.code" placeholder="请输入角色标识" clearable class="w-[180px]!" />
       </el-form-item>
       <el-form-item label="状态：" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择状态"
-          clearable
-          class="w-[180px]!"
-        >
+        <el-select v-model="form.status" placeholder="请选择状态" clearable class="w-[180px]!">
           <el-option label="已启用" value="1" />
           <el-option label="已停用" value="0" />
         </el-select>
@@ -134,16 +114,11 @@ onMounted(() => {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
-    <div
-      ref="contentRef"
-      :class="['flex', deviceDetection() ? 'flex-wrap' : '']"
-    >
+    <div ref="contentRef" :class="['flex', deviceDetection() ? 'flex-wrap' : '']">
       <PureTableBar
         :class="[isShow && !deviceDetection() ? 'w-[60vw]!' : 'w-full']"
         style="transition: width 220ms cubic-bezier(0.4, 0, 0.2, 1)"
@@ -152,11 +127,7 @@ onMounted(() => {
         @refresh="onSearch"
       >
         <template #buttons>
-          <el-button
-            type="primary"
-            :icon="useRenderIcon(AddFill)"
-            @click="openDialog()"
-          >
+          <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
             新增角色
           </el-button>
         </template>
@@ -294,7 +265,7 @@ onMounted(() => {
           </div>
           <p class="font-bold truncate">
             菜单权限
-            {{ `${curRow?.name ? `（${curRow.name}）` : ""}` }}
+            {{ `${curRow?.name ? `（${curRow.name}）` : ''}` }}
           </p>
         </div>
         <el-input

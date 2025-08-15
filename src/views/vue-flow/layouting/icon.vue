@@ -4,16 +4,11 @@ defineProps({
     type: String,
     required: true
   }
-});
+})
 </script>
 
 <template>
-  <svg
-    v-if="name === 'play'"
-    viewBox="0 0 24 24"
-    height="24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg v-if="name === 'play'" viewBox="0 0 24 24" height="24" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 5v14l11-7z" fill="currentColor" />
   </svg>
 
@@ -36,18 +31,8 @@ defineProps({
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M2,12 L22,12" stroke="currentColor" stroke-width="2" />
-    <path
-      d="M7,7 L2,12 L7,17"
-      stroke="currentColor"
-      stroke-width="2"
-      fill="none"
-    />
-    <path
-      d="M17,7 L22,12 L17,17"
-      stroke="currentColor"
-      stroke-width="2"
-      fill="none"
-    />
+    <path d="M7,7 L2,12 L7,17" stroke="currentColor" stroke-width="2" fill="none" />
+    <path d="M17,7 L22,12 L17,17" stroke="currentColor" stroke-width="2" fill="none" />
   </svg>
 
   <svg
@@ -57,18 +42,8 @@ defineProps({
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M12,2 L12,22" stroke="currentColor" stroke-width="2" />
-    <path
-      d="M7,7 L12,2 L17,7"
-      stroke="currentColor"
-      stroke-width="2"
-      fill="none"
-    />
-    <path
-      d="M7,17 L12,22 L17,17"
-      stroke="currentColor"
-      stroke-width="2"
-      fill="none"
-    />
+    <path d="M7,7 L12,2 L17,7" stroke="currentColor" stroke-width="2" fill="none" />
+    <path d="M7,17 L12,22 L17,17" stroke="currentColor" stroke-width="2" fill="none" />
   </svg>
 
   <svg

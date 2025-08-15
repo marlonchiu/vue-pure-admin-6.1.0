@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import tree from "./tree.vue";
-import { useUser } from "./utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref } from 'vue'
+import tree from './tree.vue'
+import { useUser } from './utils/hook'
+import { PureTableBar } from '@/components/RePureTableBar'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
-import Upload from "~icons/ri/upload-line";
-import Role from "~icons/ri/admin-line";
-import Password from "~icons/ri/lock-password-line";
-import More from "~icons/ep/more-filled";
-import Delete from "~icons/ep/delete";
-import EditPen from "~icons/ep/edit-pen";
-import Refresh from "~icons/ep/refresh";
-import AddFill from "~icons/ri/add-circle-line";
+import Upload from '~icons/ri/upload-line'
+import Role from '~icons/ri/admin-line'
+import Password from '~icons/ri/lock-password-line'
+import More from '~icons/ep/more-filled'
+import Delete from '~icons/ep/delete'
+import EditPen from '~icons/ep/edit-pen'
+import Refresh from '~icons/ep/refresh'
+import AddFill from '~icons/ri/add-circle-line'
 
 defineOptions({
-  name: "SystemUser"
-});
+  name: 'SystemUser'
+})
 
-const treeRef = ref();
-const formRef = ref();
-const tableRef = ref();
+const treeRef = ref()
+const formRef = ref()
+const tableRef = ref()
 
 const {
   form,
@@ -47,7 +47,7 @@ const {
   onSelectionCancel,
   handleCurrentChange,
   handleSelectionChange
-} = useUser(tableRef, treeRef);
+} = useUser(tableRef, treeRef)
 </script>
 
 <template>
@@ -59,9 +59,7 @@ const {
       :treeLoading="treeLoading"
       @tree-select="onTreeSelect"
     />
-    <div
-      :class="[deviceDetection() ? ['w-full', 'mt-2'] : 'w-[calc(100%-200px)]']"
-    >
+    <div :class="[deviceDetection() ? ['w-full', 'mt-2'] : 'w-[calc(100%-200px)]']">
       <el-form
         ref="formRef"
         :inline="true"
@@ -85,12 +83,7 @@ const {
           />
         </el-form-item>
         <el-form-item label="状态：" prop="status">
-          <el-select
-            v-model="form.status"
-            placeholder="请选择"
-            clearable
-            class="w-[180px]!"
-          >
+          <el-select v-model="form.status" placeholder="请选择" clearable class="w-[180px]!">
             <el-option label="已开启" value="1" />
             <el-option label="已关闭" value="0" />
           </el-select>
@@ -104,23 +97,13 @@ const {
           >
             搜索
           </el-button>
-          <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-            重置
-          </el-button>
+          <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
         </el-form-item>
       </el-form>
 
-      <PureTableBar
-        title="用户管理（仅演示，操作后不生效）"
-        :columns="columns"
-        @refresh="onSearch"
-      >
+      <PureTableBar title="用户管理（仅演示，操作后不生效）" :columns="columns" @refresh="onSearch">
         <template #buttons>
-          <el-button
-            type="primary"
-            :icon="useRenderIcon(AddFill)"
-            @click="openDialog()"
-          >
+          <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
             新增用户
           </el-button>
         </template>
@@ -137,15 +120,11 @@ const {
               >
                 已选 {{ selectedNum }} 项
               </span>
-              <el-button type="primary" text @click="onSelectionCancel">
-                取消选择
-              </el-button>
+              <el-button type="primary" text @click="onSelectionCancel"> 取消选择 </el-button>
             </div>
             <el-popconfirm title="是否确认删除?" @confirm="onbatchDel">
               <template #reference>
-                <el-button type="danger" text class="mr-1!">
-                  批量删除
-                </el-button>
+                <el-button type="danger" text class="mr-1!"> 批量删除 </el-button>
               </template>
             </el-popconfirm>
           </div>

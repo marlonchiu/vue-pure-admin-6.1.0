@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { html } from "pinyin-pro";
+import { html } from 'pinyin-pro'
 
 defineOptions({
-  name: "Pinyin"
-});
+  name: 'Pinyin'
+})
 </script>
 
 <template>

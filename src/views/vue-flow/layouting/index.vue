@@ -1,65 +1,61 @@
 <script setup lang="ts">
-import "@vue-flow/core/dist/style.css";
-import "@vue-flow/core/dist/theme-default.css";
-import Icon from "./icon.vue";
-import { nextTick, ref } from "vue";
-import { useLayout } from "./useLayout";
-import { useShuffle } from "./useShuffle";
-import ProcessNode from "./processNode.vue";
-import { useRunProcess } from "./useRunProcess";
-import AnimationEdge from "./animationEdge.vue";
-import { Background } from "@vue-flow/background";
-import { Panel, VueFlow, useVueFlow } from "@vue-flow/core";
-import { initialEdges, initialNodes } from "./initialElements";
+import '@vue-flow/core/dist/style.css'
+import '@vue-flow/core/dist/theme-default.css'
+import Icon from './icon.vue'
+import { nextTick, ref } from 'vue'
+import { useLayout } from './useLayout'
+import { useShuffle } from './useShuffle'
+import ProcessNode from './processNode.vue'
+import { useRunProcess } from './useRunProcess'
+import AnimationEdge from './animationEdge.vue'
+import { Background } from '@vue-flow/background'
+import { Panel, VueFlow, useVueFlow } from '@vue-flow/core'
+import { initialEdges, initialNodes } from './initialElements'
 
-const nodes = ref(initialNodes);
+const nodes = ref(initialNodes)
 
-const edges = ref(initialEdges);
+const edges = ref(initialEdges)
 
-const cancelOnError = ref(true);
+const cancelOnError = ref(true)
 
-const shuffle = useShuffle();
+const shuffle = useShuffle()
 
-const { graph, layout, previousDirection } = useLayout();
+const { graph, layout, previousDirection } = useLayout()
 
 // @ts-expect-error
-const { run, stop, reset, isRunning } = useRunProcess({ graph, cancelOnError });
+const { run, stop, reset, isRunning } = useRunProcess({ graph, cancelOnError })
 
-const { fitView } = useVueFlow();
+const { fitView } = useVueFlow()
 
 async function shuffleGraph() {
-  await stop();
+  await stop()
 
-  reset(nodes.value);
+  reset(nodes.value)
 
-  edges.value = shuffle(nodes.value);
+  edges.value = shuffle(nodes.value)
 
   nextTick(() => {
-    layoutGraph(previousDirection.value);
-  });
+    layoutGraph(previousDirection.value)
+  })
 }
 
 async function layoutGraph(direction) {
-  await stop();
+  await stop()
 
-  reset(nodes.value);
+  reset(nodes.value)
 
-  nodes.value = layout(nodes.value, edges.value, direction);
+  nodes.value = layout(nodes.value, edges.value, direction)
 
   nextTick(() => {
-    fitView();
-    run(nodes.value);
-  });
+    fitView()
+    run(nodes.value)
+  })
 }
 </script>
 
 <template>
   <div class="layout-flow">
-    <VueFlow
-      :nodes="nodes"
-      :edges="edges"
-      @nodes-initialized="layoutGraph('LR')"
-    >
+    <VueFlow :nodes="nodes" :edges="edges" @nodes-initialized="layoutGraph('LR')">
       <template #node-process="props">
         <ProcessNode
           :data="props.data"

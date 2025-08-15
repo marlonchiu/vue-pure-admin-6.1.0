@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useColumns } from "./columns";
+import { useColumns } from './columns'
 
-const { editMap, columns, dataList, onEdit, onSave, onCancel } = useColumns();
+const { editMap, columns, dataList, onEdit, onSave, onCancel } = useColumns()
 </script>
 
 <template>
@@ -32,17 +32,10 @@ const { editMap, columns, dataList, onEdit, onSave, onCancel } = useColumns();
           修改
         </el-button>
         <div v-else>
-          <el-button
-            class="reset-margin"
-            link
-            type="primary"
-            @click="onSave(index)"
-          >
+          <el-button class="reset-margin" link type="primary" @click="onSave(index)">
             保存
           </el-button>
-          <el-button class="reset-margin" link @click="onCancel(index)">
-            取消
-          </el-button>
+          <el-button class="reset-margin" link @click="onCancel(index)"> 取消 </el-button>
         </div>
       </template>
     </pure-table>

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useNav } from "@/layout/hooks/useNav";
-import LaySearch from "../lay-search/index.vue";
-import LayNotice from "../lay-notice/index.vue";
-import LayNavMix from "../lay-sidebar/NavMix.vue";
-import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
-import LaySidebarFullScreen from "../lay-sidebar/components/SidebarFullScreen.vue";
-import LaySidebarBreadCrumb from "../lay-sidebar/components/SidebarBreadCrumb.vue";
-import LaySidebarTopCollapse from "../lay-sidebar/components/SidebarTopCollapse.vue";
+import { useNav } from '@/layout/hooks/useNav'
+import LaySearch from '../lay-search/index.vue'
+import LayNotice from '../lay-notice/index.vue'
+import LayNavMix from '../lay-sidebar/NavMix.vue'
+import { useTranslationLang } from '@/layout/hooks/useTranslationLang'
+import LaySidebarFullScreen from '../lay-sidebar/components/SidebarFullScreen.vue'
+import LaySidebarBreadCrumb from '../lay-sidebar/components/SidebarBreadCrumb.vue'
+import LaySidebarTopCollapse from '../lay-sidebar/components/SidebarTopCollapse.vue'
 
-import GlobalizationIcon from "@/assets/svg/globalization.svg?component";
-import AccountSettingsIcon from "~icons/ri/user-settings-line";
-import LogoutCircleRLine from "~icons/ri/logout-circle-r-line";
-import Setting from "~icons/ri/settings-3-line";
-import Check from "~icons/ep/check";
+import GlobalizationIcon from '@/assets/svg/globalization.svg?component'
+import AccountSettingsIcon from '~icons/ri/user-settings-line'
+import LogoutCircleRLine from '~icons/ri/logout-circle-r-line'
+import Setting from '~icons/ri/settings-3-line'
+import Check from '~icons/ep/check'
 
 const {
   layout,
@@ -27,9 +27,9 @@ const {
   toAccountSettings,
   getDropdownItemStyle,
   getDropdownItemClass
-} = useNav();
+} = useNav()
 
-const { t, locale, translationCh, translationEn } = useTranslationLang();
+const { t, locale, translationCh, translationEn } = useTranslationLang()
 </script>
 
 <template>
@@ -63,11 +63,7 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
               :class="['dark:text-white!', getDropdownItemClass(locale, 'zh')]"
               @click="translationCh"
             >
-              <IconifyIconOffline
-                v-show="locale === 'zh'"
-                class="check-zh"
-                :icon="Check"
-              />
+              <IconifyIconOffline v-show="locale === 'zh'" class="check-zh" :icon="Check" />
               简体中文
             </el-dropdown-item>
             <el-dropdown-item
@@ -96,18 +92,12 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         <template #dropdown>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="toAccountSettings">
-              <IconifyIconOffline
-                :icon="AccountSettingsIcon"
-                style="margin: 5px"
-              />
-              {{ t("buttons.pureAccountSettings") }}
+              <IconifyIconOffline :icon="AccountSettingsIcon" style="margin: 5px" />
+              {{ t('buttons.pureAccountSettings') }}
             </el-dropdown-item>
             <el-dropdown-item @click="logout">
-              <IconifyIconOffline
-                :icon="LogoutCircleRLine"
-                style="margin: 5px"
-              />
-              {{ t("buttons.pureLoginOut") }}
+              <IconifyIconOffline :icon="LogoutCircleRLine" style="margin: 5px" />
+              {{ t('buttons.pureLoginOut') }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

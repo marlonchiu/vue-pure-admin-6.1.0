@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { h } from "vue";
-import hot from "@/assets/svg/hot.svg?component";
-import { message, closeAllMessage } from "@/utils/message";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import Check from "~icons/ep/check";
+import { h } from 'vue'
+import hot from '@/assets/svg/hot.svg?component'
+import { message, closeAllMessage } from '@/utils/message'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
+import Check from '~icons/ep/check'
 
 defineOptions({
-  name: "Message"
-});
+  name: 'Message'
+})
 </script>
 
 <template>
@@ -28,25 +28,18 @@ defineOptions({
     <h4 class="mb-4!">Element Plus 的消息提示，点击弹出提示信息</h4>
 
     <el-space wrap>
-      <el-button
-        type="info"
-        @click="message('Info类型消息', { customClass: 'el' })"
-      >
+      <el-button type="info" @click="message('Info类型消息', { customClass: 'el' })">
         Info
       </el-button>
       <el-button
         type="success"
-        @click="
-          message('Success类型消息', { customClass: 'el', type: 'success' })
-        "
+        @click="message('Success类型消息', { customClass: 'el', type: 'success' })"
       >
         Success
       </el-button>
       <el-button
         type="warning"
-        @click="
-          message('Warning类型消息', { customClass: 'el', type: 'warning' })
-        "
+        @click="message('Warning类型消息', { customClass: 'el', type: 'warning' })"
       >
         Warning
       </el-button>
@@ -56,9 +49,7 @@ defineOptions({
       >
         Error
       </el-button>
-      <el-button
-        @click="message('可关闭消息', { customClass: 'el', showClose: true })"
-      >
+      <el-button @click="message('可关闭消息', { customClass: 'el', showClose: true })">
         可关闭
       </el-button>
       <el-button
@@ -87,8 +78,7 @@ defineOptions({
           message('3秒后关闭', {
             customClass: 'el',
             duration: 3000,
-            onClose: () =>
-              message('消息已关闭', { customClass: 'el', type: 'success' })
+            onClose: () => message('消息已关闭', { customClass: 'el', type: 'success' })
           })
         "
       >
@@ -122,37 +112,23 @@ defineOptions({
     <el-divider />
 
     <h4 class="mb-4!">
-      类似 Ant Design 风格的消息提示，点击弹出提示信息（基于 ElMessage
-      样式改版，不会影响 ElMessage
+      类似 Ant Design 风格的消息提示，点击弹出提示信息（基于 ElMessage 样式改版，不会影响 ElMessage
       原本样式，使用和打包大小成本极低并适配整体暗色风格）
     </h4>
 
     <el-space wrap>
       <el-button type="info" @click="message('Info类型消息')">Info</el-button>
-      <el-button
-        type="success"
-        @click="message('Success类型消息', { type: 'success' })"
-      >
+      <el-button type="success" @click="message('Success类型消息', { type: 'success' })">
         Success
       </el-button>
-      <el-button
-        type="warning"
-        @click="message('Warning类型消息', { type: 'warning' })"
-      >
+      <el-button type="warning" @click="message('Warning类型消息', { type: 'warning' })">
         Warning
       </el-button>
-      <el-button
-        type="danger"
-        @click="message('Error类型消息', { type: 'error' })"
-      >
+      <el-button type="danger" @click="message('Error类型消息', { type: 'error' })">
         Error
       </el-button>
-      <el-button @click="message('可关闭消息', { showClose: true })">
-        可关闭
-      </el-button>
-      <el-button
-        @click="message('分组消息合并', { type: 'success', grouping: true })"
-      >
+      <el-button @click="message('可关闭消息', { showClose: true })"> 可关闭 </el-button>
+      <el-button @click="message('分组消息合并', { type: 'success', grouping: true })">
         分组消息合并
       </el-button>
       <el-button

@@ -1,29 +1,25 @@
-import type {
-  LoadingConfig,
-  AdaptiveConfig,
-  PaginationProps
-} from "@pureadmin/table";
-import { tableData } from "../data";
-import { ref, onMounted, reactive } from "vue";
-import { clone, delay } from "@pureadmin/utils";
+import type { LoadingConfig, AdaptiveConfig, PaginationProps } from '@pureadmin/table'
+import { tableData } from '../data'
+import { ref, onMounted, reactive } from 'vue'
+import { clone, delay } from '@pureadmin/utils'
 
 export function useColumns() {
-  const dataList = ref([]);
-  const loading = ref(true);
+  const dataList = ref([])
+  const loading = ref(true)
   const columns: TableColumnList = [
     {
-      label: "日期",
-      prop: "date"
+      label: '日期',
+      prop: 'date'
     },
     {
-      label: "姓名",
-      prop: "name"
+      label: '姓名',
+      prop: 'name'
     },
     {
-      label: "地址",
-      prop: "address"
+      label: '地址',
+      prop: 'address'
     }
-  ];
+  ]
 
   /** 分页配置 */
   const pagination = reactive<PaginationProps>({
@@ -31,15 +27,15 @@ export function useColumns() {
     currentPage: 1,
     pageSizes: [20, 40, 60],
     total: 0,
-    align: "right",
+    align: 'right',
     background: true,
-    size: "default"
-  });
+    size: 'default'
+  })
 
   /** 加载动画配置 */
   const loadingConfig = reactive<LoadingConfig>({
-    text: "正在加载第一页...",
-    viewBox: "-10, -10, 50, 50",
+    text: '正在加载第一页...',
+    viewBox: '-10, -10, 50, 50',
     spinner: `
         <path class="path" d="
           M 30 15
@@ -52,7 +48,7 @@ export function useColumns() {
       `
     // svg: "",
     // background: rgba()
-  });
+  })
 
   /** 撑满内容区自适应高度相关配置 */
   const adaptiveConfig: AdaptiveConfig = {
@@ -64,33 +60,33 @@ export function useColumns() {
     // timeout: 60
     /** 表头的 `z-index`，默认值为 `100` */
     // zIndex: 100
-  };
+  }
 
   function onSizeChange(val) {
-    console.log("onSizeChange", val);
+    console.log('onSizeChange', val)
   }
 
   function onCurrentChange(val) {
-    loadingConfig.text = `正在加载第${val}页...`;
-    loading.value = true;
+    loadingConfig.text = `正在加载第${val}页...`
+    loading.value = true
     delay(600).then(() => {
-      loading.value = false;
-    });
+      loading.value = false
+    })
   }
 
   onMounted(() => {
     delay(600).then(() => {
-      const newList = [];
+      const newList = []
       Array.from({ length: 6 }).forEach(() => {
-        newList.push(clone(tableData, true));
-      });
+        newList.push(clone(tableData, true))
+      })
       newList.flat(Infinity).forEach((item, index) => {
-        dataList.value.push({ id: index, ...item });
-      });
-      pagination.total = dataList.value.length;
-      loading.value = false;
-    });
-  });
+        dataList.value.push({ id: index, ...item })
+      })
+      pagination.total = dataList.value.length
+      loading.value = false
+    })
+  })
 
   return {
     loading,
@@ -101,5 +97,5 @@ export function useColumns() {
     adaptiveConfig,
     onSizeChange,
     onCurrentChange
-  };
+  }
 }

@@ -1,64 +1,64 @@
 <script setup lang="ts">
-import demoData from "./dataTurbo.json";
-import "@logicflow/core/dist/style/index.css";
-import "@logicflow/extension/lib/style/index.css";
+import demoData from './dataTurbo.json'
+import '@logicflow/core/dist/style/index.css'
+import '@logicflow/extension/lib/style/index.css'
 
-import LogicFlow from "@logicflow/core";
-import { ref, unref, onMounted } from "vue";
-import { BpmnNode } from "@/components/ReFlowChart/src/config";
-import { Snapshot, BpmnElement, Menu } from "@logicflow/extension";
-import { Control, NodePanel, DataDialog } from "@/components/ReFlowChart";
-import { toLogicflowData } from "@/components/ReFlowChart/src/adpterForTurbo";
+import LogicFlow from '@logicflow/core'
+import { ref, unref, onMounted } from 'vue'
+import { BpmnNode } from '@/components/ReFlowChart/src/config'
+import { Snapshot, BpmnElement, Menu } from '@logicflow/extension'
+import { Control, NodePanel, DataDialog } from '@/components/ReFlowChart'
+import { toLogicflowData } from '@/components/ReFlowChart/src/adpterForTurbo'
 
 defineOptions({
-  name: "FlowChart"
-});
+  name: 'FlowChart'
+})
 
-const lf = ref(null);
-const graphData = ref(null);
-const dataVisible = ref<boolean>(false);
+const lf = ref(null)
+const graphData = ref(null)
+const dataVisible = ref<boolean>(false)
 const config = ref({
   grid: true,
   background: {
-    color: "#f7f9ff"
+    color: '#f7f9ff'
   },
   keyboard: {
     enabled: true
   }
-});
-const nodeList = BpmnNode;
+})
+const nodeList = BpmnNode
 
 function initLf() {
   // 画布配置
-  LogicFlow.use(Snapshot);
+  LogicFlow.use(Snapshot)
   // 使用bpmn插件，引入bpmn元素，这些元素可以在turbo中转换后使用
-  LogicFlow.use(BpmnElement);
+  LogicFlow.use(BpmnElement)
   // 启动右键菜单
-  LogicFlow.use(Menu);
+  LogicFlow.use(Menu)
   const domLf = new LogicFlow({
     ...unref(config),
-    container: document.querySelector("#turbo")
-  });
-  lf.value = domLf;
+    container: document.querySelector('#turbo')
+  })
+  lf.value = domLf
   // 设置边类型bpmn:sequenceFlow为默认类型
-  unref(lf).setDefaultEdgeType("bpmn:sequenceFlow");
-  onRender();
+  unref(lf).setDefaultEdgeType('bpmn:sequenceFlow')
+  onRender()
 }
 
 function onRender() {
   // Turbo数据转换为LogicFlow内部识别的数据结构
-  const lFData = toLogicflowData(demoData);
-  lf.value.render(lFData);
+  const lFData = toLogicflowData(demoData)
+  lf.value.render(lFData)
 }
 
 function catData() {
-  graphData.value = unref(lf).getGraphData();
-  dataVisible.value = true;
+  graphData.value = unref(lf).getGraphData()
+  dataVisible.value = true
 }
 
 onMounted(() => {
-  initLf();
-});
+  initLf()
+})
 </script>
 
 <template>
@@ -86,24 +86,13 @@ onMounted(() => {
     </template>
     <div class="logic-flow-view">
       <!-- 辅助工具栏 -->
-      <Control
-        v-if="lf"
-        class="demo-control"
-        :lf="lf"
-        :catTurboData="false"
-        @catData="catData"
-      />
+      <Control v-if="lf" class="demo-control" :lf="lf" :catTurboData="false" @catData="catData" />
       <!-- 节点面板 -->
       <NodePanel v-if="lf" :lf="lf" :nodeList="nodeList" />
       <!-- 画布 -->
       <div id="turbo" />
       <!-- 数据查看面板 -->
-      <el-dialog
-        v-model="dataVisible"
-        class="flow-dialog"
-        title="数据"
-        width="50%"
-      >
+      <el-dialog v-model="dataVisible" class="flow-dialog" title="数据" width="50%">
         <el-scrollbar>
           <DataDialog :graphData="graphData" />
         </el-scrollbar>

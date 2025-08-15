@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
 defineOptions({
-  name: "ButtonPage"
-});
+  name: 'ButtonPage'
+})
 
-const { VITE_PUBLIC_PATH } = import.meta.env;
+const { VITE_PUBLIC_PATH } = import.meta.env
 
-const url = ref(`${VITE_PUBLIC_PATH}html/button.html`);
+const url = ref(`${VITE_PUBLIC_PATH}html/button.html`)
 </script>
 
 <template>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRole } from "./hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref } from 'vue'
+import { useRole } from './hook'
+import { PureTableBar } from '@/components/RePureTableBar'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
-import Plane from "~icons/ri/plane-line";
-import Refresh from "~icons/ep/refresh";
+import Plane from '~icons/ri/plane-line'
+import Refresh from '~icons/ep/refresh'
 
 defineOptions({
-  name: "OnlineUser"
-});
+  name: 'OnlineUser'
+})
 
-const formRef = ref();
+const formRef = ref()
 const {
   form,
   loading,
@@ -24,7 +24,7 @@ const {
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
-} = useRole();
+} = useRole()
 </script>
 
 <template>
@@ -36,12 +36,7 @@ const {
       class="search-form bg-bg_color w-full pl-8 pt-[12px] overflow-auto"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input
-          v-model="form.username"
-          placeholder="请输入用户名"
-          clearable
-          class="w-[180px]!"
-        />
+        <el-input v-model="form.username" placeholder="请输入用户名" clearable class="w-[180px]!" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -52,17 +47,11 @@ const {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
-    <PureTableBar
-      title="在线用户（仅演示，操作后不生效）"
-      :columns="columns"
-      @refresh="onSearch"
-    >
+    <PureTableBar title="在线用户（仅演示，操作后不生效）" :columns="columns" @refresh="onSearch">
       <template v-slot="{ size, dynamicColumns }">
         <pure-table
           align-whole="center"
@@ -84,10 +73,7 @@ const {
           @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
-            <el-popconfirm
-              :title="`是否强制下线${row.username}`"
-              @confirm="handleOffline(row)"
-            >
+            <el-popconfirm :title="`是否强制下线${row.username}`" @confirm="handleOffline(row)">
               <template #reference>
                 <el-button
                   class="reset-margin"

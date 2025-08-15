@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const value1 = ref(0);
-const value2 = ref(0);
+const value1 = ref(0)
+const value2 = ref(0)
 </script>
 
 <template>

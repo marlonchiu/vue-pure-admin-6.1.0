@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const value1 = ref(0);
-const value2 = ref(10);
-const value3 = ref(0);
-const value4 = ref(0);
-const value5 = ref(0);
+const value1 = ref(0)
+const value2 = ref(10)
+const value3 = ref(0)
+const value4 = ref(0)
+const value5 = ref(0)
 
 const formatTooltip = (val: number) => {
-  return val / 100;
-};
+  return val / 100
+}
 </script>
 
 <template>

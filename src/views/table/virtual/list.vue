@@ -1,46 +1,41 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { VxeTableBar } from "@/components/ReVxeTableBar";
+import { ref } from 'vue'
+import { VxeTableBar } from '@/components/ReVxeTableBar'
 
-const vxeTableRef = ref();
-const loading = ref(true);
-const tableData = ref([]);
+const vxeTableRef = ref()
+const loading = ref(true)
+const tableData = ref([])
 
 const columns = [
-  { type: "seq", field: "seq", title: "序号", width: 100 },
-  { field: "name", title: "名称", sortable: true },
-  { field: "role", title: "角色" },
-  { field: "sex", title: "性别" }
-];
+  { type: 'seq', field: 'seq', title: '序号', width: 100 },
+  { field: 'name', title: '名称', sortable: true },
+  { field: 'role', title: '角色' },
+  { field: 'sex', title: '性别' }
+]
 
 async function onSearch() {
-  loading.value = true;
+  loading.value = true
   // 模拟数据
-  const mockList = [];
+  const mockList = []
   for (let index = 0; index < 500; index++) {
     mockList.push({
       id: index,
-      name: "Test" + index,
-      role: "Developer",
-      sex: "男"
-    });
+      name: 'Test' + index,
+      role: 'Developer',
+      sex: '男'
+    })
   }
-  tableData.value = mockList;
+  tableData.value = mockList
   setTimeout(() => {
-    loading.value = false;
-  }, 500);
+    loading.value = false
+  }, 500)
 }
 
-onSearch();
+onSearch()
 </script>
 
 <template>
-  <VxeTableBar
-    :vxeTableRef="vxeTableRef"
-    :columns="columns"
-    title="虚拟表格"
-    @refresh="onSearch"
-  >
+  <VxeTableBar :vxeTableRef="vxeTableRef" :columns="columns" title="虚拟表格" @refresh="onSearch">
     <template v-slot="{ size, dynamicColumns }">
       <vxe-grid
         ref="vxeTableRef"

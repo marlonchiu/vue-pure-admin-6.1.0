@@ -1,47 +1,47 @@
 <script setup lang="ts">
-import { emitter } from "@/utils/mitt";
-import { useLoader } from "@pureadmin/utils";
-import { CanvasRenderer } from "./canvasRenderer";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { emitter } from '@/utils/mitt'
+import { useLoader } from '@pureadmin/utils'
+import { CanvasRenderer } from './canvasRenderer'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 defineOptions({
-  name: "VideoFrame"
-});
+  name: 'VideoFrame'
+})
 
-const num = 200;
-const curImg = ref("");
-const renderer = ref();
-const captureUtil = ref();
-const loading = ref(false);
-const { loadScript } = useLoader();
+const num = 200
+const curImg = ref('')
+const renderer = ref()
+const captureUtil = ref()
+const loading = ref(false)
+const { loadScript } = useLoader()
 
-const { VITE_PUBLIC_PATH } = import.meta.env;
-const getPath = path => `${VITE_PUBLIC_PATH}wasm/${path}`;
-const src = getPath("index.js");
-const workerPath = getPath("capture.worker.js");
-const wasmPath = getPath("capture.worker.wasm");
+const { VITE_PUBLIC_PATH } = import.meta.env
+const getPath = path => `${VITE_PUBLIC_PATH}wasm/${path}`
+const src = getPath('index.js')
+const workerPath = getPath('capture.worker.js')
+const wasmPath = getPath('capture.worker.wasm')
 
 loadScript({
   src
 }).then(mgs => {
-  if (mgs[0].message === "加载成功") {
+  if (mgs[0].message === '加载成功') {
     // @ts-expect-error
     captureUtil.value = cheetahCapture.initCapture({
       workerPath,
       wasmPath
-    });
+    })
   }
-});
+})
 
 onMounted(() => {
-  renderer.value = new CanvasRenderer("canvas-container");
-  emitter.on("imageInfo", info => (curImg.value = info.img.src));
-});
+  renderer.value = new CanvasRenderer('canvas-container')
+  emitter.on('imageInfo', info => (curImg.value = info.img.src))
+})
 
 function beforeUpload(file) {
-  curImg.value = "";
-  loading.value = true;
-  renderer.value.clearImages();
+  curImg.value = ''
+  loading.value = true
+  renderer.value.clearImages()
   // api参考 https://github.com/wanwu/cheetah-capture#api
   captureUtil.value.then(res => {
     res.capture({
@@ -51,29 +51,29 @@ function beforeUpload(file) {
       info: 16,
       // 当抽帧结果变化的回调
       onChange: (list, { url }) => {
-        renderer.value.addImage(url, num * list.url.length, 0, num, num);
+        renderer.value.addImage(url, num * list.url.length, 0, num, num)
       },
       // 当抽帧结束并成功的回调
       onSuccess: () => {
-        renderer.value.addListener();
+        renderer.value.addListener()
         // 默认选中第一张
-        renderer.value.drawTick({ offsetX: num / 2, offsetY: num / 2 });
-        loading.value = false;
+        renderer.value.drawTick({ offsetX: num / 2, offsetY: num / 2 })
+        loading.value = false
       },
       // 当抽帧过程出现错误的回调
       onError: () => {
-        loading.value = false;
+        loading.value = false
       }
-    });
-  });
+    })
+  })
 
-  return false;
+  return false
 }
 
 onBeforeUnmount(() => {
   // 解绑`imageInfo`公共事件，防止多次触发
-  emitter.off("imageInfo");
-});
+  emitter.off('imageInfo')
+})
 </script>
 
 <template>
@@ -150,9 +150,7 @@ onBeforeUnmount(() => {
         accept=".mp4,.mov,.avi,.webm,.mkv"
         :before-upload="beforeUpload"
       >
-        <div class="el-upload__text">
-          可拖拽上传视频（默认截取16张帧图片，可在代码中自行修改）
-        </div>
+        <div class="el-upload__text">可拖拽上传视频（默认截取16张帧图片，可在代码中自行修改）</div>
       </el-upload>
       <el-image
         v-if="curImg"

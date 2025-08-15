@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useDetail } from "./hooks";
+import { useDetail } from './hooks'
 
 defineOptions({
-  name: "TabQueryDetail"
-});
+  name: 'TabQueryDetail'
+})
 
-const { initToDetail, getParameter } = useDetail();
-initToDetail("query");
+const { initToDetail, getParameter } = useDetail()
+initToDetail('query')
 </script>
 
 <template>

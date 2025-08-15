@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, toRef, watch } from "vue";
-import { TransitionPresets, executeTransition } from "@vueuse/core";
+import { computed, nextTick, ref, toRef, watch } from 'vue'
+import { TransitionPresets, executeTransition } from '@vueuse/core'
 import {
   Position,
   BaseEdge,
@@ -8,7 +8,7 @@ import {
   useNodesData,
   getSmoothStepPath,
   EdgeLabelRenderer
-} from "@vue-flow/core";
+} from '@vue-flow/core'
 
 const props = defineProps({
   id: {
@@ -47,138 +47,133 @@ const props = defineProps({
     type: String,
     default: Position.Left
   }
-});
+})
 
-const { findEdge } = useVueFlow();
+const { findEdge } = useVueFlow()
 
-const nodesData = useNodesData([props.target, props.source]);
+const nodesData = useNodesData([props.target, props.source])
 
-const edgePoint = ref(0);
+const edgePoint = ref(0)
 
-const edgeRef = ref();
+const edgeRef = ref()
 
-const labelPosition = ref({ x: 0, y: 0 });
+const labelPosition = ref({ x: 0, y: 0 })
 
-const currentLength = ref(0);
+const currentLength = ref(0)
 
-const targetNodeData = toRef(() => nodesData.value[0].data);
+const targetNodeData = toRef(() => nodesData.value[0].data)
 
-const sourceNodeData = toRef(() => nodesData.value[1].data);
+const sourceNodeData = toRef(() => nodesData.value[1].data)
 
-const isFinished = toRef(() => sourceNodeData.value.isFinished);
+const isFinished = toRef(() => sourceNodeData.value.isFinished)
 
-const isCancelled = toRef(() => targetNodeData.value.isCancelled);
+const isCancelled = toRef(() => targetNodeData.value.isCancelled)
 
-const isAnimating = ref(false);
+const isAnimating = ref(false)
 
 const edgeColor = toRef(() => {
   if (targetNodeData.value.hasError) {
-    return "#f87171";
+    return '#f87171'
   }
 
   if (targetNodeData.value.isFinished) {
-    return "#42B983";
+    return '#42B983'
   }
 
   if (targetNodeData.value.isCancelled || targetNodeData.value.isSkipped) {
-    return "#fbbf24";
+    return '#fbbf24'
   }
 
   if (targetNodeData.value.isRunning || isAnimating.value) {
-    return "#2563eb";
+    return '#2563eb'
   }
 
-  return "#6b7280";
-});
+  return '#6b7280'
+})
 
 // @ts-expect-error
-const path = computed(() => getSmoothStepPath(props));
+const path = computed(() => getSmoothStepPath(props))
 
 watch(isCancelled, isCancelled => {
   if (isCancelled) {
-    reset();
+    reset()
   }
-});
+})
 
 watch(isAnimating, isAnimating => {
-  const edge = findEdge(props.id);
+  const edge = findEdge(props.id)
 
   if (edge) {
     edge.data = {
       ...edge.data,
       isAnimating
-    };
+    }
   }
-});
+})
 
 watch(edgePoint, point => {
-  const pathEl = edgeRef.value?.pathEl;
+  const pathEl = edgeRef.value?.pathEl
 
   if (!pathEl || point === 0 || !isAnimating.value) {
-    return;
+    return
   }
 
-  const nextLength = pathEl.getTotalLength();
+  const nextLength = pathEl.getTotalLength()
 
   if (currentLength.value !== nextLength) {
-    runAnimation();
-    return;
+    runAnimation()
+    return
   }
 
-  labelPosition.value = pathEl.getPointAtLength(point);
-});
+  labelPosition.value = pathEl.getPointAtLength(point)
+})
 
 watch(isFinished, isFinished => {
   if (isFinished) {
-    runAnimation();
+    runAnimation()
   }
-});
+})
 
 async function runAnimation() {
-  const pathEl = edgeRef.value?.pathEl;
+  const pathEl = edgeRef.value?.pathEl
 
   if (!pathEl) {
-    return;
+    return
   }
 
-  const totalLength = pathEl.getTotalLength();
+  const totalLength = pathEl.getTotalLength()
 
-  const from = edgePoint.value || 0;
+  const from = edgePoint.value || 0
 
-  labelPosition.value = pathEl.getPointAtLength(from);
+  labelPosition.value = pathEl.getPointAtLength(from)
 
-  isAnimating.value = true;
+  isAnimating.value = true
 
   if (currentLength.value !== totalLength) {
-    currentLength.value = totalLength;
+    currentLength.value = totalLength
   }
 
   await executeTransition(edgePoint, from, totalLength, {
     transition: TransitionPresets.easeInOutCubic,
     duration: Math.max(1500, totalLength / 2),
     abort: () => !isAnimating.value
-  });
+  })
 
-  reset();
+  reset()
 }
 
 function reset() {
   nextTick(() => {
-    edgePoint.value = 0;
-    currentLength.value = 0;
-    labelPosition.value = { x: 0, y: 0 };
-    isAnimating.value = false;
-  });
+    edgePoint.value = 0
+    currentLength.value = 0
+    labelPosition.value = { x: 0, y: 0 }
+    isAnimating.value = false
+  })
 }
 </script>
 
 <template>
-  <BaseEdge
-    :id="id"
-    ref="edgeRef"
-    :path="path[0]"
-    :style="{ stroke: edgeColor }"
-  />
+  <BaseEdge :id="id" ref="edgeRef" :path="path[0]" :style="{ stroke: edgeColor }" />
 
   <EdgeLabelRenderer v-if="isAnimating">
     <div

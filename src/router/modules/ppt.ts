@@ -1,25 +1,25 @@
-import { ppt } from "@/router/enums";
-const IFrame = () => import("@/layout/frame.vue");
+import { ppt } from '@/router/enums'
+const IFrame = () => import('@/layout/frame.vue')
 
 export default {
-  path: "/ppt",
-  redirect: "/ppt/index",
+  path: '/ppt',
+  redirect: '/ppt/index',
   meta: {
-    icon: "ri/file-ppt-2-line",
-    title: "PPT",
+    icon: 'ri/file-ppt-2-line',
+    title: 'PPT',
     rank: ppt
   },
   children: [
     {
-      path: "/ppt/index",
-      name: "FramePpt",
+      path: '/ppt/index',
+      name: 'FramePpt',
       component: IFrame,
       meta: {
-        title: "PPT",
+        title: 'PPT',
         keepAlive: true,
-        frameSrc: "https://pipipi-pikachu.github.io/PPTist/",
+        frameSrc: 'https://pipipi-pikachu.github.io/PPTist/',
         frameLoading: false
       }
     }
   ]
-} satisfies RouteConfigsTable;
+} satisfies RouteConfigsTable

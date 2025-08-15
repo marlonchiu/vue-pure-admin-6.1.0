@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import "deep-chat";
-import { ref, onMounted } from "vue";
+import 'deep-chat'
+import { ref, onMounted } from 'vue'
 
-const chatRef = ref();
+const chatRef = ref()
 
 onMounted(() => {
   chatRef.value.demo = {
     response: message => {
-      console.log(message);
+      console.log(message)
       return {
-        text: "仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect"
-      };
+        text: '仅演示，如需AI服务，请参考 https://deepchat.dev/docs/connect'
+      }
     }
-  };
-});
+  }
+})
 </script>
 
 <template>
@@ -62,8 +62,7 @@ onMounted(() => {
           border: 'unset',
           width: '78%',
           marginLeft: '-15px',
-          boxShadow:
-            '0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16)'
+          boxShadow: '0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16)'
         },
         text: { padding: '10px', paddingLeft: '15px', paddingRight: '34px' }
       },
@@ -76,8 +75,7 @@ onMounted(() => {
             backgroundColor: 'unset',
             marginTop: '10px',
             marginBottom: '10px',
-            boxShadow:
-              '0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16)'
+            boxShadow: '0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16)'
           }
         },
         user: {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: "MenuOverflow"
-});
+  name: 'MenuOverflow'
+})
 </script>
 
 <template>

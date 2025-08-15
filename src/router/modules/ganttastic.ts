@@ -1,22 +1,22 @@
-import { $t } from "@/plugins/i18n";
-import { ganttastic } from "@/router/enums";
+import { $t } from '@/plugins/i18n'
+import { ganttastic } from '@/router/enums'
 
 export default {
-  path: "/ganttastic",
-  redirect: "/ganttastic/index",
+  path: '/ganttastic',
+  redirect: '/ganttastic/index',
   meta: {
-    icon: "ri/bar-chart-horizontal-line",
-    title: $t("menus.pureGanttastic"),
+    icon: 'ri/bar-chart-horizontal-line',
+    title: $t('menus.pureGanttastic'),
     rank: ganttastic
   },
   children: [
     {
-      path: "/ganttastic/index",
-      name: "Ganttastic",
-      component: () => import("@/views/ganttastic/index.vue"),
+      path: '/ganttastic/index',
+      name: 'Ganttastic',
+      component: () => import('@/views/ganttastic/index.vue'),
       meta: {
-        title: $t("menus.pureGanttastic")
+        title: $t('menus.pureGanttastic')
       }
     }
   ]
-} satisfies RouteConfigsTable;
+} satisfies RouteConfigsTable

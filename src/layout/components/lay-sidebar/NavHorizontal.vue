@@ -1,31 +1,29 @@
 <script setup lang="ts">
-import { emitter } from "@/utils/mitt";
-import { useNav } from "@/layout/hooks/useNav";
-import LaySearch from "../lay-search/index.vue";
-import LayNotice from "../lay-notice/index.vue";
-import { responsiveStorageNameSpace } from "@/config";
-import { ref, nextTick, computed, onMounted } from "vue";
-import { storageLocal, isAllEmpty } from "@pureadmin/utils";
-import { useTranslationLang } from "../../hooks/useTranslationLang";
-import { usePermissionStoreHook } from "@/store/modules/permission";
-import LaySidebarItem from "../lay-sidebar/components/SidebarItem.vue";
-import LaySidebarFullScreen from "../lay-sidebar/components/SidebarFullScreen.vue";
+import { emitter } from '@/utils/mitt'
+import { useNav } from '@/layout/hooks/useNav'
+import LaySearch from '../lay-search/index.vue'
+import LayNotice from '../lay-notice/index.vue'
+import { responsiveStorageNameSpace } from '@/config'
+import { ref, nextTick, computed, onMounted } from 'vue'
+import { storageLocal, isAllEmpty } from '@pureadmin/utils'
+import { useTranslationLang } from '../../hooks/useTranslationLang'
+import { usePermissionStoreHook } from '@/store/modules/permission'
+import LaySidebarItem from '../lay-sidebar/components/SidebarItem.vue'
+import LaySidebarFullScreen from '../lay-sidebar/components/SidebarFullScreen.vue'
 
-import GlobalizationIcon from "@/assets/svg/globalization.svg?component";
-import AccountSettingsIcon from "~icons/ri/user-settings-line";
-import LogoutCircleRLine from "~icons/ri/logout-circle-r-line";
-import Setting from "~icons/ri/settings-3-line";
-import Check from "~icons/ep/check";
+import GlobalizationIcon from '@/assets/svg/globalization.svg?component'
+import AccountSettingsIcon from '~icons/ri/user-settings-line'
+import LogoutCircleRLine from '~icons/ri/logout-circle-r-line'
+import Setting from '~icons/ri/settings-3-line'
+import Check from '~icons/ep/check'
 
-const menuRef = ref();
+const menuRef = ref()
 const showLogo = ref(
-  storageLocal().getItem<StorageConfigs>(
-    `${responsiveStorageNameSpace()}configure`
-  )?.showLogo ?? true
-);
+  storageLocal().getItem<StorageConfigs>(`${responsiveStorageNameSpace()}configure`)?.showLogo ??
+    true
+)
 
-const { t, route, locale, translationCh, translationEn } =
-  useTranslationLang(menuRef);
+const { t, route, locale, translationCh, translationEn } = useTranslationLang(menuRef)
 const {
   title,
   logout,
@@ -38,28 +36,25 @@ const {
   toAccountSettings,
   getDropdownItemStyle,
   getDropdownItemClass
-} = useNav();
+} = useNav()
 
 const defaultActive = computed(() =>
   !isAllEmpty(route.meta?.activePath) ? route.meta.activePath : route.path
-);
+)
 
 nextTick(() => {
-  menuRef.value?.handleResize();
-});
+  menuRef.value?.handleResize()
+})
 
 onMounted(() => {
-  emitter.on("logoChange", key => {
-    showLogo.value = key;
-  });
-});
+  emitter.on('logoChange', key => {
+    showLogo.value = key
+  })
+})
 </script>
 
 <template>
-  <div
-    v-loading="usePermissionStoreHook().wholeMenus.length === 0"
-    class="horizontal-header"
-  >
+  <div v-loading="usePermissionStoreHook().wholeMenus.length === 0" class="horizontal-header">
     <div v-if="showLogo" class="horizontal-header-left" @click="backTopMenu">
       <img :src="getLogo()" alt="logo" />
       <span>{{ title }}</span>
@@ -123,19 +118,13 @@ onMounted(() => {
         </span>
         <template #dropdown>
           <el-dropdown-item @click="toAccountSettings">
-            <IconifyIconOffline
-              :icon="AccountSettingsIcon"
-              style="margin: 5px"
-            />
-            {{ t("buttons.pureAccountSettings") }}
+            <IconifyIconOffline :icon="AccountSettingsIcon" style="margin: 5px" />
+            {{ t('buttons.pureAccountSettings') }}
           </el-dropdown-item>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <IconifyIconOffline
-                :icon="LogoutCircleRLine"
-                style="margin: 5px"
-              />
-              {{ t("buttons.pureLoginOut") }}
+              <IconifyIconOffline :icon="LogoutCircleRLine" style="margin: 5px" />
+              {{ t('buttons.pureLoginOut') }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

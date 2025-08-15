@@ -1,48 +1,48 @@
 <script setup lang="ts">
-import { computed, PropType } from "vue";
-import shopIcon from "@/assets/svg/shop.svg?component";
-import laptopIcon from "@/assets/svg/laptop.svg?component";
-import serviceIcon from "@/assets/svg/service.svg?component";
-import calendarIcon from "@/assets/svg/calendar.svg?component";
-import userAvatarIcon from "@/assets/svg/user_avatar.svg?component";
-import More2Fill from "~icons/ri/more-2-fill";
+import { computed, PropType } from 'vue'
+import shopIcon from '@/assets/svg/shop.svg?component'
+import laptopIcon from '@/assets/svg/laptop.svg?component'
+import serviceIcon from '@/assets/svg/service.svg?component'
+import calendarIcon from '@/assets/svg/calendar.svg?component'
+import userAvatarIcon from '@/assets/svg/user_avatar.svg?component'
+import More2Fill from '~icons/ri/more-2-fill'
 
 defineOptions({
-  name: "ReCard"
-});
+  name: 'ReCard'
+})
 
 interface CardProductType {
-  type: number;
-  isSetup: boolean;
-  description: string;
-  name: string;
+  type: number
+  isSetup: boolean
+  description: string
+  name: string
 }
 
 const props = defineProps({
   product: {
     type: Object as PropType<CardProductType>
   }
-});
+})
 
-const emit = defineEmits(["manage-product", "delete-item"]);
+const emit = defineEmits(['manage-product', 'delete-item'])
 
 const handleClickManage = (product: CardProductType) => {
-  emit("manage-product", product);
-};
+  emit('manage-product', product)
+}
 
 const handleClickDelete = (product: CardProductType) => {
-  emit("delete-item", product);
-};
+  emit('delete-item', product)
+}
 
 const cardClass = computed(() => [
-  "list-card-item",
-  { "list-card-item__disabled": !props.product.isSetup }
-]);
+  'list-card-item',
+  { 'list-card-item__disabled': !props.product.isSetup }
+])
 
 const cardLogoClass = computed(() => [
-  "list-card-item_detail--logo",
-  { "list-card-item_detail--logo__disabled": !props.product.isSetup }
-]);
+  'list-card-item_detail--logo',
+  { 'list-card-item_detail--logo__disabled': !props.product.isSetup }
+])
 </script>
 
 <template>
@@ -62,18 +62,14 @@ const cardLogoClass = computed(() => [
             effect="dark"
             class="mx-1 list-card-item_detail--operation--tag"
           >
-            {{ product.isSetup ? "已启用" : "已停用" }}
+            {{ product.isSetup ? '已启用' : '已停用' }}
           </el-tag>
           <el-dropdown trigger="click" :disabled="!product.isSetup">
             <IconifyIconOffline :icon="More2Fill" class="text-[24px]" />
             <template #dropdown>
               <el-dropdown-menu :disabled="!product.isSetup">
-                <el-dropdown-item @click="handleClickManage(product)">
-                  管理
-                </el-dropdown-item>
-                <el-dropdown-item @click="handleClickDelete(product)">
-                  删除
-                </el-dropdown-item>
+                <el-dropdown-item @click="handleClickManage(product)"> 管理 </el-dropdown-item>
+                <el-dropdown-item @click="handleClickDelete(product)"> 删除 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>

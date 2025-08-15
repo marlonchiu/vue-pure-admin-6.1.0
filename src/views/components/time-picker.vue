@@ -1,55 +1,53 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch } from 'vue'
 
 defineOptions({
-  name: "TimePicker"
-});
+  name: 'TimePicker'
+})
 
-const size = ref("default");
-const dynamicSize = ref();
+const size = ref('default')
+const dynamicSize = ref()
 
 /** 时间选择器 */
-const value = ref("");
-const value1 = ref("");
-const value3 = ref();
+const value = ref('')
+const value1 = ref('')
+const value3 = ref()
 
-const value2 = ref(new Date(2016, 9, 10, 18, 30));
+const value2 = ref(new Date(2016, 9, 10, 18, 30))
 
 const makeRange = (start: number, end: number) => {
-  const result: number[] = [];
+  const result: number[] = []
   for (let i = start; i <= end; i++) {
-    result.push(i);
+    result.push(i)
   }
-  return result;
-};
+  return result
+}
 const disabledHours = () => {
-  return makeRange(0, 16).concat(makeRange(19, 23));
-};
+  return makeRange(0, 16).concat(makeRange(19, 23))
+}
 const disabledMinutes = (hour: number) => {
   if (hour === 17) {
-    return makeRange(0, 29);
+    return makeRange(0, 29)
   }
   if (hour === 18) {
-    return makeRange(31, 59);
+    return makeRange(31, 59)
   }
-};
+}
 const disabledSeconds = (hour: number, minute: number) => {
   if (hour === 18 && minute === 30) {
-    return makeRange(1, 59);
+    return makeRange(1, 59)
   }
-};
+}
 
 watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
-);
+  val === 'disabled' ? (dynamicSize.value = 'default') : (dynamicSize.value = size.value)
+)
 
 /** 时间选择 */
-const value4 = ref("");
-const value5 = ref("");
-const startTime = ref("");
-const endTime = ref("");
+const value4 = ref('')
+const value5 = ref('')
+const startTime = ref('')
+const endTime = ref('')
 </script>
 
 <template>

@@ -1,21 +1,21 @@
 <script setup lang="ts">
 const tableData = [
   {
-    userInfo: { name: "Test1", age: 22 },
+    userInfo: { name: 'Test1', age: 22 },
     other: [
-      { sex: "女" },
+      { sex: '女' },
       {
         more: {
           content: '<div><span style="color: red">我是 html 片段</span></div>'
         }
       }
     ],
-    role: "设计师"
+    role: '设计师'
   },
   {
-    userInfo: { name: "Test2", age: 28 },
+    userInfo: { name: 'Test2', age: 28 },
     other: [
-      { sex: "男" },
+      { sex: '男' },
       {
         more: {
           content:
@@ -23,12 +23,12 @@ const tableData = [
         }
       }
     ],
-    role: "后端"
+    role: '后端'
   },
   {
-    userInfo: { name: "Test3", age: 20 },
+    userInfo: { name: 'Test3', age: 20 },
     other: [
-      { sex: "女" },
+      { sex: '女' },
       {
         more: {
           content:
@@ -36,12 +36,12 @@ const tableData = [
         }
       }
     ],
-    role: "程序员鼓励师"
+    role: '程序员鼓励师'
   },
   {
-    userInfo: { name: "Test4", age: 26 },
+    userInfo: { name: 'Test4', age: 26 },
     other: [
-      { sex: "男" },
+      { sex: '男' },
       {
         more: {
           content:
@@ -49,32 +49,32 @@ const tableData = [
         }
       }
     ],
-    role: "前端"
+    role: '前端'
   }
-];
+]
 
 const columns: TableColumnList = [
   {
-    label: "姓名",
-    prop: "userInfo.name"
+    label: '姓名',
+    prop: 'userInfo.name'
   },
   {
-    label: "性别",
-    prop: "other[0].sex"
+    label: '性别',
+    prop: 'other[0].sex'
   },
   {
-    label: "年龄",
-    prop: "userInfo.age"
+    label: '年龄',
+    prop: 'userInfo.age'
   },
   {
-    label: "Html片段",
-    slot: "content"
+    label: 'Html片段',
+    slot: 'content'
   },
   {
-    label: "角色",
-    prop: "role"
+    label: '角色',
+    prop: 'role'
   }
-];
+]
 </script>
 
 <template>

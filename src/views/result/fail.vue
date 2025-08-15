@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useColumns } from "./columns";
+import { useColumns } from './columns'
 defineOptions({
-  name: "Fail"
-});
+  name: 'Fail'
+})
 
-const { columns } = useColumns();
+const { columns } = useColumns()
 </script>
 
 <template>
@@ -21,11 +21,7 @@ const { columns } = useColumns();
         代码位置 src/views/result/fail.vue
       </el-link>
     </template>
-    <el-result
-      icon="error"
-      title="提交失败"
-      sub-title="请核对并修改以下信息后，再重新提交。"
-    >
+    <el-result icon="error" title="提交失败" sub-title="请核对并修改以下信息后，再重新提交。">
       <template #extra>
         <el-button type="primary">返回修改</el-button>
       </template>

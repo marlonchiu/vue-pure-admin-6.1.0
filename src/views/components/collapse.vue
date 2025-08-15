@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
 defineOptions({
-  name: "Collapse"
-});
+  name: 'Collapse'
+})
 
-const radio = ref();
-const collapseRef = ref();
-const activeNames = ref(["1", "2", "3", "4", "5"]);
-const isOpen = ref(true);
+const radio = ref()
+const collapseRef = ref()
+const activeNames = ref(['1', '2', '3', '4', '5'])
+const isOpen = ref(true)
 
 function onClick() {
   isOpen.value
     ? (activeNames.value = [])
-    : radio.value === "accordion"
-      ? (activeNames.value = ["5"])
-      : (activeNames.value = ["1", "2", "3", "4", "5"]);
-  isOpen.value = !isOpen.value;
+    : radio.value === 'accordion'
+      ? (activeNames.value = ['5'])
+      : (activeNames.value = ['1', '2', '3', '4', '5'])
+  isOpen.value = !isOpen.value
 }
 
 const handleChange = (val: string[]) => {
-  console.log(val);
-};
+  console.log(val)
+}
 </script>
 
 <template>
@@ -65,18 +65,10 @@ const handleChange = (val: string[]) => {
       :accordion="radio === 'accordion' ? true : false"
       @change="handleChange"
     >
-      <el-collapse-item title="周一" name="1">
-        周一启航，新的篇章
-      </el-collapse-item>
-      <el-collapse-item title="周二" name="2">
-        周二律动，携手共进
-      </el-collapse-item>
-      <el-collapse-item title="周三" name="3">
-        周三昂扬，激情不减
-      </el-collapse-item>
-      <el-collapse-item title="周四" name="4">
-        周四精进，事半功倍
-      </el-collapse-item>
+      <el-collapse-item title="周一" name="1"> 周一启航，新的篇章 </el-collapse-item>
+      <el-collapse-item title="周二" name="2"> 周二律动，携手共进 </el-collapse-item>
+      <el-collapse-item title="周三" name="3"> 周三昂扬，激情不减 </el-collapse-item>
+      <el-collapse-item title="周四" name="4"> 周四精进，事半功倍 </el-collapse-item>
       <el-collapse-item name="5">
         <template #title>
           周五

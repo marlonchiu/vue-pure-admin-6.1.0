@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useColumns } from "./columns";
+import { useColumns } from './columns'
 
-const { columns, dataList, columnsDrag } = useColumns();
+const { columns, dataList, columnsDrag } = useColumns()
 </script>
 
 <template>

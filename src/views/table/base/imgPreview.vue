@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { tableDataImage } from "./data";
+import { tableDataImage } from './data'
 
 const columns: TableColumnList = [
   {
-    label: "日期",
-    prop: "date"
+    label: '日期',
+    prop: 'date'
   },
   {
-    label: "姓名",
-    prop: "name"
+    label: '姓名',
+    prop: 'name'
   },
   {
-    label: "地址",
-    prop: "address"
+    label: '地址',
+    prop: 'address'
   },
   {
-    label: "视频",
-    slot: "video"
+    label: '视频',
+    slot: 'video'
   },
   {
-    label: "图像",
-    slot: "image"
+    label: '图像',
+    slot: 'image'
   }
-];
+]
 </script>
 
 <template>

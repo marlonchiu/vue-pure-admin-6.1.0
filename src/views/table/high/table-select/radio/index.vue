@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useColumns } from "./columns";
+import { ref } from 'vue'
+import { useColumns } from './columns'
 
-const selectRef = ref();
-const {
-  columns,
-  pagination,
-  selectValue,
-  tableDataEdit,
-  rowStyle,
-  onRowClick
-} = useColumns(selectRef);
+const selectRef = ref()
+const { columns, pagination, selectValue, tableDataEdit, rowStyle, onRowClick } =
+  useColumns(selectRef)
 </script>
 
 <template>

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Vcode from "vue3-puzzle-vcode";
+import { ref } from 'vue'
+import Vcode from 'vue3-puzzle-vcode'
 
-const isShow = ref(true);
+const isShow = ref(true)
 
 function onSuccess() {
-  console.log("验证成功");
+  console.log('验证成功')
 }
 
 function onFail() {
-  console.log("验证失败");
+  console.log('验证失败')
 }
 </script>
 

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import JsBarcode from "jsbarcode";
-import { ref, onMounted } from "vue";
+import JsBarcode from 'jsbarcode'
+import { ref, onMounted } from 'vue'
 
 defineOptions({
-  name: "ReBarcode"
-});
+  name: 'ReBarcode'
+})
 
 const props = defineProps({
   tag: {
     type: String,
-    default: "canvas"
+    default: 'canvas'
   },
   text: {
     type: String,
@@ -19,22 +19,22 @@ const props = defineProps({
   options: {
     type: Object,
     default() {
-      return {};
+      return {}
     }
   },
   // type 相当于 options.format，如果 type 和 options.format 同时存在，type 值优先；
   type: {
     type: String,
-    default: "CODE128"
+    default: 'CODE128'
   }
-});
+})
 
-const wrapEl = ref(null);
+const wrapEl = ref(null)
 
 onMounted(() => {
-  const opt = { ...props.options, format: props.type };
-  JsBarcode(wrapEl.value, props.text, opt);
-});
+  const opt = { ...props.options, format: props.type }
+  JsBarcode(wrapEl.value, props.text, opt)
+})
 </script>
 
 <template>

@@ -1,18 +1,18 @@
-import { ref } from "vue";
-import { options } from "../data";
+import { ref } from 'vue'
+import { options } from '../data'
 
 export function useColumns() {
-  const dataList = ref([]);
+  const dataList = ref([])
 
   const columns: TableColumnList = [
     {
-      label: "姓名",
-      prop: "name",
+      label: '姓名',
+      prop: 'name',
       cellRenderer: ({ row }) => <el-input v-model={row.name} />
     },
     {
-      label: "性别",
-      prop: "sex",
+      label: '性别',
+      prop: 'sex',
       cellRenderer: ({ row }) => (
         <el-switch
           v-model={row.sex}
@@ -25,25 +25,19 @@ export function useColumns() {
       )
     },
     {
-      label: "爱好",
-      prop: "hobby",
+      label: '爱好',
+      prop: 'hobby',
       cellRenderer: ({ row }) => (
         <el-select v-model={row.hobby} clearable placeholder="请选择爱好">
           {options.map(item => {
-            return (
-              <el-option
-                key={item.value}
-                label={item.label}
-                value={item.value}
-              />
-            );
+            return <el-option key={item.value} label={item.label} value={item.value} />
           })}
         </el-select>
       )
     },
     {
-      label: "日期",
-      prop: "date",
+      label: '日期',
+      prop: 'date',
       cellRenderer: ({ row }) => (
         <el-date-picker
           v-model={row.date}
@@ -56,26 +50,26 @@ export function useColumns() {
       minWidth: 110
     },
     {
-      label: "操作",
-      fixed: "right",
+      label: '操作',
+      fixed: 'right',
       width: 90,
-      slot: "operation"
+      slot: 'operation'
     }
-  ];
+  ]
 
   function onAdd() {
     dataList.value.push({
       id: dataList.value.length + 1,
-      name: "",
+      name: '',
       sex: 0,
-      hobby: "",
-      date: ""
-    });
+      hobby: '',
+      date: ''
+    })
   }
 
   function onDel(row) {
-    const index = dataList.value.indexOf(row);
-    if (index !== -1) dataList.value.splice(index, 1);
+    const index = dataList.value.indexOf(row)
+    if (index !== -1) dataList.value.splice(index, 1)
   }
 
   return {
@@ -83,5 +77,5 @@ export function useColumns() {
     dataList,
     onAdd,
     onDel
-  };
+  }
 }

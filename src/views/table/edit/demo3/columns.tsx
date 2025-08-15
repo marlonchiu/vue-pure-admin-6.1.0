@@ -1,38 +1,38 @@
-import { ref, computed } from "vue";
-import { tableDataEdit } from "../data";
+import { ref, computed } from 'vue'
+import { tableDataEdit } from '../data'
 
-import EditPen from "~icons/ep/edit-pen";
-import Check from "~icons/ep/check";
+import EditPen from '~icons/ep/edit-pen'
+import Check from '~icons/ep/check'
 
 export function useColumns() {
-  const editMap = ref({});
-  const activeIndex = ref(-1);
-  const dataList = ref(tableDataEdit);
+  const editMap = ref({})
+  const activeIndex = ref(-1)
+  const dataList = ref(tableDataEdit)
 
   const editing = computed(() => {
     return index => {
-      return editMap.value[index]?.editing;
-    };
-  });
+      return editMap.value[index]?.editing
+    }
+  })
 
   const iconClass = computed(() => {
     return (index, other = false) => {
       return [
-        "cursor-pointer",
-        "ml-2",
-        "transition",
-        "delay-100",
+        'cursor-pointer',
+        'ml-2',
+        'transition',
+        'delay-100',
         other
-          ? ["hover:scale-110", "hover:text-red-500"]
-          : editing.value(index) && ["scale-150", "text-red-500"]
-      ];
-    };
-  });
+          ? ['hover:scale-110', 'hover:text-red-500']
+          : editing.value(index) && ['scale-150', 'text-red-500']
+      ]
+    }
+  })
 
   const columns: TableColumnList = [
     {
-      label: "姓名（可修改）",
-      prop: "name",
+      label: '姓名（可修改）',
+      prop: 'name',
       cellRenderer: ({ row, index }) => (
         <div
           class="flex-bc w-full h-[32px]"
@@ -61,27 +61,25 @@ export function useColumns() {
       )
     },
     {
-      label: "地址",
-      prop: "address"
+      label: '地址',
+      prop: 'address'
     }
-  ];
+  ]
 
   function onMouseleave(index) {
-    editing.value[index]
-      ? (activeIndex.value = index)
-      : (activeIndex.value = -1);
+    editing.value[index] ? (activeIndex.value = index) : (activeIndex.value = -1)
   }
 
   function onEdit(row, index) {
-    editMap.value[index] = Object.assign({ ...row, editing: true });
+    editMap.value[index] = Object.assign({ ...row, editing: true })
   }
 
   function onSave(index) {
-    editMap.value[index].editing = false;
+    editMap.value[index].editing = false
   }
 
   return {
     columns,
     dataList
-  };
+  }
 }

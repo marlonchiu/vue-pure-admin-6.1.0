@@ -27,7 +27,7 @@ const home = 0, // 平台规定只有 home 路由的 rank 才能为 0 ，所以�
   ppt = 24,
   mind = 25,
   guide = 26,
-  menuoverflow = 27;
+  menuoverflow = 27
 
 export {
   home,
@@ -58,4 +58,4 @@ export {
   mind,
   guide,
   menuoverflow
-};
+}

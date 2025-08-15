@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { DynamicScroller, DynamicScrollerItem } from "vue-virtual-scroller";
+import { ref, computed } from 'vue'
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
 
-const items = ref([]);
-const search = ref("");
+const items = ref([])
+const search = ref('')
 
 for (let i = 0; i < 800; i++) {
   items.value.push({
     id: i
-  });
+  })
 }
 
 const filteredItems = computed(() => {
-  if (!search.value) return items.value;
-  const lowerCaseSearch = search.value;
-  return items.value.filter(i => i.id == lowerCaseSearch);
-});
+  if (!search.value) return items.value
+  const lowerCaseSearch = search.value
+  return items.value.filter(i => i.id == lowerCaseSearch)
+})
 </script>
 
 <template>
@@ -51,10 +51,7 @@ const filteredItems = computed(() => {
           class="message"
         >
           <div>
-            <IconifyIconOnline
-              icon="openmoji:beaming-face-with-smiling-eyes"
-              width="40"
-            />
+            <IconifyIconOnline icon="openmoji:beaming-face-with-smiling-eyes" width="40" />
             <p class="text-center">{{ item.id }}</p>
           </div>
         </DynamicScrollerItem>

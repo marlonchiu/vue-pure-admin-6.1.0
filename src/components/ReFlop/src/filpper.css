@@ -11,12 +11,12 @@
   color: #fff;
   box-shadow: 0 0 6px rgb(0 0 0 / 50%);
   text-align: center;
-  font-family: "Helvetica Neue";
+  font-family: 'Helvetica Neue';
 }
 
 .m-flipper .digital::before,
 .m-flipper .digital::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
@@ -135,50 +135,50 @@
 
 .m-flipper .number0::before,
 .m-flipper .number0::after {
-  content: "0";
+  content: '0';
 }
 
 .m-flipper .number1::before,
 .m-flipper .number1::after {
-  content: "1";
+  content: '1';
 }
 
 .m-flipper .number2::before,
 .m-flipper .number2::after {
-  content: "2";
+  content: '2';
 }
 
 .m-flipper .number3::before,
 .m-flipper .number3::after {
-  content: "3";
+  content: '3';
 }
 
 .m-flipper .number4::before,
 .m-flipper .number4::after {
-  content: "4";
+  content: '4';
 }
 
 .m-flipper .number5::before,
 .m-flipper .number5::after {
-  content: "5";
+  content: '5';
 }
 
 .m-flipper .number6::before,
 .m-flipper .number6::after {
-  content: "6";
+  content: '6';
 }
 
 .m-flipper .number7::before,
 .m-flipper .number7::after {
-  content: "7";
+  content: '7';
 }
 
 .m-flipper .number8::before,
 .m-flipper .number8::after {
-  content: "8";
+  content: '8';
 }
 
 .m-flipper .number9::before,
 .m-flipper .number9::after {
-  content: "9";
+  content: '9';
 }

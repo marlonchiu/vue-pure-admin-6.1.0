@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useColumns } from "./columns";
+import { useColumns } from './columns'
 
-const { columns, dataList } = useColumns();
+const { columns, dataList } = useColumns()
 </script>
 
 <template>
@@ -11,12 +11,6 @@ const { columns, dataList } = useColumns();
         <pre class="w-[400px]"> {{ dataList }}</pre>
       </code>
     </el-scrollbar>
-    <pure-table
-      class="w-[30vw]!"
-      row-key="id"
-      border
-      :data="dataList"
-      :columns="columns"
-    />
+    <pure-table class="w-[30vw]!" row-key="id" border :data="dataList" :columns="columns" />
   </div>
 </template>

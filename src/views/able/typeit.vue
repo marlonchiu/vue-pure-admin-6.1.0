@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { TypeIt, type TypeItOptions } from "@/components/ReTypeit";
+import { TypeIt, type TypeItOptions } from '@/components/ReTypeit'
 
 defineOptions({
-  name: "Typeit"
-});
+  name: 'Typeit'
+})
 
 const options: TypeItOptions = {
-  strings: ["test1", "test2", "test3"]
-};
+  strings: ['test1', 'test2', 'test3']
+}
 </script>
 
 <template>

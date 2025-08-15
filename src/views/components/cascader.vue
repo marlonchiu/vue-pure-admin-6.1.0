@@ -6,21 +6,21 @@ import {
   regionDataPlus,
   regionData,
   CodeToText
-} from "@/utils/chinaArea";
-import { ref } from "vue";
+} from '@/utils/chinaArea'
+import { ref } from 'vue'
 
 defineOptions({
-  name: "Cascader"
-});
+  name: 'Cascader'
+})
 
-const selectedOptions1 = ref(["110000", "110100"]);
-const selectedOptions2 = ref(["120000", "120100", "120101"]);
-const selectedOptions3 = ref(["130000", ""]);
-const selectedOptions4 = ref(["120000", "120100", ""]);
+const selectedOptions1 = ref(['110000', '110100'])
+const selectedOptions2 = ref(['120000', '120100', '120101'])
+const selectedOptions3 = ref(['130000', ''])
+const selectedOptions4 = ref(['120000', '120100', ''])
 
 const handleChange = value => {
-  console.log(value);
-};
+  console.log(value)
+}
 </script>
 
 <template>
@@ -56,10 +56,7 @@ const handleChange = value => {
             <div>
               汉字转区域码：
               {{
-                convertTextToCode(
-                  CodeToText[selectedOptions1[0]],
-                  CodeToText[selectedOptions1[1]]
-                )
+                convertTextToCode(CodeToText[selectedOptions1[0]], CodeToText[selectedOptions1[1]])
               }}
             </div>
           </div>
@@ -85,10 +82,7 @@ const handleChange = value => {
             <div>
               汉字转区域码：
               {{
-                convertTextToCode(
-                  CodeToText[selectedOptions3[0]],
-                  CodeToText[selectedOptions3[1]]
-                )
+                convertTextToCode(CodeToText[selectedOptions3[0]], CodeToText[selectedOptions3[1]])
               }}
             </div>
           </div>
@@ -98,18 +92,13 @@ const handleChange = value => {
         <div class="flex flex-col items-center justify-center mt-3">
           <span class="text-[var(--el-color-primary)]">
             3. 三级联动（不带“全部”选项）
-            <el-cascader
-              v-model="selectedOptions2"
-              :options="regionData"
-              @change="handleChange"
-            />
+            <el-cascader v-model="selectedOptions2" :options="regionData" @change="handleChange" />
           </span>
           <div class="leading-10">
             <div>绑定值：{{ selectedOptions2 }}</div>
             <div>
               区域码转汉字：
-              {{ CodeToText[selectedOptions2[0]] }},
-              {{ CodeToText[selectedOptions2[1]] }},
+              {{ CodeToText[selectedOptions2[0]] }}, {{ CodeToText[selectedOptions2[1]] }},
               {{ CodeToText[selectedOptions2[2]] }}
             </div>
             <div>
@@ -139,8 +128,7 @@ const handleChange = value => {
             <div>绑定值：{{ selectedOptions4 }}</div>
             <div>
               区域码转汉字：
-              {{ CodeToText[selectedOptions4[0]] }},
-              {{ CodeToText[selectedOptions4[1]] }},
+              {{ CodeToText[selectedOptions4[0]] }}, {{ CodeToText[selectedOptions4[1]] }},
               {{ CodeToText[selectedOptions4[2]] }}
             </div>
             <div>

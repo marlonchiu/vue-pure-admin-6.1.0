@@ -1,63 +1,63 @@
 <script setup lang="ts">
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import SwiperCore from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import SwiperCore from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 
 defineOptions({
-  name: "Swiper"
-});
+  name: 'Swiper'
+})
 
-SwiperCore.use([Autoplay, Navigation, Pagination]);
+SwiperCore.use([Autoplay, Navigation, Pagination])
 
 const swiperExample: any[] = [
-  { id: 0, label: "基础滑动", options: {} },
+  { id: 0, label: '基础滑动', options: {} },
   {
     id: 1,
-    label: "按钮切换",
+    label: '按钮切换',
     options: {
       navigation: true
     }
   },
   {
     id: 2,
-    label: "分页器",
+    label: '分页器',
     options: {
       pagination: true
     }
   },
   {
     id: 3,
-    label: "分页器 / 动态指示点",
+    label: '分页器 / 动态指示点',
     options: {
       pagination: { dynamicBullets: true }
     }
   },
   {
     id: 4,
-    label: "分页器 / 进度条",
+    label: '分页器 / 进度条',
     options: {
       navigation: true,
       pagination: {
-        type: "progressbar"
+        type: 'progressbar'
       }
     }
   },
   {
     id: 5,
-    label: "分页器 / 分式",
+    label: '分页器 / 分式',
     options: {
       navigation: true,
       pagination: {
-        type: "fraction"
+        type: 'fraction'
       }
     }
   },
   {
     id: 6,
-    label: "一次显示多个Slides",
+    label: '一次显示多个Slides',
     options: {
       pagination: {
         clickable: true
@@ -68,7 +68,7 @@ const swiperExample: any[] = [
   },
   {
     id: 7,
-    label: "无限循环",
+    label: '无限循环',
     options: {
       autoplay: {
         delay: 2000,
@@ -81,7 +81,7 @@ const swiperExample: any[] = [
       loop: true
     }
   }
-];
+]
 </script>
 
 <template>
@@ -109,9 +109,7 @@ const swiperExample: any[] = [
         <h6 class="py-[16px]! text-base">{{ item.label }}</h6>
         <swiper v-bind="item.options">
           <swiper-slide v-for="i in 5" :key="i">
-            <div
-              class="flex justify-center items-center h-[240px] border border-[#999]"
-            >
+            <div class="flex justify-center items-center h-[240px] border border-[#999]">
               Slide{{ i }}
             </div>
           </swiper-slide>

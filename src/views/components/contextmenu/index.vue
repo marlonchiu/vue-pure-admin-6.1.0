@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import basic from "./basic.vue";
-import menuGroup from "./menuGroup.vue";
-import menuDynamic from "./menuDynamic.vue";
-import "v-contextmenu/dist/themes/default.css";
+import basic from './basic.vue'
+import menuGroup from './menuGroup.vue'
+import menuDynamic from './menuDynamic.vue'
+import 'v-contextmenu/dist/themes/default.css'
 
 defineOptions({
-  name: "ContextMenu"
-});
+  name: 'ContextMenu'
+})
 </script>
 
 <template>

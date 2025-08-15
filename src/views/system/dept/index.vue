@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useDept } from "./utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { ref } from 'vue'
+import { useDept } from './utils/hook'
+import { PureTableBar } from '@/components/RePureTableBar'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
 
-import Delete from "~icons/ep/delete";
-import EditPen from "~icons/ep/edit-pen";
-import Refresh from "~icons/ep/refresh";
-import AddFill from "~icons/ri/add-circle-line";
+import Delete from '~icons/ep/delete'
+import EditPen from '~icons/ep/edit-pen'
+import Refresh from '~icons/ep/refresh'
+import AddFill from '~icons/ri/add-circle-line'
 
 defineOptions({
-  name: "SystemDept"
-});
+  name: 'SystemDept'
+})
 
-const formRef = ref();
-const tableRef = ref();
+const formRef = ref()
+const tableRef = ref()
 const {
   form,
   loading,
@@ -25,11 +25,11 @@ const {
   openDialog,
   handleDelete,
   handleSelectionChange
-} = useDept();
+} = useDept()
 
 function onFullscreen() {
   // 重置表格高度
-  tableRef.value.setAdaptive();
+  tableRef.value.setAdaptive()
 }
 </script>
 
@@ -42,20 +42,10 @@ function onFullscreen() {
       class="search-form bg-bg_color w-full pl-8 pt-[12px] overflow-auto"
     >
       <el-form-item label="部门名称：" prop="name">
-        <el-input
-          v-model="form.name"
-          placeholder="请输入部门名称"
-          clearable
-          class="w-[180px]!"
-        />
+        <el-input v-model="form.name" placeholder="请输入部门名称" clearable class="w-[180px]!" />
       </el-form-item>
       <el-form-item label="状态：" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择状态"
-          clearable
-          class="w-[180px]!"
-        >
+        <el-select v-model="form.status" placeholder="请选择状态" clearable class="w-[180px]!">
           <el-option label="启用" :value="1" />
           <el-option label="停用" :value="0" />
         </el-select>
@@ -69,9 +59,7 @@ function onFullscreen() {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
@@ -83,11 +71,7 @@ function onFullscreen() {
       @fullscreen="onFullscreen"
     >
       <template #buttons>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
+        <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
           新增部门
         </el-button>
       </template>

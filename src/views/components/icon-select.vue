@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { IconSelect } from "@/components/ReIcon";
+import { ref } from 'vue'
+import { IconSelect } from '@/components/ReIcon'
 
 defineOptions({
-  name: "IconSelect"
-});
+  name: 'IconSelect'
+})
 
-const icon = ref("ep:add-location");
+const icon = ref('ep:add-location')
 </script>
 
 <template>

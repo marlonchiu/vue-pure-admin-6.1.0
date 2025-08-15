@@ -1,82 +1,82 @@
 <script setup lang="tsx">
-import { ref } from "vue";
-import "vue-json-pretty/lib/styles.css";
-import VueJsonPretty from "vue-json-pretty";
+import { ref } from 'vue'
+import 'vue-json-pretty/lib/styles.css'
+import VueJsonPretty from 'vue-json-pretty'
 
 const props = defineProps({
   data: {
     type: Array,
     default: () => []
   }
-});
+})
 
 const columns = [
   {
-    label: "IP 地址",
-    prop: "ip"
+    label: 'IP 地址',
+    prop: 'ip'
   },
   {
-    label: "地点",
-    prop: "address"
+    label: '地点',
+    prop: 'address'
   },
   {
-    label: "操作系统",
-    prop: "system"
+    label: '操作系统',
+    prop: 'system'
   },
   {
-    label: "浏览器类型",
-    prop: "browser"
+    label: '浏览器类型',
+    prop: 'browser'
   },
   {
-    label: "所属模块",
-    prop: "module"
+    label: '所属模块',
+    prop: 'module'
   },
   {
-    label: "请求时间",
-    prop: "requestTime"
+    label: '请求时间',
+    prop: 'requestTime'
   },
   {
-    label: "请求方法",
-    prop: "method"
+    label: '请求方法',
+    prop: 'method'
   },
   {
-    label: "请求耗时",
-    prop: "takesTime"
+    label: '请求耗时',
+    prop: 'takesTime'
   },
   {
-    label: "请求接口",
-    prop: "url",
+    label: '请求接口',
+    prop: 'url',
     copy: true
   },
   {
-    label: "TraceId",
-    prop: "traceId",
+    label: 'TraceId',
+    prop: 'traceId',
     copy: true
   }
-];
+]
 
 const dataList = ref([
   {
-    title: "响应头",
-    name: "responseHeaders",
+    title: '响应头',
+    name: 'responseHeaders',
     data: (props.data[0] as any).responseHeaders
   },
   {
-    title: "响应体",
-    name: "responseBody",
+    title: '响应体',
+    name: 'responseBody',
     data: (props.data[0] as any).responseBody
   },
   {
-    title: "请求头",
-    name: "requestHeaders",
+    title: '请求头',
+    name: 'requestHeaders',
     data: (props.data[0] as any).requestHeaders
   },
   {
-    title: "请求体",
-    name: "requestBody",
+    title: '请求体',
+    name: 'requestBody',
     data: (props.data[0] as any).requestBody
   }
-]);
+])
 </script>
 
 <template>

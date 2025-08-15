@@ -1,79 +1,79 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Print from "@/utils/print";
-import pieChart from "./pieChart.vue";
+import { ref } from 'vue'
+import Print from '@/utils/print'
+import pieChart from './pieChart.vue'
 
 defineOptions({
-  name: "Print"
-});
+  name: 'Print'
+})
 
 interface User {
-  date: string;
-  name: string;
-  age: number;
-  address: string;
+  date: string
+  name: string
+  age: number
+  address: string
 }
 
-const value = ref("1");
+const value = ref('1')
 
 const options = [
   {
-    value: "1",
-    el: ".el-table",
-    label: "Table"
+    value: '1',
+    el: '.el-table',
+    label: 'Table'
   },
   {
-    value: "2",
-    el: ".echart",
-    label: "Echart"
+    value: '2',
+    el: '.echart',
+    label: 'Echart'
   },
   {
-    value: "3",
-    el: ".img",
-    label: "Image"
+    value: '3',
+    el: '.img',
+    label: 'Image'
   }
-];
+]
 
 function onPrint() {
-  const el = options.filter(v => v.value === value.value)[0]?.el;
-  Print(el).toPrint;
+  const el = options.filter(v => v.value === value.value)[0]?.el
+  Print(el).toPrint
 }
 
 const tableRowClassName = ({ rowIndex }: { row: User; rowIndex: number }) => {
   if (rowIndex === 1) {
-    return "warning-row";
+    return 'warning-row'
   } else if (rowIndex === 3) {
-    return "success-row";
+    return 'success-row'
   }
-  return "";
-};
+  return ''
+}
 
 const tableData: User[] = [
   {
-    date: "2016-05-03",
-    name: "Tom",
+    date: '2016-05-03',
+    name: 'Tom',
     age: 18,
-    address: "No. 189, Grove St, Los Angeles"
+    address: 'No. 189, Grove St, Los Angeles'
   },
   {
-    date: "2016-05-02",
-    name: "Tom",
+    date: '2016-05-02',
+    name: 'Tom',
     age: 18,
-    address: "No. 189, Grove St, Los Angeles"
+    address: 'No. 189, Grove St, Los Angeles'
   },
   {
-    date: "2016-05-04",
-    name: "Tom",
+    date: '2016-05-04',
+    name: 'Tom',
     age: 18,
-    address: "No. 189, Grove St, Los Angeles"
+    address: 'No. 189, Grove St, Los Angeles'
   },
   {
-    date: "2016-05-01",
-    name: "Tom",
+    date: '2016-05-01',
+    name: 'Tom',
     age: 18,
-    address: "No. 189, Grove St, Los Angeles"
+    address: 'No. 189, Grove St, Los Angeles'
   }
-];
+]
 </script>
 
 <template>
@@ -81,12 +81,7 @@ const tableData: User[] = [
     <template #header>
       <div class="card-header">
         <span class="font-medium">打印功能（报表、图表、图片）</span>
-        <el-select
-          v-model="value"
-          class="w-[100px]! mr-2"
-          placeholder="Select"
-          size="small"
-        >
+        <el-select v-model="value" class="w-[100px]! mr-2" placeholder="Select" size="small">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -94,9 +89,7 @@ const tableData: User[] = [
             :value="item.value"
           />
         </el-select>
-        <el-button size="small" type="primary" @click="onPrint">
-          打印
-        </el-button>
+        <el-button size="small" type="primary" @click="onPrint"> 打印 </el-button>
       </div>
       <el-link
         class="mt-2"

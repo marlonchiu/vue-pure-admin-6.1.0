@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { getList } from "./api";
-import error from "./error.png";
-import loading from "./loading.png";
-import { ElLoading } from "element-plus";
-import "vue-waterfall-plugin-next/dist/style.css";
-import InfiniteLoading from "v3-infinite-loading";
-import { onMounted, reactive, ref, nextTick } from "vue";
-import backTop from "@/assets/svg/back_top.svg?component";
-import { LazyImg, Waterfall } from "vue-waterfall-plugin-next";
+import { getList } from './api'
+import error from './error.png'
+import loading from './loading.png'
+import { ElLoading } from 'element-plus'
+import 'vue-waterfall-plugin-next/dist/style.css'
+import InfiniteLoading from 'v3-infinite-loading'
+import { onMounted, reactive, ref, nextTick } from 'vue'
+import backTop from '@/assets/svg/back_top.svg?component'
+import { LazyImg, Waterfall } from 'vue-waterfall-plugin-next'
 
 const options = reactive({
   // 唯一key值
-  rowKey: "id",
+  rowKey: 'id',
   // 卡片之间的间隙
   gutter: 10,
   // 是否有周围的gutter
@@ -34,7 +34,7 @@ const options = reactive({
     }
   },
   // 动画效果 https://animate.style/
-  animationEffect: "animate__zoomInUp",
+  animationEffect: 'animate__zoomInUp',
   // 动画时间
   animationDuration: 1000,
   // 动画延迟
@@ -42,7 +42,7 @@ const options = reactive({
   // 背景色
   // backgroundColor: "#2C2E3A",
   // 图片字段选择器，如果层级较深，使用 xxx.xxx.xxx 方式
-  imgSelector: "src.original",
+  imgSelector: 'src.original',
   // 加载配置
   loadProps: {
     loading,
@@ -50,45 +50,45 @@ const options = reactive({
   },
   // 是否懒加载
   lazyload: true
-});
+})
 
-const page = ref(1);
-const list = ref([]);
-const pageSize = ref();
-const loadingInstance = ref();
+const page = ref(1)
+const list = ref([])
+const pageSize = ref()
+const loadingInstance = ref()
 
 /** 加载更多 */
 function handleLoadMore() {
   loadingInstance.value = ElLoading.service({
-    target: ".content",
-    background: "transparent",
-    text: "加载中"
-  });
+    target: '.content',
+    background: 'transparent',
+    text: '加载中'
+  })
   getList({
     page: page.value,
     pageSize: pageSize.value
   }).then(res => {
     setTimeout(() => {
-      list.value.push(...res);
-      page.value += 1;
+      list.value.push(...res)
+      page.value += 1
       nextTick(() => {
-        loadingInstance.value.close();
-      });
-    }, 500);
-  });
+        loadingInstance.value.close()
+      })
+    }, 500)
+  })
 }
 
 function handleDelete(item, index) {
-  list.value.splice(index, 1);
+  list.value.splice(index, 1)
 }
 
 function handleClick(item) {
-  console.log(item);
+  console.log(item)
 }
 
 onMounted(() => {
-  handleLoadMore();
-});
+  handleLoadMore()
+})
 </script>
 
 <template>

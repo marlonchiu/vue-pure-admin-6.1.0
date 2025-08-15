@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 import {
   directive,
@@ -36,10 +36,10 @@ import {
   ContextmenuDivider,
   ContextmenuSubmenu,
   ContextmenuGroup
-} from "v-contextmenu";
+} from 'v-contextmenu'
 
 const ExampleSFC = defineComponent({
-  name: "ExampleSFC",
+  name: 'ExampleSFC',
 
   components: {
     [Contextmenu.name]: Contextmenu,
@@ -52,9 +52,9 @@ const ExampleSFC = defineComponent({
   directives: {
     contextmenu: directive
   }
-});
+})
 
-export default ExampleSFC;
+export default ExampleSFC
 </script>
 
 <style scoped>

@@ -1,56 +1,56 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import Sortable, { Swap } from "sortablejs";
-import draggable from "vuedraggable/src/vuedraggable";
-import { useAppStoreHook } from "@/store/modules/app";
+import { ref, onMounted } from 'vue'
+import Sortable, { Swap } from 'sortablejs'
+import draggable from 'vuedraggable/src/vuedraggable'
+import { useAppStoreHook } from '@/store/modules/app'
 
 defineOptions({
-  name: "Draggable"
-});
+  name: 'Draggable'
+})
 
-const { setSortSwap } = useAppStoreHook();
+const { setSortSwap } = useAppStoreHook()
 
 const gridLists = ref<Array<Object>>([
-  { grid: "cn", num: 1 },
-  { grid: "cn", num: 2 },
-  { grid: "cn", num: 3 },
-  { grid: "cn", num: 4 },
-  { grid: "cn", num: 5 },
-  { grid: "cn", num: 6 },
-  { grid: "cn", num: 7 },
-  { grid: "cn", num: 8 },
-  { grid: "cn", num: 9 }
-]);
+  { grid: 'cn', num: 1 },
+  { grid: 'cn', num: 2 },
+  { grid: 'cn', num: 3 },
+  { grid: 'cn', num: 4 },
+  { grid: 'cn', num: 5 },
+  { grid: 'cn', num: 6 },
+  { grid: 'cn', num: 7 },
+  { grid: 'cn', num: 8 },
+  { grid: 'cn', num: 9 }
+])
 
 const lists = ref<Array<Object>>([
-  { people: "cn", id: 1, name: "www.itxst.com" },
-  { people: "cn", id: 2, name: "www.baidu.com" },
-  { people: "cn", id: 3, name: "www.taobao.com" },
-  { people: "cn", id: 4, name: "www.google.com" }
-]);
+  { people: 'cn', id: 1, name: 'www.itxst.com' },
+  { people: 'cn', id: 2, name: 'www.baidu.com' },
+  { people: 'cn', id: 3, name: 'www.taobao.com' },
+  { people: 'cn', id: 4, name: 'www.google.com' }
+])
 
 const cutLists = ref([
-  { people: "cn", id: 1, name: "cut1" },
-  { people: "cn", id: 2, name: "cut2" },
-  { people: "cn", id: 3, name: "cut3" },
-  { people: "cn", id: 4, name: "cut4" }
-]);
+  { people: 'cn', id: 1, name: 'cut1' },
+  { people: 'cn', id: 2, name: 'cut2' },
+  { people: 'cn', id: 3, name: 'cut3' },
+  { people: 'cn', id: 4, name: 'cut4' }
+])
 
 const change = (evt): void => {
-  console.log("evt: ", evt);
-};
+  console.log('evt: ', evt)
+}
 
 onMounted(() => {
-  if (!useAppStoreHook().sortSwap) Sortable.mount(new Swap());
-  setSortSwap(true);
-  new Sortable(document.querySelector(".cut-container"), {
+  if (!useAppStoreHook().sortSwap) Sortable.mount(new Swap())
+  setSortSwap(true)
+  new Sortable(document.querySelector('.cut-container'), {
     swap: true,
     forceFallback: true,
-    chosenClass: "chosen",
-    swapClass: "highlight",
+    chosenClass: 'chosen',
+    swapClass: 'highlight',
     animation: 300
-  });
-});
+  })
+})
 </script>
 
 <template>
@@ -135,11 +135,7 @@ onMounted(() => {
             </template>
             <!-- 拖拽实现元素位置切换 -->
             <div class="cut-container">
-              <div
-                v-for="(item, index) in cutLists"
-                :key="index"
-                class="item-cut"
-              >
+              <div v-for="(item, index) in cutLists" :key="index" class="item-cut">
                 <p>{{ item.name }}</p>
               </div>
             </div>

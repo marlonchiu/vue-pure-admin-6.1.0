@@ -5,15 +5,15 @@ import {
   type DrawerOptions,
   closeDrawer,
   drawerStore
-} from "./index";
-import { computed, ref } from "vue";
-import { isFunction } from "@pureadmin/utils";
+} from './index'
+import { computed, ref } from 'vue'
+import { isFunction } from '@pureadmin/utils'
 
 defineOptions({
-  name: "ReDrawer"
-});
+  name: 'ReDrawer'
+})
 
-const sureBtnMap = ref({});
+const sureBtnMap = ref({})
 
 const footerButtons = computed(() => {
   return (options: DrawerOptions) => {
@@ -21,62 +21,53 @@ const footerButtons = computed(() => {
       ? options.footerButtons
       : ([
           {
-            label: "取消",
+            label: '取消',
             text: true,
             bg: true,
             btnClick: ({ drawer: { options, index } }) => {
-              const done = () =>
-                closeDrawer(options, index, { command: "cancel" });
+              const done = () => closeDrawer(options, index, { command: 'cancel' })
               if (options?.beforeCancel && isFunction(options?.beforeCancel)) {
-                options.beforeCancel(done, { options, index });
+                options.beforeCancel(done, { options, index })
               } else {
-                done();
+                done()
               }
             }
           },
           {
-            label: "确定",
-            type: "primary",
+            label: '确定',
+            type: 'primary',
             text: true,
             bg: true,
             popConfirm: options?.popConfirm,
             btnClick: ({ drawer: { options, index } }) => {
               if (options?.sureBtnLoading) {
-                sureBtnMap.value[index] = Object.assign(
-                  {},
-                  sureBtnMap.value[index],
-                  {
-                    loading: true
-                  }
-                );
+                sureBtnMap.value[index] = Object.assign({}, sureBtnMap.value[index], {
+                  loading: true
+                })
               }
               const closeLoading = () => {
                 if (options?.sureBtnLoading) {
-                  sureBtnMap.value[index].loading = false;
+                  sureBtnMap.value[index].loading = false
                 }
-              };
+              }
               const done = () => {
-                closeLoading();
-                closeDrawer(options, index, { command: "sure" });
-              };
+                closeLoading()
+                closeDrawer(options, index, { command: 'sure' })
+              }
               if (options?.beforeSure && isFunction(options?.beforeSure)) {
-                options.beforeSure(done, { options, index, closeLoading });
+                options.beforeSure(done, { options, index, closeLoading })
               } else {
-                done();
+                done()
               }
             }
           }
-        ] as Array<ButtonProps>);
-  };
-});
+        ] as Array<ButtonProps>)
+  }
+})
 
-function eventsCallBack(
-  event: EventType,
-  options: DrawerOptions,
-  index: number
-) {
+function eventsCallBack(event: EventType, options: DrawerOptions, index: number) {
   if (options?.[event] && isFunction(options?.[event])) {
-    return options?.[event]({ options, index });
+    return options?.[event]({ options, index })
   }
 }
 
@@ -87,13 +78,9 @@ function eventsCallBack(
  * @param {Object} args - 传递给关闭抽屉操作的参数对象，默认为 { command: 'close' }
  * @returns {void} 这个函数不返回任何值
  */
-function handleClose(
-  options: DrawerOptions,
-  index: number,
-  args = { command: "close" }
-) {
-  closeDrawer(options, index, args);
-  eventsCallBack("close", options, index);
+function handleClose(options: DrawerOptions, index: number, args = { command: 'close' }) {
+  closeDrawer(options, index, args)
+  eventsCallBack('close', options, index)
 }
 </script>
 
@@ -114,13 +101,8 @@ function handleClose(
     @close-auto-focus="eventsCallBack('closeAutoFocus', options, index)"
   >
     <!-- header  -->
-    <template
-      v-if="options?.headerRenderer"
-      #header="{ close, titleId, titleClass }"
-    >
-      <component
-        :is="options?.headerRenderer({ close, titleId, titleClass })"
-      />
+    <template v-if="options?.headerRenderer" #header="{ close, titleId, titleClass }">
+      <component :is="options?.headerRenderer({ close, titleId, titleClass })" />
     </template>
     <!--  body  -->
     <component

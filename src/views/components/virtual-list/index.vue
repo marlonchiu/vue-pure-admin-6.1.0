@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import verticalList from "./vertical.vue";
-import horizontalList from "./horizontal.vue";
-import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
+import verticalList from './vertical.vue'
+import horizontalList from './horizontal.vue'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 defineOptions({
-  name: "VirtualList"
-});
+  name: 'VirtualList'
+})
 </script>
 
 <template>

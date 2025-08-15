@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Mint from "mint-filter";
+import { ref } from 'vue'
+import Mint from 'mint-filter'
 
 defineOptions({
-  name: "Sensitive"
-});
+  name: 'Sensitive'
+})
 
 // 自定义敏感词字典
-const words = ["脑残", "废物", "白痴", "三八", "智障"];
+const words = ['脑残', '废物', '白痴', '三八', '智障']
 
-const modelValue = ref();
-const mint = new Mint(words);
+const modelValue = ref()
+const mint = new Mint(words)
 
 function onInput() {
-  modelValue.value = mint.filter(modelValue.value).text;
+  modelValue.value = mint.filter(modelValue.value).text
 }
 </script>
 

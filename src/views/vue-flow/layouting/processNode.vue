@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { toRef } from "vue";
-import { Handle, useNodeConnections } from "@vue-flow/core";
+import { toRef } from 'vue'
+import { Handle, useNodeConnections } from '@vue-flow/core'
 
 const props = defineProps({
   data: {
@@ -13,63 +13,63 @@ const props = defineProps({
   targetPosition: {
     type: String
   }
-});
+})
 
 const sourceConnections = useNodeConnections({
-  handleType: "target"
-});
+  handleType: 'target'
+})
 
 const targetConnections = useNodeConnections({
-  handleType: "source"
-});
+  handleType: 'source'
+})
 
-const isSender = toRef(() => sourceConnections.value.length <= 0);
+const isSender = toRef(() => sourceConnections.value.length <= 0)
 
-const isReceiver = toRef(() => targetConnections.value.length <= 0);
+const isReceiver = toRef(() => targetConnections.value.length <= 0)
 
 const bgColor = toRef(() => {
   if (isSender.value) {
-    return "#2563eb";
+    return '#2563eb'
   }
 
   if (props.data.hasError) {
-    return "#f87171";
+    return '#f87171'
   }
 
   if (props.data.isFinished) {
-    return "#42B983";
+    return '#42B983'
   }
 
   if (props.data.isCancelled) {
-    return "#fbbf24";
+    return '#fbbf24'
   }
 
-  return "#4b5563";
-});
+  return '#4b5563'
+})
 
 const processLabel = toRef(() => {
   if (props.data.hasError) {
-    return "❌";
+    return '❌'
   }
 
   if (props.data.isSkipped) {
-    return "🚧";
+    return '🚧'
   }
 
   if (props.data.isCancelled) {
-    return "🚫";
+    return '🚫'
   }
 
   if (isSender.value) {
-    return "📦";
+    return '📦'
   }
 
   if (props.data.isFinished) {
-    return "😎";
+    return '😎'
   }
 
-  return "🏠";
-});
+  return '🏠'
+})
 </script>
 
 <template>
@@ -92,11 +92,7 @@ const processLabel = toRef(() => {
         >📥
       </span>
     </Handle>
-    <Handle
-      v-if="!isReceiver"
-      type="source"
-      :position="sourcePosition as any"
-    />
+    <Handle v-if="!isReceiver" type="source" :position="sourcePosition as any" />
 
     <div v-if="!isSender && data.isRunning" class="spinner" />
     <span v-else>

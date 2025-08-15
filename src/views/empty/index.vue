@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import back from "@/assets/svg/back.svg?component";
+import { useRouter } from 'vue-router'
+import back from '@/assets/svg/back.svg?component'
 
 defineOptions({
-  name: "Empty"
-});
+  name: 'Empty'
+})
 
-const router = useRouter();
+const router = useRouter()
 </script>
 
 <template>

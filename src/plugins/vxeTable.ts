@@ -1,7 +1,7 @@
-import "vxe-table/lib/style.css";
+import 'vxe-table/lib/style.css'
 // import "xe-utils";
 // import XEUtils from "xe-utils";
-import type { App } from "vue";
+import type { App } from 'vue'
 // import { i18n } from "@/plugins/i18n";
 // import zh from "vxe-table/lib/locale/lang/zh-CN";
 // import en from "vxe-table/lib/locale/lang/en-US";
@@ -45,7 +45,7 @@ import {
   // Pulldown,
   // 表格
   Table
-} from "vxe-table";
+} from 'vxe-table'
 
 // 全局默认参数
 VXETable.setConfig({
@@ -61,7 +61,7 @@ VXETable.setConfig({
   //   }
   //   return key;
   // }
-});
+})
 
 export function useVxeTable(app: App) {
   // 表格功能
@@ -100,5 +100,5 @@ export function useVxeTable(app: App) {
     // .use(List)
     // .use(Pulldown)
     // 安装表格
-    .use(Table);
+    .use(Table)
 }

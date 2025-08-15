@@ -1,86 +1,84 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import intro from "intro.js";
-import "intro.js/minified/introjs.min.css";
+import { ref } from 'vue'
+import intro from 'intro.js'
+import 'intro.js/minified/introjs.min.css'
 
 type GuideStep = {
-  element: HTMLElement;
-  title: string;
-  intro: string;
-  position: "left" | "right" | "top" | "bottom";
-};
+  element: HTMLElement
+  title: string
+  intro: string
+  position: 'left' | 'right' | 'top' | 'bottom'
+}
 
 defineOptions({
-  name: "Guide"
-});
+  name: 'Guide'
+})
 
 const GUIDE_STEPS = [
   {
-    element: document.querySelector(".sidebar-logo-container"),
-    title: "项目名称和Logo",
-    intro: "您可以在这里设置项目名称和Logo",
-    position: "left"
+    element: document.querySelector('.sidebar-logo-container'),
+    title: '项目名称和Logo',
+    intro: '您可以在这里设置项目名称和Logo',
+    position: 'left'
   },
   {
-    element: document.querySelector("#header-search"),
-    title: "搜索菜单",
-    intro: "您可以在这里搜索想要查看的菜单",
-    position: "left"
+    element: document.querySelector('#header-search'),
+    title: '搜索菜单',
+    intro: '您可以在这里搜索想要查看的菜单',
+    position: 'left'
   },
   {
-    element: document.querySelector("#header-translation"),
-    title: "国际化",
-    intro: "您可以在这里进行语言切换",
-    position: "left"
+    element: document.querySelector('#header-translation'),
+    title: '国际化',
+    intro: '您可以在这里进行语言切换',
+    position: 'left'
   },
   {
-    element: document.querySelector("#full-screen"),
-    title: "全屏",
-    intro: "您可以在这里进行全屏切换",
-    position: "left"
+    element: document.querySelector('#full-screen'),
+    title: '全屏',
+    intro: '您可以在这里进行全屏切换',
+    position: 'left'
   },
   {
-    element: document.querySelector("#header-notice"),
-    title: "消息通知",
-    intro: "您可以在这里查看管理员发送的消息",
-    position: "left"
+    element: document.querySelector('#header-notice'),
+    title: '消息通知',
+    intro: '您可以在这里查看管理员发送的消息',
+    position: 'left'
   },
   {
-    element: document.querySelector(".set-icon"),
-    title: "系统配置",
-    intro: "您可以在这里查看系统配置",
-    position: "left"
+    element: document.querySelector('.set-icon'),
+    title: '系统配置',
+    intro: '您可以在这里查看系统配置',
+    position: 'left'
   },
   {
-    element: document.querySelector(".tags-view"),
-    title: "多标签页",
-    intro: "这里是您访问过的页面的历史",
-    position: "bottom"
+    element: document.querySelector('.tags-view'),
+    title: '多标签页',
+    intro: '这里是您访问过的页面的历史',
+    position: 'bottom'
   }
-] as Partial<GuideStep>[];
+] as Partial<GuideStep>[]
 
-const tourOpen = ref(false);
+const tourOpen = ref(false)
 
 const onGuide = () => {
   intro()
     .setOptions({
       steps: GUIDE_STEPS
     })
-    .start();
-};
+    .start()
+}
 
 const onTour = () => {
-  tourOpen.value = true;
-};
+  tourOpen.value = true
+}
 </script>
 
 <template>
   <el-card shadow="never">
     <template #header>
       <div class="card-header">
-        <span class="font-medium">
-          引导页常用于引导式介绍项目的基本功能或亮点
-        </span>
+        <span class="font-medium"> 引导页常用于引导式介绍项目的基本功能或亮点 </span>
       </div>
       <el-link
         class="mt-2"

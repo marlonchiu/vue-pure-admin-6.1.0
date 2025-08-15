@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import treeList from "./tree.json";
-import { VxeTableBar } from "@/components/ReVxeTableBar";
+import { ref } from 'vue'
+import treeList from './tree.json'
+import { VxeTableBar } from '@/components/ReVxeTableBar'
 
-const vxeTableRef = ref();
+const vxeTableRef = ref()
 
-const loading = ref(true);
-const tableData = ref([]);
+const loading = ref(true)
+const tableData = ref([])
 
 const columns = [
-  { type: "seq", field: "seq", title: "序号", width: 200, treeNode: true },
-  { field: "id", title: "Id" },
-  { field: "name", title: "地点" }
-];
+  { type: 'seq', field: 'seq', title: '序号', width: 200, treeNode: true },
+  { field: 'id', title: 'Id' },
+  { field: 'name', title: '地点' }
+]
 
 async function onSearch() {
-  loading.value = true;
-  tableData.value = treeList;
+  loading.value = true
+  tableData.value = treeList
   setTimeout(() => {
-    loading.value = false;
-  }, 500);
+    loading.value = false
+  }, 500)
 }
 
-onSearch();
+onSearch()
 </script>
 
 <template>

@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { markRaw } from "vue";
-import { randomGradient } from "@pureadmin/utils";
-import { useRenderFlicker } from "@/components/ReFlicker";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import Iphone from "~icons/ep/iphone";
+import { markRaw } from 'vue'
+import { randomGradient } from '@pureadmin/utils'
+import { useRenderFlicker } from '@/components/ReFlicker'
+import { useRenderIcon } from '@/components/ReIcon/src/hooks'
+import Iphone from '~icons/ep/iphone'
 
 defineOptions({
-  name: "TimeLine"
-});
+  name: 'TimeLine'
+})
 
-const { lastBuildTime } = __APP_INFO__;
+const { lastBuildTime } = __APP_INFO__
 const activities = [
   {
-    content: "支持圆点发光",
+    content: '支持圆点发光',
     timestamp: lastBuildTime,
     icon: markRaw(useRenderFlicker())
   },
   {
-    content: "支持方形发光",
+    content: '支持方形发光',
     timestamp: lastBuildTime,
-    icon: markRaw(useRenderFlicker({ borderRadius: 0, background: "#67C23A" }))
+    icon: markRaw(useRenderFlicker({ borderRadius: 0, background: '#67C23A' }))
   },
   {
-    content: "支持渐变发光",
+    content: '支持渐变发光',
     timestamp: lastBuildTime,
     icon: markRaw(
       useRenderFlicker({
@@ -33,23 +33,23 @@ const activities = [
     )
   },
   {
-    content: "支持默认颜色",
+    content: '支持默认颜色',
     timestamp: lastBuildTime
   },
   {
-    content: "支持自定义颜色",
+    content: '支持自定义颜色',
     timestamp: lastBuildTime,
-    color: "#F56C6C"
+    color: '#F56C6C'
   },
   {
-    content: "支持自定义图标",
+    content: '支持自定义图标',
     timestamp: lastBuildTime,
-    color: "transparent",
+    color: 'transparent',
     icon: useRenderIcon(Iphone, {
-      color: "#0bbd87"
+      color: '#0bbd87'
     })
   }
-];
+]
 </script>
 
 <template>
@@ -88,9 +88,7 @@ const activities = [
           :timestamp="activity.timestamp"
           placement="bottom"
         >
-          <div class="message">
-            vue-pure-admin 第{{ activities.length - index }}个版本发布啦
-          </div>
+          <div class="message">vue-pure-admin 第{{ activities.length - index }}个版本发布啦</div>
         </el-timeline-item>
       </el-timeline>
     </div>
@@ -118,7 +116,7 @@ const activities = [
   width: 0;
   height: 0;
   overflow: hidden;
-  content: "";
+  content: '';
   border-color: var(--el-color-primary) transparent transparent;
   border-style: solid dashed dashed;
   border-width: 10px;

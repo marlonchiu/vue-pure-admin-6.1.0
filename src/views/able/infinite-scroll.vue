@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { default as vElTableInfiniteScroll } from "el-table-infinite-scroll";
+import { ref } from 'vue'
+import { default as vElTableInfiniteScroll } from 'el-table-infinite-scroll'
 
 defineOptions({
-  name: "InfiniteScroll"
-});
+  name: 'InfiniteScroll'
+})
 
 const dataTemplate = new Array(10).fill({
-  date: "2022-08-24",
-  name: "RealityBoy",
-  age: "18"
-});
+  date: '2022-08-24',
+  name: 'RealityBoy',
+  age: '18'
+})
 
-const data = ref([]);
-const page = ref(0);
-const total = ref(10);
-const isBottom = ref(false);
+const data = ref([])
+const page = ref(0)
+const total = ref(10)
+const isBottom = ref(false)
 
 const load = () => {
-  if (isBottom.value) return;
+  if (isBottom.value) return
 
-  page.value++;
+  page.value++
   if (page.value <= total.value) {
-    data.value = data.value.concat(dataTemplate);
+    data.value = data.value.concat(dataTemplate)
   }
 
   if (page.value === total.value) {
-    isBottom.value = true;
+    isBottom.value = true
   }
-};
+}
 </script>
 
 <template>
@@ -52,7 +52,7 @@ const load = () => {
       </el-link>
     </template>
     <div class="mb-2">
-      {{ isBottom ? "已加载全部页" : `加载到第 ${page} 页` }}
+      {{ isBottom ? '已加载全部页' : `加载到第 ${page} 页` }}
     </div>
     <el-table
       v-el-table-infinite-scroll="load"

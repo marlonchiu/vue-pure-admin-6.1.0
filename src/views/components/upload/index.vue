@@ -1,103 +1,103 @@
 <script setup lang="ts">
-import axios from "axios";
-import Sortable from "sortablejs";
-import UploadForm from "./form.vue";
-import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
-import { message } from "@/utils/message";
-import type { UploadFile } from "element-plus";
-import { getKeyList, extractFields, downloadByData } from "@pureadmin/utils";
+import axios from 'axios'
+import Sortable from 'sortablejs'
+import UploadForm from './form.vue'
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { message } from '@/utils/message'
+import type { UploadFile } from 'element-plus'
+import { getKeyList, extractFields, downloadByData } from '@pureadmin/utils'
 
-import EpPlus from "~icons/ep/plus?width=30&height=30";
-import Eye from "~icons/ri/eye-line";
-import Delete from "~icons/ri/delete-bin-7-line";
+import EpPlus from '~icons/ep/plus?width=30&height=30'
+import Eye from '~icons/ri/eye-line'
+import Delete from '~icons/ri/delete-bin-7-line'
 
 defineOptions({
-  name: "PureUpload"
-});
+  name: 'PureUpload'
+})
 
-const fileList = ref([]);
-const router = useRouter();
-const curOpenImgIndex = ref(0);
-const dialogVisible = ref(false);
+const fileList = ref([])
+const router = useRouter()
+const curOpenImgIndex = ref(0)
+const dialogVisible = ref(false)
 
-const urlList = computed(() => getKeyList(fileList.value, "url"));
-const imgInfos = computed(() => extractFields(fileList.value, "name", "size"));
+const urlList = computed(() => getKeyList(fileList.value, 'url'))
+const imgInfos = computed(() => extractFields(fileList.value, 'name', 'size'))
 
-const getImgUrl = name => new URL(`./imgs/${name}.jpg`, import.meta.url).href;
+const getImgUrl = name => new URL(`./imgs/${name}.jpg`, import.meta.url).href
 const srcList = Array.from({ length: 3 }).map((_, index) => {
-  return getImgUrl(index + 1);
-});
+  return getImgUrl(index + 1)
+})
 
 /** 上传文件前校验 */
 const onBefore = file => {
-  if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-    message("只能上传图片");
-    return false;
+  if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
+    message('只能上传图片')
+    return false
   }
-  const isExceed = file.size / 1024 / 1024 > 2;
+  const isExceed = file.size / 1024 / 1024 > 2
   if (isExceed) {
-    message(`单个图片大小不能超过2MB`);
-    return false;
+    message(`单个图片大小不能超过2MB`)
+    return false
   }
-};
+}
 
 /** 超出最大上传数时触发 */
 const onExceed = () => {
-  message("最多上传3张图片，请先删除在上传");
-};
+  message('最多上传3张图片，请先删除在上传')
+}
 
 /** 移除上传的文件 */
 const handleRemove = (file: UploadFile) => {
-  fileList.value.splice(fileList.value.indexOf(file), 1);
-};
+  fileList.value.splice(fileList.value.indexOf(file), 1)
+}
 
 /** 大图预览 */
 const handlePictureCardPreview = (file: UploadFile) => {
-  curOpenImgIndex.value = fileList.value.findIndex(img => img.uid === file.uid);
-  dialogVisible.value = true;
-};
+  curOpenImgIndex.value = fileList.value.findIndex(img => img.uid === file.uid)
+  dialogVisible.value = true
+}
 
-const getUploadItem = () => document.querySelectorAll("#pure-upload-item");
+const getUploadItem = () => document.querySelectorAll('#pure-upload-item')
 
 /** 缩略图拖拽排序 */
 const imgDrop = uid => {
-  const CLASSNAME = "el-upload-list";
-  const _curIndex = fileList.value.findIndex(img => img.uid === uid);
-  getUploadItem()?.[_curIndex]?.classList?.add(`${CLASSNAME}__item-actions`);
-  const wrapper: HTMLElement = document.querySelector(`.${CLASSNAME}`);
+  const CLASSNAME = 'el-upload-list'
+  const _curIndex = fileList.value.findIndex(img => img.uid === uid)
+  getUploadItem()?.[_curIndex]?.classList?.add(`${CLASSNAME}__item-actions`)
+  const wrapper: HTMLElement = document.querySelector(`.${CLASSNAME}`)
   Sortable.create(wrapper, {
     handle: `.${CLASSNAME}__item`,
     onEnd: ({ newIndex, oldIndex }) => {
-      const oldFile = fileList.value[oldIndex];
-      fileList.value.splice(oldIndex, 1);
-      fileList.value.splice(newIndex, 0, oldFile);
+      const oldFile = fileList.value[oldIndex]
+      fileList.value.splice(oldIndex, 1)
+      fileList.value.splice(newIndex, 0, oldFile)
       // fix: https://github.com/SortableJS/Sortable/issues/232 (firefox is ok, but chromium is bad. see https://bugs.chromium.org/p/chromium/issues/detail?id=410328)
       getUploadItem().forEach(ele => {
-        ele.classList.remove(`${CLASSNAME}__item-actions`);
-      });
+        ele.classList.remove(`${CLASSNAME}__item-actions`)
+      })
     }
-  });
-};
+  })
+}
 
 /** 下载图片 */
 const onDownload = () => {
-  [
-    { name: "巴旦木.jpeg", type: "img" },
-    { name: "恭喜发财.png", type: "img" },
-    { name: "可爱动物.gif", type: "gif" },
-    { name: "pure-upload.csv", type: "other" },
-    { name: "pure-upload.txt", type: "other" }
+  ;[
+    { name: '巴旦木.jpeg', type: 'img' },
+    { name: '恭喜发财.png', type: 'img' },
+    { name: '可爱动物.gif', type: 'gif' },
+    { name: 'pure-upload.csv', type: 'other' },
+    { name: 'pure-upload.txt', type: 'other' }
   ].forEach(img => {
     axios
       .get(`https://xiaoxian521.github.io/hyperlink/${img.type}/${img.name}`, {
-        responseType: "blob"
+        responseType: 'blob'
       })
       .then(({ data }) => {
-        downloadByData(data, img.name);
-      });
-  });
-};
+        downloadByData(data, img.name)
+      })
+  })
+}
 </script>
 
 <template>
@@ -124,9 +124,7 @@ const onDownload = () => {
       </el-link>
     </template>
 
-    <el-button class="mb-4!" text bg @click="onDownload">
-      点击下载安全文件进行上传测试
-    </el-button>
+    <el-button class="mb-4!" text bg @click="onDownload"> 点击下载安全文件进行上传测试 </el-button>
     <p class="mb-4!">
       综合示例<span class="text-[14px]">
         （ <span class="text-[red]">自动上传</span>
@@ -151,10 +149,7 @@ const onDownload = () => {
     >
       <EpPlus class="m-auto mt-4" />
       <template #file="{ file }">
-        <div
-          v-if="file.status == 'ready' || file.status == 'uploading'"
-          class="mt-[35%]! m-auto"
-        >
+        <div v-if="file.status == 'ready' || file.status == 'uploading'" class="mt-[35%]! m-auto">
           <p class="font-medium">文件上传中</p>
           <el-progress
             class="mt-2!"
@@ -165,36 +160,17 @@ const onDownload = () => {
           />
         </div>
         <div v-else @mouseenter.stop="imgDrop(file.uid)">
-          <img
-            class="el-upload-list__item-thumbnail select-none"
-            :src="file.url"
-          />
+          <img class="el-upload-list__item-thumbnail select-none" :src="file.url" />
           <span
             id="pure-upload-item"
-            :class="[
-              'el-upload-list__item-actions',
-              fileList.length > 1 && 'cursor-move!'
-            ]"
+            :class="['el-upload-list__item-actions', fileList.length > 1 && 'cursor-move!']"
           >
-            <span
-              title="查看"
-              class="hover:text-primary"
-              @click="handlePictureCardPreview(file)"
-            >
-              <IconifyIconOffline
-                :icon="Eye"
-                class="hover:scale-125 duration-100"
-              />
+            <span title="查看" class="hover:text-primary" @click="handlePictureCardPreview(file)">
+              <IconifyIconOffline :icon="Eye" class="hover:scale-125 duration-100" />
             </span>
-            <span
-              class="el-upload-list__item-delete"
-              @click="handleRemove(file)"
-            >
+            <span class="el-upload-list__item-delete" @click="handleRemove(file)">
               <span title="移除" class="hover:text-[var(--el-color-danger)]">
-                <IconifyIconOffline
-                  :icon="Delete"
-                  class="hover:scale-125 duration-100"
-                />
+                <IconifyIconOffline :icon="Delete" class="hover:scale-125 duration-100" />
               </span>
             </span>
           </span>
@@ -227,9 +203,7 @@ const onDownload = () => {
         </p>
       </div>
     </teleport>
-    <p class="el-upload__tip">
-      可拖拽上传最多3张单个不超过2MB且格式为jpeg/png/gif的图片
-    </p>
+    <p class="el-upload__tip">可拖拽上传最多3张单个不超过2MB且格式为jpeg/png/gif的图片</p>
     <el-divider />
 
     <p class="my-4!">

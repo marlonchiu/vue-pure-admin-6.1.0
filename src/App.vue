@@ -16,6 +16,7 @@ import en from 'element-plus/es/locale/lang/en'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import plusEn from 'plus-pro-components/es/locale/lang/en'
 import plusZhCn from 'plus-pro-components/es/locale/lang/zh-cn'
+var a = 1;
 
 export default defineComponent({
   name: 'app',
